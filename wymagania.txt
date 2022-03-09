@@ -1,0 +1,74 @@
+1. Opowieści użytkowników.
+    a)  Jako planista
+        Chcę móc dodawać, edytować i usuwać loty
+        Dzięki czemu będę widzieć wizualnie plan lotów
+
+        Kryteria:
+            Nowy rekord zostaje dodany, zedytowany lub usunięty z tabeli Fligths.
+            Na stronie All_flights pokazuje się/znika reprezentacja tego lotu.
+            Na koncie pasażera pokazuje się/znika reprezentacja tego lotu.
+    b)  Jako planista
+        Chcę dodawać, edytować i usuwać członków załogi z istniejących lotów.
+        Dzieki czemu będę mógł widzieć wizualnie listę członków załogi danego lotu.
+
+        Kryteria:
+            Nowy rekord zosatje dodawać, edytować i usuwać z tabeli CrewList.
+            Na stronie crew_list pokazuje się/znika reprezentacja tego członka załogi.
+    c)  Jako pasażer
+        Chcę mieć możliwość założenia konta.
+        Dzięki czemu będę mógł korzystać z aplikacji.
+
+        Kryteria:
+            Nowy rekord zostaje dodany do tabeli Passengers.
+
+    d)  Jako pasażer
+        Chcę móc kupować bilet na dany lot.
+        Dzięki czemu miejsce na lot zostanie dla mnie zarezerwowane.
+
+        Kryteria:
+            Nowy rekord zostaje dodany do tabeli bilety.
+            Musi być wolne miejsce na dany lot.
+            Pojawia się potwierdzenie zakupu.
+
+    e)  Jako pasażer
+        Chcę mieć możliwość wyświetlenia swoich biletów.
+        Dzięki czemu będę mieć potwierdzenie zakupu.
+
+        Kryteria:
+            Do bazy danych musis zostać wysłane zapytanie, które zwraca
+            wszystkie bilety danego pasażera.
+2. Wymagania biznesowe
+    a) Sporządzenie bilansu wydatków i kosztów.
+3. Wymagania użytkownika
+    a) Pasażer musi mieć możliwość zakupu biletu.
+    b) Pasażer musi mieć możliwość założenia konta.
+    c) Pasażer musi mieć możliwość wyświetlenia wszystkich swoich biletów.
+    d) Planista musi mieć możliwość dodania, edycji i usunięcia danego lotu
+    e) Planista musi mieć możliwość dodania, edycji i usunięcia członka załogi danego lotu.
+    f) Każdy lot ma przypisany dany samolot. Musi być zaplanowane lotnisko startowe i docelowe.
+       Lot powinien być zaplanowany na daną datę i godzinę. Lot musi mieć sprecyzowaną cenę biletu.
+    g) Pasażer jest zobowiązany do podania imienia, nazwiska i swojej narodowości.
+4. Wymagania funkcjonalne
+    a) Planista powinien mieć możliowść wyboru daty z interaktywnego kalendarza.
+    b) Pasażer powinien mieć możliwość wybór kraju z listy przewijanej.
+    c) Planista powinien mieć możliowść wyboru lotniska i samolotu, które są w danym momencie dostępne.
+    d) Pasażer może kupować bilety tylko na loty, które są dodane przez planistów.
+    e) Pasażer powinien mieć możliwość podglądu listy dostępnych lotów z danym lotniskiem startowym i docelowym.
+    f) Pasażer powinien mieć możliwość posortowania listy zakupionych biletów po dacie.
+    h) Bilety na loty już odbyte powinny ?zaznaczone?
+    i) Bilety o statusie canceled powinny być ?zaznaczone?
+5. Wymagania niefunkcjonalne
+    a) Hasło jest przechowywane w postaci hasha.
+    b) Aplikacja dla planisty powinnna być dostępna w przeglądarce.
+    c) Aplkacji dla pasażera powinna być dostępna na systemie IOS.
+    d) Nie można pozwolić planiście na zaplanowanie dwóch lotów jednego samolotu w tym samym czasie.
+    e) Musi się pojawić ostrzeżenie o w przypadku niepoprwanego zaplanowania kolejności lotów
+       danego samolotu, tj. gdy ma zaplanowane loty X -> Y po czym nastepny lot Z -> W gdzie Y =/= Z.  
+    f) Nazwa użytkownika musi być unikalna.
+    g) Hasło musi się składać z co najmniej ośmiu i co najwyżej dwudziestu znaków w tym co najmniej jednej cyfry.
+    i) Jeżeli na lot został kupiny co najmniej jeden bilet, to rekord nie jest usywany, tylko dostaje status
+       canceled.
+    h) Jeżeli na lot został kupiny co najmniej jeden bilet, to planista musi podwójnie potwierdzić decyzję
+       usunięcia lub edycji tego lotu.
+    
+// fluter, jira
