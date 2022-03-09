@@ -37,8 +37,10 @@
         Kryteria:
             Do bazy danych musis zostać wysłane zapytanie, które zwraca
             wszystkie bilety danego pasażera.
-2. Wymagania biznesowe
-    a) Sporządzenie bilansu wydatków i kosztów.
+2. Opis domeny biznesowej
+    a) System ma być zaprojektowany dla co najwyżej kilku planistów.
+    b) System ma być zaprojektowany dla użytku wielu użytkowników.
+    // TODO
 3. Wymagania użytkownika
     a) Pasażer musi mieć możliwość zakupu biletu.
     b) Pasażer musi mieć możliwość założenia konta.
@@ -48,6 +50,7 @@
     f) Każdy lot ma przypisany dany samolot. Musi być zaplanowane lotnisko startowe i docelowe.
        Lot powinien być zaplanowany na daną datę i godzinę. Lot musi mieć sprecyzowaną cenę biletu.
     g) Pasażer jest zobowiązany do podania imienia, nazwiska i swojej narodowości.
+    a) Planista powinien mieć możliwość wizualizowania bilansu wydatków i kosztów w danym okresie.
 4. Wymagania funkcjonalne
     a) Planista powinien mieć możliowść wyboru daty z interaktywnego kalendarza.
     b) Pasażer powinien mieć możliwość wybór kraju z listy przewijanej.
