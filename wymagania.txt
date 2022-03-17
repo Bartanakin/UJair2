@@ -22,13 +22,13 @@
             Nowy rekord zostaje dodany do tabeli Passengers.
 
     d)  Jako pasażer
-        Chcę móc kupować bilet na dany lot.
+        Chcę móc bookować bilet na dany lot.
         Dzięki czemu miejsce na lot zostanie dla mnie zarezerwowane.
 
         Kryteria:
             Nowy rekord zostaje dodany do tabeli bilety.
             Musi być wolne miejsce na dany lot.
-            Pojawia się potwierdzenie zakupu.
+            Pojawia się potwierdzenie zabookowania.
 
     e)  Jako pasażer
         Chcę mieć możliwość wyświetlenia swoich biletów.
@@ -71,8 +71,7 @@
     d) Pasażer może kupować bilety tylko na loty, które są dodane przez planistów.
     e) Pasażer powinien mieć możliwość podglądu listy dostępnych lotów z danym lotniskiem startowym i docelowym.
     f) Pasażer powinien mieć możliwość posortowania listy zakupionych biletów po dacie.
-    h) Bilety na loty już odbyte powinny ?zaznaczone?
-    i) Bilety o statusie canceled powinny być ?zaznaczone?
+    h) Pasażer powinniem mieć możliwość odsortowania lotów o statusie "canceled" i "already finished".
 5. Wymagania niefunkcjonalne
     a) Hasło jest przechowywane w postaci hasha.
     d) Nie można pozwolić planiście na zaplanowanie dwóch lotów jednego samolotu w tym samym czasie.
