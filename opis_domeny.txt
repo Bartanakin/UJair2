@@ -1,0 +1,15 @@
+Opis domeny biznesowej aplikacji dla linii lotniczej UJair
+1. Opis zasobów
+    Do linii należą samoloty pasażerskie. Każdy samolot ma maksymalną liczbę miejsc dla pasażerów,
+    maksymalną masę startową oraz maksymalny zasięg lotu. Każdy samolot może odbywać loty pasażerskie.
+    Każdy egzemplarz jest pewnym typem samolotu.
+    Bilet jest przypisany do pasażera i na konkretny lot.
+2. Przepisy i ograniczenia
+    Trzeba zadbać, aby limity samolotu nie zostały złamane. Aplikacja musi przechowywać dane 
+    zgodnie z prawem RODO.
+3. Dane techniczne
+    a) Aplikacja dla planisty powinnna być dostępna w przeglądarce i będzie obsługiwana przez jedną osobę.
+    b) Aplkacji dla pasażera powinna być dostępna na systemie IOS i będzie obsługiwana przez 
+    wielu użytkowników (ponad 1000).
+    c) W bazie danych powinny pojawić się informacje o typach samolotów jak i konkretnych egzemplarzach oraz
+        informacje o lotniskach, lotach, biletach, pilotach i stewardach.

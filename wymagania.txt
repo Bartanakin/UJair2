@@ -37,15 +37,28 @@
         Kryteria:
             Do bazy danych musis zostać wysłane zapytanie, które zwraca
             wszystkie bilety danego pasażera.
-2. Opis domeny biznesowej
-    a) System ma być zaprojektowany dla co najwyżej kilku planistów.
-    b) System ma być zaprojektowany dla użytku wielu użytkowników.
-    // TODO
+1. Opis zasobów
+    Do linii należą samoloty pasażerskie. Każdym samolot ma maksymalną liczbę miejsc dla pasażerów,
+    maksymalną masę startową oraz maksymalny zasięg lotu. Każdy samolot może odbywać loty.
+    Każdy egzemplarz jest pewnym typem samolotu.
+    Bilet jest przypisany do pasażera i na konkretny lot.
+2. Przepisy i ograniczenia
+    Trzeba zadbać, aby limity samolotu nie zostały złamane. Aplikacja musi przechowywać dane 
+    zgodnie z prawem RODO.
+3. Dane techniczne
+    a) Aplikacja dla planisty powinnna być dostępna w przeglądarce i będzie obsługiwana przez jedną osobę.
+    b) Aplkacji dla pasażera powinna być dostępna na systemie IOS i będzie obsługiwana przez 
+    wielu użytkowników (ponad 1000).
+    c) W bazie danych powinny pojawić się informacje o typach samolotów jak i konkretnych egzemplarzach,
+        informacje o lotniskach, lotach, biletach, pilotach i stewardach.
+
+
+
 3. Wymagania użytkownika
     a) Pasażer musi mieć możliwość zakupu biletu.
     b) Pasażer musi mieć możliwość założenia konta.
     c) Pasażer musi mieć możliwość wyświetlenia wszystkich swoich biletów.
-    d) Planista musi mieć możliwość dodania, edycji i usunięcia danego lotu
+    d) Planista musi mieć możliwość dodania, edycji i usunięcia danego lotu.
     e) Planista musi mieć możliwość dodania, edycji i usunięcia członka załogi danego lotu.
     f) Każdy lot ma przypisany dany samolot. Musi być zaplanowane lotnisko startowe i docelowe.
        Lot powinien być zaplanowany na daną datę i godzinę. Lot musi mieć sprecyzowaną cenę biletu.
@@ -62,16 +75,17 @@
     i) Bilety o statusie canceled powinny być ?zaznaczone?
 5. Wymagania niefunkcjonalne
     a) Hasło jest przechowywane w postaci hasha.
-    b) Aplikacja dla planisty powinnna być dostępna w przeglądarce.
-    c) Aplkacji dla pasażera powinna być dostępna na systemie IOS.
     d) Nie można pozwolić planiście na zaplanowanie dwóch lotów jednego samolotu w tym samym czasie.
     e) Musi się pojawić ostrzeżenie o w przypadku niepoprwanego zaplanowania kolejności lotów
        danego samolotu, tj. gdy ma zaplanowane loty X -> Y po czym nastepny lot Z -> W gdzie Y =/= Z.  
     f) Nazwa użytkownika musi być unikalna.
     g) Hasło musi się składać z co najmniej ośmiu i co najwyżej dwudziestu znaków w tym co najmniej jednej cyfry.
-    i) Jeżeli na lot został kupiny co najmniej jeden bilet, to rekord nie jest usywany, tylko dostaje status
+    h) Jeżeli na lot został kupiny co najmniej jeden bilet, to rekord nie jest usywany, tylko dostaje status
        canceled.
-    h) Jeżeli na lot został kupiny co najmniej jeden bilet, to planista musi podwójnie potwierdzić decyzję
+    i) Jeżeli na lot został kupiny co najmniej jeden bilet, to planista musi podwójnie potwierdzić decyzję
        usunięcia lub edycji tego lotu.
+    j) Aplkacji dla pasażera będzie działać na telefonie ustawionym w pozycji pionowej. M
+    j) Aplkacji dla pasażera będzie działać na telefonie ustawionym w pozycji poziomej. C
+
     
 // fluter, jira
