@@ -1,0 +1,24 @@
+After cloning the repository you need to start up the Docker containers.
+You can do that by executing the following command in the UJAIR2-Docker/ directory.
+
+ docker-compose up -d --build
+
+Make sure that default port specified in docker-compose.yaml are currently available on your machine.
+If not feel free to change them.
+
+To test if everything works correctly you need to.
+
+1. Enter localhost:8002 to check if the app is working.
+2. Enter localhost:8100 to check if phpmyadmin service is working.
+    To log in you have to check your ip address (on linux is   ifconfig ).
+    Your server name is:
+
+        <your_ip>:<bd_port>
+
+    By default <bd_port> is 3308.
+   Your login and password are "root".
+3. You need to check if the volumes are working correctly. So that create a new table in the database and delete the ujair2-db container by
+
+    docker rm ujair2-db
+
+   Then build the containers again and check if the table persisted.

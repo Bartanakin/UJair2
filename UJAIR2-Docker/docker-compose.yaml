@@ -1,0 +1,47 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: ujair2-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ../src:/var/www
+  websrver:
+    image: nginx:1.19
+    container_name: ujair2-server
+    restart: unless-stopped
+    ports:
+      - "8002:80"
+    volumes:
+      - ../src:/var/www
+      - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - app
+  database:
+    image: mysql:8.0
+    container_name: ujair2-db
+    volumes:
+      - dbdata:/var/lib/mysql:rw
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=mydb
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=pass
+    ports:
+      - "3308:3306"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: ujair2-phpmyadmin
+    restart: unless-stopped
+    environment:
+      - PMA_ARBITRARY=1
+    ports:
+      - "8100:80"
+volumes:
+  dbdata:
+    driver: local
