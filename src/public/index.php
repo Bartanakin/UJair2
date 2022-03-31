@@ -1,9 +1,11 @@
 <?php
 
+use App\App;
+
 require __DIR__ . '/../vendor/autoload.php';
 
-echo "Hello world!";
+$app = new App();
 
-$id = new \Ramsey\Uuid\UuidFactory();
+$app -> getRouter() -> get('/',function(){echo "Hello world";});
 
-echo    $id -> uuid4();
+$app -> run();

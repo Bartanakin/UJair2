@@ -1,4 +1,4 @@
-Opis domeny biznesowej aplikacji dla linii lotniczej UJair
+Opis domeny biznesowej aplikacji dla linii lotniczej UJair2
 1. Opis zasobów
     Do linii należą samoloty pasażerskie. Każdy samolot ma maksymalną liczbę miejsc dla pasażerów,
     maksymalną masę startową oraz maksymalny zasięg lotu. Każdy samolot może odbywać loty pasażerskie.
