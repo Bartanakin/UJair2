@@ -1,2 +1,4 @@
-<?php
-    echo "Hello world but without Putin!";
+<?="Hello world but without Putin!";?>
+<pre>
+    <?php var_dump($this -> params); ?>
+</pre>

@@ -6,9 +6,11 @@ namespace App;
 class App
 {
     private $router;
+    private static $dbConnection;
 
-    function __construct(){
+    function __construct(protected string $method, protected string $uri,array $dbCredentials){
         $this -> router = new Router();
+        static::$dbConnection = new DataBaseConnection($dbCredentials);
     }
 
     function getRouter(): Router {
@@ -16,7 +18,11 @@ class App
     }
 
     function run(){
-        echo $this -> router -> resolve($_SERVER["REQUEST_METHOD"],$_SERVER["REQUEST_URI"]);
+        echo $this -> router -> resolve($this -> method,$this -> uri);
+    }
+
+    public static function getDataBaseConnection(): DataBaseConnection {
+        return static::$dbConnection;
     }
 
 
