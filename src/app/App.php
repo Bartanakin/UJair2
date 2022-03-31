@@ -16,7 +16,7 @@ class App
     }
 
     function run(){
-        $this -> router -> resolve($_SERVER["REQUEST_METHOD"],$_SERVER["REQUEST_URI"]);
+        echo $this -> router -> resolve($_SERVER["REQUEST_METHOD"],$_SERVER["REQUEST_URI"]);
     }
 
 
