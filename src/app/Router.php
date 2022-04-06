@@ -9,7 +9,7 @@ use App\Exceptions\UnknownUriException;
 class Router{
     private array $actions = [];
 
-    private function register(string $method, string $uri, callable|array $action): self {
+    public function register(string $method, string $uri, callable|array $action): self {
         $this -> actions[$uri][$method] = $action;
 
         return $this;
@@ -51,6 +51,10 @@ class Router{
 
     private function parseUri(string $uri): string {
         return explode("?",$uri)[0];
+    }
+
+    public function routes(): array {
+        return $this -> actions;
     }
 
 
