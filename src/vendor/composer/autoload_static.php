@@ -41,6 +41,7 @@ class ComposerStaticInitdde054e2769b1733c231597fbef3fe4f
         ),
         'P' => 
         array (
+            'Psr\\Container\\' => 14,
             'Prophecy\\' => 9,
             'PhpParser\\' => 10,
         ),
@@ -93,6 +94,10 @@ class ComposerStaticInitdde054e2769b1733c231597fbef3fe4f
         'Ramsey\\Collection\\' => 
         array (
             0 => __DIR__ . '/..' . '/ramsey/collection/src',
+        ),
+        'Psr\\Container\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/container/src',
         ),
         'Prophecy\\' => 
         array (

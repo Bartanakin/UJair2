@@ -5,12 +5,21 @@ namespace App;
 
 class App
 {
-    private $router;
-    private static $dbConnection;
+    protected Router $router;
+    private static DataBaseConnection $dbConnection;
+    protected Container $container;
 
     function __construct(protected string $method, protected string $uri,array $dbCredentials){
-        $this -> router = new Router();
+        $this -> container = new Container();
+        $this -> router = new Router( $this -> container );
         static::$dbConnection = new DataBaseConnection($dbCredentials);
+
+        /*
+         * $this -> container -> set(
+         *      <interface name>::class,
+         *      <class name>::class
+         * );
+         */
     }
 
     function getRouter(): Router {

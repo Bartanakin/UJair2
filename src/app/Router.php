@@ -9,6 +9,10 @@ use App\Exceptions\UnknownUriException;
 class Router{
     private array $actions = [];
 
+    public function __construct( private Container $container ){
+
+    }
+
     public function register(string $method, string $uri, callable|array $action): self {
         $this -> actions[$uri][$method] = $action;
 
@@ -35,7 +39,7 @@ class Router{
         if( is_array($action) ){
             [$class, $method] = $action;
             if( class_exists($class) ){
-                $class = new $class();
+                $class = $this -> container -> get($class);
 
                 if( method_exists($class,$method) ){
                     return call_user_func_array([$class,$method],[]);
