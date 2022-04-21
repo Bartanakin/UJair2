@@ -12,6 +12,6 @@ $app = new App($_SERVER["REQUEST_METHOD"],$_SERVER["REQUEST_URI"],CONNECT);
 
 $app -> getRouter() -> get('/',[HomeController::class, 'index']);
 $app -> getRouter() -> get("/testPage",[TestPageController::class, "testPage"]);
-$app -> getRouter() -> get("/function",function(){ echo "Hello world 2!";});
+$app -> getRouter() -> get("/check",[TestPageController::class, "check"]);
 
 $app -> run();

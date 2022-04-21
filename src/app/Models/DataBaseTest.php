@@ -23,4 +23,14 @@ class DataBaseTest extends Model
         $data = $statement -> fetchAll();
         return $data ? $data : [];
     }
+    
+    public function check1() {
+        $login = $_GET['login'];
+        $password = $_GET['password'];
+        $query = "SELECT doLoginAndPasswordExist('{$login}', '{$password}') AS answer;";
+        $statement = $this -> dbConnection -> prepare($query);
+        $statement -> execute();
+        $data = $statement -> fetchAll();
+        echo json_encode($data);
+    }
 }

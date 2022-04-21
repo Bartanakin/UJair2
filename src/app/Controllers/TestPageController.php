@@ -15,4 +15,10 @@ class TestPageController
 
         return View::make("TestPage/testPage.php",$test -> printAll());
     }
+    
+    public function check(): View {
+        $test = new DataBaseTest();
+        $test -> check1();
+        return View::make("TestPage/testPage.php",$test -> printAll());
+    }
 }

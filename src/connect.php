@@ -1,7 +1,7 @@
 <?php
 const CONNECT = [
     "HOST" => "ujair2-db",
-    "DATABASE" => "UJAIR2",
+    "DATABASE" => "UJair",
     "USER" => "root",
     "PASSWORD" => "root"
 ];
