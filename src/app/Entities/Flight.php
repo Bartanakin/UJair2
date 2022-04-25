@@ -2,8 +2,8 @@
 
 namespace App\Entities;
 
+use App\Model;
 use DateTime;
-use JetBrains\PhpStorm\Internal\TentativeType;
 use JsonSerializable;
 
 class Flight implements JsonSerializable {
@@ -14,7 +14,7 @@ class Flight implements JsonSerializable {
     public function jsonSerialize(): mixed {
         return [
             'ID' => $this->id,
-            'DateTimeOfDeparture' => $this->dateOfDeparture->format('Y-m-d H:i:s')
+            'DateTimeOfDeparture' => $this->dateOfDeparture->format(Model::$dateFormat)
         ];
     }
 }
