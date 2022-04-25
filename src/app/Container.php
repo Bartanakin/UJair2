@@ -71,8 +71,12 @@ class Container implements ContainerInterface
                 if( $type instanceof \ReflectionNamedType && ! $type -> isBuiltin() ){
                     return $this -> get($type -> getName());
                 }
+                if( $type -> isBuiltin() && $param -> isDefaultValueAvailable()){
+                    return $param -> getDefaultValue();
+                }
                  throw new ContainerException("Failed to resolve class " . $id . " because of invalid param named " . $name . ".");
-                },
+
+             },
              $parameters
          );
 
