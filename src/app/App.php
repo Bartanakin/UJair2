@@ -14,12 +14,10 @@ class App
         $this -> router = new Router( $this -> container );
         static::$dbConnection = new DataBaseConnection($dbCredentials);
 
-        /*
-         * $this -> container -> set(
-         *      <interface name>::class,
-         *      <class name>::class
-         * );
-         */
+
+        // To bind a specific class to an interface use this line:
+        // $this -> container -> set(<interface name>::class, <class name>::class);
+
     }
 
     function getRouter(): Router {

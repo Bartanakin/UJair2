@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
+use App\Container;
 use App\Exceptions\UnknownUriException;
 use App\Router;
 use PHPUnit\Framework\TestCase;
@@ -17,7 +18,7 @@ class RouterTest extends TestCase
     protected function setUp(): void {
         parent::setUp();
         
-        $this -> router = new Router();
+        $this -> router = new Router(new Container());
         
         $this -> user = new class() {
             public function login(): bool {
