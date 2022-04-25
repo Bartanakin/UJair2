@@ -1,6 +1,7 @@
 <?php
 
 use App\App;
+use App\Controllers\BookingTicketsController;
 use App\Controllers\HomeController;
 use App\Controllers\TestPageController;
 require __DIR__ . '/../vendor/autoload.php';
@@ -13,5 +14,6 @@ $app = new App($_SERVER["REQUEST_METHOD"],$_SERVER["REQUEST_URI"],CONNECT);
 $app -> getRouter() -> get('/',[HomeController::class, 'index']);
 $app -> getRouter() -> get("/testPage",[TestPageController::class, "testPage"]);
 $app -> getRouter() -> get("/check",[TestPageController::class, "check"]);
+$app -> getRouter() -> get("/xd",[BookingTicketsController::class, "getAllAirports"]);
 
 $app -> run();

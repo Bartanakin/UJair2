@@ -3,6 +3,9 @@
 declare(strict_types=1);
 namespace App;
 
+use App\Interfaces\BookingTicketsInterfaces\AllAirportsGetter;
+use App\Models\BookingTickets\AllAirportsGetterImpl;
+
 class App
 {
     protected Router $router;
@@ -16,8 +19,7 @@ class App
 
 
         // To bind a specific class to an interface use this line:
-        // $this -> container -> set(<interface name>::class, <class name>::class);
-
+        $this -> container -> set(AllAirportsGetter::class, AllAirportsGetterImpl::class);
     }
 
     function getRouter(): Router {

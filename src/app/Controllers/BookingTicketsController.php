@@ -4,8 +4,7 @@ namespace App\Controllers;
 
 use App\Interfaces\BookingTicketsInterfaces\AllAirportsGetter;
 
-class BookingTicketsController
-{
+class BookingTicketsController {
     protected array $airports = [];
 
     public function __construct(protected AllAirportsGetter $airportsGetter) {
