@@ -12,6 +12,7 @@ class BookingTicketsController {
     }
     public function getAllAirports() {
         $airports = $this -> airportsGetter -> run();
+//        print_r($airports);
         echo json_encode($airports);
     }
 }
