@@ -4,7 +4,11 @@ declare(strict_types=1);
 namespace App;
 
 use App\Interfaces\BookingTicketsInterfaces\AllAirportsGetter;
+use App\Interfaces\BookingTicketsInterfaces\ScheduleOfRouteGetter;
+use App\Interfaces\BookingTicketsInterfaces\TargetAirportsGetter;
 use App\Models\BookingTickets\AllAirportsGetterImpl;
+use App\Models\BookingTickets\ScheduleOfRouteGetterImpl;
+use App\Models\BookingTickets\TargetAirportsGetterImpl;
 
 class App
 {
@@ -20,6 +24,8 @@ class App
 
         // To bind a specific class to an interface use this line:
         $this -> container -> set(AllAirportsGetter::class, AllAirportsGetterImpl::class);
+        $this -> container -> set(ScheduleOfRouteGetter::class, ScheduleOfRouteGetterImpl::class);
+        $this -> container -> set(TargetAirportsGetter::class, TargetAirportsGetterImpl::class);
     }
 
     function getRouter(): Router {
