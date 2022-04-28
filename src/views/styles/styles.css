@@ -1,0 +1,46 @@
+body{
+    background-color: #f5f5fa;
+}
+
+.wrapper{
+    margin: 100px auto 0px auto;
+
+}
+.login_input_div{
+    margin: 0px auto 0px auto;
+    width: 600px;
+    padding: 15px;
+    background-color: #fff4ae;
+    display: block;
+    border-radius: 25px;
+    border: 2px solid #fff4ae;
+}
+.login_form_input{
+    margin: 30px auto;
+    width: 300px;
+    display: block;
+    background-color: lightgray;
+}
+.login_input_submit{
+    margin: 0 auto;
+    display: block;
+
+}
+.ujair_header{
+
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+}
+h6{
+    font-size: 20px;
+    text-align: center;
+    width: 100%;
+}
+.login_input_submit{
+    border-radius: 25px;
+    border: 2px solid black;
+    background-color: lightgray;
+    width: 80px;
+    height: 30px;
+}

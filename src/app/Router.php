@@ -39,7 +39,8 @@ class Router{
         if( is_array($action) ){
             [$class, $method] = $action;
             if( class_exists($class) ){
-                $class = $this -> container -> get($class);
+                session_start();
+                $class = $this->loadFromSessionOrGet($class);
 
                 if( method_exists($class,$method) ){
                     return call_user_func_array([$class,$method],[]);
@@ -59,6 +60,18 @@ class Router{
 
     public function routes(): array {
         return $this -> actions;
+    }
+
+    private function loadFromSessionOrGet(string $class)
+    {
+        if( isset($_SESSION[$class]) ){
+            $class = $_SESSION[$class];
+        }
+        else{
+            $class = $this -> container -> get($class);
+            $_SESSION[$class::class] = $class;
+        }
+        return $class;
     }
 
 
