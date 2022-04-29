@@ -13,7 +13,7 @@ body{
     background-color: #fff4ae;
     display: block;
     border-radius: 25px;
-    border: 2px solid #fff4ae;
+    border: 2px solid #222222;
 }
 .login_form_input{
     margin: 30px auto;
