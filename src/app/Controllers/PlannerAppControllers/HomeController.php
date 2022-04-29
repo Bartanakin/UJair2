@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\PlannerAppControllers;
 
 use App\View;
 use App\ViewPaths;

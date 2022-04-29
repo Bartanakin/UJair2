@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\PlannerAppControllers;
 
 use App\Exceptions\IncorrectLoginException;
 use App\Exceptions\IncorrectPasswordException;

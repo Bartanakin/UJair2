@@ -2,8 +2,9 @@
 
 use App\App;
 use App\Controllers\BookingTicketsController;
-use App\Controllers\HomeController;
+use App\Controllers\PlannerAppControllers\HomeController;
 use App\Controllers\TestPageController;
+
 require __DIR__ . '/../vendor/autoload.php';
 
 const VIEW_PATH = __DIR__ . '/../views';
@@ -20,7 +21,7 @@ $app -> getRouter() -> get("/getAllAirports",[BookingTicketsController::class, "
 $app -> getRouter() -> get("/getScheduleForRoute",[BookingTicketsController::class, "getScheduleForRoute"]);
 $app -> getRouter() -> get("/getTargetAirports",[BookingTicketsController::class, "getTargetAirports"]);
 $app -> getRouter() -> get("/style",[\App\Controllers\LinksController::class,'style']);
-$app -> getRouter() -> post("/",[\App\Controllers\PlannerLoginController::class,'login']);
+$app -> getRouter() -> post("/",[\App\Controllers\PlannerAppControllers\PlannerLoginController::class,'login']);
 
 $app -> run();
 

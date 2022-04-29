@@ -7,7 +7,10 @@ use DateTime;
 use JsonSerializable;
 
 class Flight implements JsonSerializable {
-    public function __construct(protected ?int $id, protected ?DateTime $dateOfDeparture) {
+    public function __construct(
+        protected ?int $id,
+        protected ?DateTime $dateOfDeparture
+    ) {
 
     }
 
