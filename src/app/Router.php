@@ -39,7 +39,6 @@ class Router{
         if( is_array($action) ){
             [$class, $method] = $action;
             if( class_exists($class) ){
-                session_start();
                 $class = $this->loadFromSessionOrGet($class);
 
                 if( method_exists($class,$method) ){

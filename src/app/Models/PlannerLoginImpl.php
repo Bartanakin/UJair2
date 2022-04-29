@@ -7,10 +7,14 @@ use App\Model;
 
 class PlannerLoginImpl extends Model implements PlannerLoginInterface
 {
-
+    public function __construct(){
+        parent::__construct();
+    }
     public function login($login, $password): bool
     {
-        $stm = $this -> dbConnection -> prepare('SELECT * FROM planners WHERE username = ? AND password = ?;');
-
+        $passwordHash = password_hash($password,PASSWORD_DEFAULT);
+        $stm = $this -> dbConnection -> prepare('SELECT * FROM Planners WHERE Username = ? AND PasswordHash = ?;');
+        $stm -> execute([$login,$passwordHash]);
+        return true;
     }
 }

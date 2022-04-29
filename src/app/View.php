@@ -8,18 +8,18 @@ use App\Exceptions\ViewNotFoundException;
 
 class View
 {
-    public function __construct(protected string $viewFileName, protected array $params = []){
+    public function __construct(protected ViewPaths $viewFileName, protected array $params = []){
 
     }
 
-    public static function make(string $viewFileName, array $params = []): static
+    public static function make(ViewPaths $viewFileName, array $params = []): static
     {
         return new static($viewFileName,$params);
     }
 
     public function render(): string {
 
-        $path = VIEW_PATH . "/" . $this -> viewFileName;
+        $path = VIEW_PATH . "/" . $this -> viewFileName -> value;
 
         if( ! file_exists($path) ){
             throw new ViewNotFoundException();

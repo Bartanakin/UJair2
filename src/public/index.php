@@ -9,6 +9,7 @@ require __DIR__ . '/../vendor/autoload.php';
 const VIEW_PATH = __DIR__ . '/../views';
 require_once __DIR__ . '/../connect.php';
 
+session_start();
 
 $app = new App($_SERVER["REQUEST_METHOD"],$_SERVER["REQUEST_URI"],CONNECT);
 
@@ -19,6 +20,7 @@ $app -> getRouter() -> get("/getAllAirports",[BookingTicketsController::class, "
 $app -> getRouter() -> get("/getScheduleForRoute",[BookingTicketsController::class, "getScheduleForRoute"]);
 $app -> getRouter() -> get("/getTargetAirports",[BookingTicketsController::class, "getTargetAirports"]);
 $app -> getRouter() -> get("/style",[\App\Controllers\LinksController::class,'style']);
+$app -> getRouter() -> post("/",[\App\Controllers\PlannerLoginController::class,'login']);
 
 $app -> run();
 

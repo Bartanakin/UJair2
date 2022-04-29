@@ -5,8 +5,6 @@ namespace App\Controllers;
 use App\Interfaces\PlannerLoginInterface;
 use App\View;
 use App\ViewPaths;
-use App\Views\BadRequestView;
-use App\Views\HomeView;
 
 class PlannerLoginController
 {
@@ -18,15 +16,16 @@ class PlannerLoginController
             $login = $_POST["login"];
             $password = $_POST["password"];
             if( $this -> loginService -> login($login,$password) ){
-
+                $_SESSION["logged"] = true;
+                View::make(ViewPaths::ALL_FLIGHTS_PAGE);
             }
             else{
-                View::make(ViewPaths::HOME_PAGE->value);
+                View::make(ViewPaths::HOME_PAGE);
             }
 
         }
         else {
-            View::make(ViewPaths::BAD_REQUEST ->value);
+            View::make(ViewPaths::BAD_REQUEST);
         }
 
     }

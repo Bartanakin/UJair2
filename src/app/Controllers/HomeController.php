@@ -9,6 +9,6 @@ use App\Views\HomeView;
 class HomeController
 {
     public function index(): View {
-        return View::make(ViewPaths::HOME_PAGE->value);
+        return View::make(ViewPaths::HOME_PAGE);
     }
 }
