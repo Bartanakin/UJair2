@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use App\Exceptions\IncorrectLoginException;
+use App\Exceptions\IncorrectPasswordException;
 use App\Interfaces\PlannerLoginInterface;
 use App\Model;
+use function PHPUnit\Framework\throwException;
 
 class PlannerLoginImpl extends Model implements PlannerLoginInterface
 {
@@ -12,9 +15,15 @@ class PlannerLoginImpl extends Model implements PlannerLoginInterface
     }
     public function login($login, $password): bool
     {
-        $passwordHash = password_hash($password,PASSWORD_DEFAULT);
-        $stm = $this -> dbConnection -> prepare('SELECT * FROM Planners WHERE Username = ? AND PasswordHash = ?;');
-        $stm -> execute([$login,$passwordHash]);
-        return true;
+        $stm = $this -> getDBConnection() -> prepare('SELECT PasswordHash FROM Planners WHERE Username LIKE ?;');
+        $stm -> execute([$login]);
+        if( $stm -> rowCount() > 0 ){
+            $stm = $stm -> fetch();
+           if( password_verify($password,$stm['PasswordHash']) ){
+                return true;
+            }
+           throw new IncorrectPasswordException();
+        }
+        throw new IncorrectLoginException();
     }
 }

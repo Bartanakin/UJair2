@@ -18,7 +18,7 @@ class ScheduleOfRouteGetterImpl extends \App\Model implements \App\Interfaces\Bo
         $query = 'SELECT Flights.ID, Flights.DateTimeOfDeparture FROM Flights 
         WHERE Flights.RouteID = (SELECT Routes.ID FROM Routes 
         WHERE Routes.TargetAirportID = ? AND Routes.StartingAirportID = ?);';
-        $statement = $this -> dbConnection -> prepare($query);
+        $statement = $this -> getDBConnection() -> prepare($query);
         $statement -> execute([$target, $start]);
         while($data = $statement -> fetch()) {
             $this->flights[] = new Flight($data['ID'], DateTime::createFromFormat(static::$dateFormat, $data['DateTimeOfDeparture']));

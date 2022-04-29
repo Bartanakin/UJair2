@@ -3,6 +3,7 @@
 declare(strict_types=1);
 namespace App;
 
+use App\Exceptions\UnauthorizedPageAccessException;
 use App\Interfaces\BookingTicketsInterfaces\AllAirportsGetter;
 use App\Interfaces\BookingTicketsInterfaces\ScheduleOfRouteGetter;
 use App\Interfaces\BookingTicketsInterfaces\TargetAirportsGetter;
@@ -43,5 +44,13 @@ class App
         return static::$dbConnection;
     }
 
+    public function assertLogged(){
+        if( isset($_SESSION['logged']) ){
+            if( $_SESSION['logged'] === true ){
+                return;
+            }
+        }
+        throw new UnauthorizedPageAccessException();
+    }
 
 }

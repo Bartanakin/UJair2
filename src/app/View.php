@@ -24,7 +24,6 @@ class View
         if( ! file_exists($path) ){
             throw new ViewNotFoundException();
         }
-
         ob_start();
 
         include $path;

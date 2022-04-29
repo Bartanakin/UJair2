@@ -17,7 +17,7 @@ class TargetAirportsGetterImpl extends \App\Model implements \App\Interfaces\Boo
         $query = 'SELECT R.TargetAirportID AS ID, A.Airport_name FROM Routes AS R
             JOIN Airports AS A ON A.ID = R.TargetAirportID
             WHERE R.StartingAirportID = ?;';
-        $statement = $this -> dbConnection -> prepare($query);
+        $statement = $this -> getDBConnection() -> prepare($query);
         $statement -> execute([$start]);
         while($data = $statement -> fetch()) {
             $this->airports[] = new Airport($data['ID'], $data['Airport_name']);

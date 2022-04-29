@@ -11,7 +11,7 @@ class AllAirportsGetterImpl extends \App\Model implements \App\Interfaces\Bookin
     }
     function run(): array {
         $query = 'SELECT Airports.ID, Airports.Airport_name FROM Airports;';
-        $statement = $this -> dbConnection -> prepare($query);
+        $statement = $this -> getDBConnection() -> prepare($query);
         $statement -> execute();
         while($data = $statement -> fetch()) {
             $this -> airports[] = new Airport($data['ID'], $data['Airport_name']);

@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Exceptions\IncorrectLoginException;
+use App\Exceptions\IncorrectPasswordException;
 use App\Interfaces\PlannerLoginInterface;
 use App\View;
 use App\ViewPaths;
@@ -11,22 +13,21 @@ class PlannerLoginController
     public function __construct(protected PlannerLoginInterface $loginService){
 
     }
-    public function login(){
+    public function login(): View {
         if( isset($_POST["login"],$_POST["password"])){
             $login = $_POST["login"];
             $password = $_POST["password"];
-            if( $this -> loginService -> login($login,$password) ){
+            try{
+                $this -> loginService -> login($login,$password);
                 $_SESSION["logged"] = true;
-                View::make(ViewPaths::ALL_FLIGHTS_PAGE);
+                return View::make(ViewPaths::ALL_FLIGHTS_PAGE);
             }
-            else{
-                View::make(ViewPaths::HOME_PAGE);
+            catch( IncorrectLoginException|IncorrectPasswordException $e ){
+                return View::make(ViewPaths::HOME_PAGE,['serverMessage' => ($e -> getMessage())]);
             }
-
         }
         else {
-            View::make(ViewPaths::BAD_REQUEST);
+            return View::make(ViewPaths::BAD_REQUEST);
         }
-
     }
 }

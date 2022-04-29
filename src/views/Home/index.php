@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html lang="eng">
 <head>
-    <link rel="stylesheet"  type="text/css" href="style" >
+    <link rel="stylesheet" type="text/css" href="../styles/styles.css"/>
+    <link rel="stylesheet" type="text/css" href="style" >
     <title>Planner login</title>
 </head>
 <body>
 <div class="wrapper">
     <div class="ujair_header">UJAIR2 - planner login panel</div>
     <div class="login_input_div">
+        <div class="correctness_message">
+            <?php if(isset($this -> params['serverMessage']))
+                echo $this -> params['serverMessage'];
+            ?>
+        </div>
         <form method="post" action="/">
             <label>
                 <h6>Login:</h6>
