@@ -7,10 +7,12 @@ use App\Exceptions\UnauthorizedPageAccessException;
 use App\Interfaces\BookingTicketsInterfaces\AllAirportsGetter;
 use App\Interfaces\BookingTicketsInterfaces\ScheduleOfRouteGetter;
 use App\Interfaces\BookingTicketsInterfaces\TargetAirportsGetter;
+use App\Interfaces\FindAllFlights;
 use App\Interfaces\PlannerLoginInterface;
-use App\Models\BookingTickets\AllAirportsGetterImpl;
-use App\Models\BookingTickets\ScheduleOfRouteGetterImpl;
-use App\Models\BookingTickets\TargetAirportsGetterImpl;
+use App\Models\BookingTicketsModels\AllAirportsGetterImpl;
+use App\Models\BookingTicketsModels\ScheduleOfRouteGetterImpl;
+use App\Models\BookingTicketsModels\TargetAirportsGetterImpl;
+use App\Models\FindAllFlightsImpl;
 use App\Models\PlannerLoginImpl;
 
 class App
@@ -29,7 +31,7 @@ class App
         $this -> container -> set(ScheduleOfRouteGetter::class, ScheduleOfRouteGetterImpl::class);
         $this -> container -> set(TargetAirportsGetter::class, TargetAirportsGetterImpl::class);
         $this -> container -> set(PlannerLoginInterface::class, PlannerLoginImpl::class);
-
+        $this -> container -> set(FindAllFlights::class, FindAllFlightsImpl::class);
     }
 
     function getRouter(): Router {

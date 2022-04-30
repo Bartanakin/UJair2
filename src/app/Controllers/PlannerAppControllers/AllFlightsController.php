@@ -4,8 +4,11 @@ namespace App\Controllers\PlannerAppControllers;
 
 class AllFlightsController
 {
-    protected array $flights = [];
-    protected array $warnings = [];
+    public function __construct(
+
+    )
+    {
+    }
 
     public function addFlight(){
 

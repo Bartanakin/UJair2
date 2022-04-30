@@ -6,7 +6,10 @@ use JetBrains\PhpStorm\Internal\TentativeType;
 use JsonSerializable;
 
 class Airport implements JsonSerializable{
-    public function __construct(protected int $id, protected string $airportName) {
+    public function __construct(
+        protected int $id,
+        protected string $airportName
+    ) {
 
     }
 

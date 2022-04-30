@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\BookingTickets;
+namespace App\Models\BookingTicketsModels;
 
 class SeatsGetterImpl extends \App\Model implements \App\Interfaces\BookingTicketsInterfaces\SeatsGetter
 {
