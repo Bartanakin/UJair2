@@ -2,6 +2,8 @@
 
 namespace App\Controllers\PassengerAppControllers;
 
+use App\Entities\Ticket;
+use App\Exceptions\PassenagerAppException\ParameterNotSetException;
 use App\Interfaces\BookingTicketsInterfaces\AllAirportsGetter;
 use App\Interfaces\BookingTicketsInterfaces\InsertionNewTicket;
 use App\Interfaces\BookingTicketsInterfaces\ScheduleOfRouteGetter;
@@ -9,6 +11,7 @@ use App\Interfaces\BookingTicketsInterfaces\SeatsGetter;
 use App\Interfaces\BookingTicketsInterfaces\TargetAirportsGetter;
 use App\View;
 use App\ViewPaths;
+use PHPUnit\Util\Exception;
 
 class BookingTicketsController {
 
@@ -47,9 +50,10 @@ class BookingTicketsController {
     }
 
     public function insertTicket() {
-        $flightID = $_GET['flightID'];
-        $seat = $_GET['numberOfSeat'];
-        $passengerID = $_GET['passengerID'];
-        echo json_encode(['answer' => $this -> insertionNewTicket -> run($flightID, $seat, $passengerID)]);
+        if (!isset($_GET['flightID'], $_GET['numberOfSeat'], $_GET['passengerID'])) {
+            throw new ParameterNotSetException();
+        }
+        $ticket = Ticket::createForBookingTickets($_GET['flightID'], $_GET['numberOfSeat'], $_GET['passengerID']);
+        echo json_encode(['answer' => $this -> insertionNewTicket -> run($ticket)]);
     }
 }
