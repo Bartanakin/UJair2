@@ -5,6 +5,8 @@ namespace App\Controllers\PassengerAppControllers;
 use App\Interfaces\BookingTicketsInterfaces\AllAirportsGetter;
 use App\Interfaces\BookingTicketsInterfaces\ScheduleOfRouteGetter;
 use App\Interfaces\BookingTicketsInterfaces\TargetAirportsGetter;
+use App\View;
+use App\ViewPaths;
 
 class BookingTicketsController {
 
@@ -14,6 +16,13 @@ class BookingTicketsController {
 
     }
     public function getAllAirports() {
+//        if( isset($_GET['token']) && $_GET['token'] == 0 ){
+//
+//            return "";
+//        }
+//        else{
+//            return View::make(ViewPaths::UNAUTHORIZED);
+//        }
         $airports = $this -> airportsGetter -> run();
         echo json_encode($airports);
     }

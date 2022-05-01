@@ -12,4 +12,5 @@ enum ViewPaths: string
 
     // Error pages
     case BAD_REQUEST = "ErrorPages/BadRequest.php";
+    case UNAUTHORIZED = "ErrorPages/Unauthorized.php";
 }

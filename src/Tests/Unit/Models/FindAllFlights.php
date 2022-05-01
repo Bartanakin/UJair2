@@ -40,7 +40,7 @@ class FindAllFlights extends ModelTestBaseClass
             )
         );
         $result = $this -> findAllFlightsImpl -> findAllFlights();
-        if(2 ==  sizeof($result)){
+        if(2 !=  sizeof($result)){
             $this -> fail("The array size is to small given ".sizeof($result)." expected 2.");
         }
         else{

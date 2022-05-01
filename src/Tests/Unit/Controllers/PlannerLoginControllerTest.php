@@ -30,6 +30,9 @@ class PlannerLoginControllerTest extends \PHPUnit\Framework\TestCase
 
     /** @test */
     public function shows_incorrect_login_message(){
+        // Given
+        // When
+        // Then
         $this -> plannerLoginMock -> method('login') -> willThrowException(new IncorrectLoginException());
         $_POST["login"] = 'login';
         $_POST["password"] = 'password';
