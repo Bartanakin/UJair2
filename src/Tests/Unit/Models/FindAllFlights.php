@@ -44,7 +44,7 @@ class FindAllFlights extends ModelTestBaseClass
             $this -> fail("The array size is to small given ".sizeof($result)." expected 2.");
         }
         else{
-            $this -> assertEquals($expected,$result[1] -> get('warning'));
+            $this -> assertEquals($expected,$result[1] -> warning);
         }
     }
 

@@ -22,7 +22,7 @@ class PlannerLoginImpl extends Model implements PlannerLoginInterface
             $stm = $stm -> fetch();
            if( password_verify($password,$stm['PasswordHash']) ){
                 return true;
-            }
+           }
            throw new IncorrectPasswordException();
         }
         throw new IncorrectLoginException();

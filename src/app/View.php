@@ -8,7 +8,10 @@ use App\Exceptions\ViewNotFoundException;
 
 class View
 {
-    public function __construct(protected ViewPaths $viewFileName, protected array $params = []){
+    public function __construct(
+        protected ViewPaths $viewFileName,
+        protected array $params = []
+    ){
 
     }
 
@@ -19,7 +22,7 @@ class View
 
     public function render(): string {
 
-        $path = VIEW_PATH . "/" . $this -> viewFileName -> value;
+        $path = VIEW_PATH . "/" . $this -> viewFileName -> value . ".php";
 
         if( ! file_exists($path) ){
             throw new ViewNotFoundException();
@@ -34,5 +37,12 @@ class View
     public function __toString(): string
     {
         return $this -> render();
+    }
+
+    public function getPath(): ViewPaths{
+        return $this -> viewFileName;
+    }
+    public function getParams(): array {
+        return $this -> params;
     }
 }

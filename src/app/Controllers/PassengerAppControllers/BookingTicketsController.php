@@ -15,7 +15,6 @@ class BookingTicketsController {
                                 protected ScheduleOfRouteGetter $scheduleOfRouteGetter,
                                 protected TargetAirportsGetter $targetAirportsGetter,
                                 protected  SeatsGetter $seatsGetter) {
-
     }
     public function getAllAirports() {
 //        if( isset($_GET['token']) && $_GET['token'] == 0 ){
@@ -40,8 +39,11 @@ class BookingTicketsController {
         echo json_encode($this -> targetAirportsGetter -> run($start));
     }
 
+<<<<<<< HEAD
     public function getAvailableSeats() {
         $flightID = $_GET['flightID'];
         echo json_encode($this -> seatsGetter -> run($flightID));
     }
+=======
+>>>>>>> beb27c78df574c56b45124f75b1231f6d10e2c7d
 }
