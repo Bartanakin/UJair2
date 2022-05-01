@@ -1,12 +1,18 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\PassengerAppControllers;
 
-use App\View;
+use App\Interfaces\PassengerLoginInterfaces\LoginAndPasswordVerification;
 
-class HomeController
+class PassengerLoginController
 {
-    public function index(): View {
-        return View::make("Home/index.php");
+    public function __construct(protected LoginAndPasswordVerification $verification)
+    {
+    }
+
+    public function getPassengerIDIfExists() {
+        $login = $_GET['login'];
+        $password = $_GET['password'];
+        echo json_encode(["passengerID" => $this -> verification -> run($login, $password)]);
     }
 }

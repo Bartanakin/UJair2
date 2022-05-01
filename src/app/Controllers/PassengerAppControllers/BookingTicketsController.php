@@ -9,9 +9,6 @@ use App\Interfaces\BookingTicketsInterfaces\InsertionNewTicket;
 use App\Interfaces\BookingTicketsInterfaces\ScheduleOfRouteGetter;
 use App\Interfaces\BookingTicketsInterfaces\SeatsGetter;
 use App\Interfaces\BookingTicketsInterfaces\TargetAirportsGetter;
-use App\View;
-use App\ViewPaths;
-use PHPUnit\Util\Exception;
 
 class BookingTicketsController {
 
@@ -22,13 +19,6 @@ class BookingTicketsController {
                                 protected InsertionNewTicket $insertionNewTicket) {
     }
     public function getAllAirports() {
-//        if( isset($_GET['token']) && $_GET['token'] == 0 ){
-//
-//            return "";
-//        }
-//        else{
-//            return View::make(ViewPaths::UNAUTHORIZED);
-//        }
         $airports = $this -> airportsGetter -> run();
         echo json_encode($airports);
     }

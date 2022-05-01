@@ -2,8 +2,8 @@
 
 use App\App;
 use App\Controllers\PassengerAppControllers\BookingTicketsController;
+use App\Controllers\PassengerAppControllers\PassengerLoginController;
 use App\Controllers\PlannerAppControllers\HomeController;
-use App\Controllers\TestPageController;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -24,6 +24,7 @@ $app -> getRouter() -> get("/getAllAirports",[BookingTicketsController::class, "
 $app -> getRouter() -> get("/getScheduleForRoute",[BookingTicketsController::class, "getScheduleForRoute"]);
 $app -> getRouter() -> get("/getTargetAirports",[BookingTicketsController::class, "getTargetAirports"]);
 $app -> getRouter() -> get("/insertTicket",[BookingTicketsController::class,'insertTicket']);
+$app -> getRouter() -> get("/getPassengerIDIfExists",[PassengerLoginController::class,'getPassengerIDIfExists']);
 
 
 
