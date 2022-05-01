@@ -1,12 +1,17 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\PassengerAppControllers;
 
-use App\View;
+use App\Interfaces\PassengerRegistrationInterfaces\LoginChecker;
 
-class HomeController
+class PassengerRegistrationController
 {
-    public function index(): View {
-        return View::make("Home/index.php");
+    public function __construct(protected LoginChecker $loginChecker)
+    {
+    }
+
+    public function canAddLogin() {
+        $login = $_GET['login'];
+        echo json_encode(['answer' => $this -> loginChecker -> run($login)]);
     }
 }
