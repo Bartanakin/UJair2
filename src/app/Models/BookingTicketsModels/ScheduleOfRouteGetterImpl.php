@@ -19,8 +19,15 @@ class ScheduleOfRouteGetterImpl extends \App\Model implements \App\Interfaces\Bo
         $query = 'SELECT Flights.ID, Flights.DateTimeOfDeparture FROM Flights 
         WHERE Flights.RouteID = (SELECT Routes.ID FROM Routes 
         WHERE Routes.TargetAirportID = ? AND Routes.StartingAirportID = ?);';
+
+        //$this -> getDBConnection() -> beginTransaction();
+
         $statement = $this -> getDBConnection() -> prepare($query);
-        $statement -> execute([$target, $start]);
+        $success = $statement -> execute([$target, $start]);
+
+        //$this -> getDBConnection() -> commit();
+        //$this -> getDBConnection() -> rollBack();
+
         while($data = $statement -> fetch()) {
             $this->flights[] = Flight::createForBookingTickets($data['ID'], $data['DateTimeOfDeparture']);
 //            echo $data['ID'] . " " . $data['Airport_name'] . '<br/ >';

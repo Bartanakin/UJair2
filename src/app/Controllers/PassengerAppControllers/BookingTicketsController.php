@@ -12,8 +12,8 @@ class BookingTicketsController {
 
     public function __construct(protected AllAirportsGetter $airportsGetter,
                                 protected ScheduleOfRouteGetter $scheduleOfRouteGetter,
-                                protected TargetAirportsGetter $targetAirportsGetter) {
-
+                                protected TargetAirportsGetter $targetAirportsGetter)
+    {
     }
     public function getAllAirports() {
 //        if( isset($_GET['token']) && $_GET['token'] == 0 ){
@@ -37,4 +37,5 @@ class BookingTicketsController {
         $start = $_GET['start'];
         echo json_encode($this -> targetAirportsGetter -> run($start));
     }
+
 }

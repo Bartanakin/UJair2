@@ -18,6 +18,7 @@ class ModelTestBaseClass extends TestCase
         $this -> dataBaseConnectionMock = $this -> createMock(DataBaseConnection::class);
         $this -> pdoMock = $this -> createMock(PDO::class);
         $this -> pdoStatementMock = $this -> createMock(\PDOStatement::class);
+
         $this -> dataBaseConnectionMock -> method('getPDO') -> willReturn($this ->pdoMock);
         $this -> pdoMock -> method('prepare') -> willReturn($this -> pdoStatementMock);
 
