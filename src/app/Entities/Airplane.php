@@ -4,7 +4,7 @@ namespace App\Entities;
 
 class Airplane
 {
-    public function __construct(
+    protected function __construct(
         protected ?int $ID = null,
         protected ?string $typeName = null
     ){

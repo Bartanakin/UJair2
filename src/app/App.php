@@ -5,12 +5,14 @@ namespace App;
 
 use App\Exceptions\UnauthorizedPageAccessException;
 use App\Interfaces\BookingTicketsInterfaces\AllAirportsGetter;
+use App\Interfaces\BookingTicketsInterfaces\InsertionNewTicket;
 use App\Interfaces\BookingTicketsInterfaces\ScheduleOfRouteGetter;
 use App\Interfaces\BookingTicketsInterfaces\SeatsGetter;
 use App\Interfaces\BookingTicketsInterfaces\TargetAirportsGetter;
 use App\Interfaces\FindAllFlights;
 use App\Interfaces\PlannerLoginInterface;
 use App\Models\BookingTicketsModels\AllAirportsGetterImpl;
+use App\Models\BookingTicketsModels\InsertionNewTicketImpl;
 use App\Models\BookingTicketsModels\ScheduleOfRouteGetterImpl;
 use App\Models\BookingTicketsModels\SeatsGetterImpl;
 use App\Models\BookingTicketsModels\TargetAirportsGetterImpl;
@@ -35,6 +37,7 @@ class App
         $this -> container -> set(PlannerLoginInterface::class, PlannerLoginImpl::class);
         $this -> container -> set(FindAllFlights::class, FindAllFlightsImpl::class);
         $this -> container -> set(SeatsGetter::class, SeatsGetterImpl::class);
+        $this -> container -> set(InsertionNewTicket::class, InsertionNewTicketImpl::class);
 
         $this -> container -> set(DataBaseConnection::class,function(Container $c){
             return App::getDataBaseConnection();

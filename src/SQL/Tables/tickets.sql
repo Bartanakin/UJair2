@@ -13,5 +13,7 @@ CREATE TABLE Tickets (
      CONSTRAINT FK_PassengerID_in_Tickets FOREIGN KEY (PassengerID)
          REFERENCES Passengers(ID)
          ON DELETE CASCADE
-         ON UPDATE CASCADE
+         ON UPDATE CASCADE,
+
+     CONSTRAINT uc UNIQUE (FlightID,NumberOfSeat)
 );

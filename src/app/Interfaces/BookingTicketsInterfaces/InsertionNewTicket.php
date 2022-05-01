@@ -2,9 +2,8 @@
 
 namespace App\Interfaces\BookingTicketsInterfaces;
 
-use App\Entities\Ticket;
 
 interface InsertionNewTicket
 {
-    function run(Ticket $ticket): bool;
+    function run(int $flightID, int $seat, int $passengerID): bool;
 }

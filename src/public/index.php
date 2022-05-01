@@ -15,14 +15,17 @@ session_start();
 $app = new App($_SERVER["REQUEST_METHOD"],$_SERVER["REQUEST_URI"],CONNECT);
 
 $app -> getRouter() -> get('/',[HomeController::class, 'index']);
-$app -> getRouter() -> get("/testPage",[TestPageController::class, "testPage"]);
-$app -> getRouter() -> get("/check",[TestPageController::class, "check"]);
+$app -> getRouter() -> post("/",[\App\Controllers\PlannerAppControllers\PlannerLoginController::class,'login']);
+$app -> getRouter() -> get("/style",[\App\Controllers\LinksController::class,'style']);
+
+//==========
+$app -> getRouter() -> get("/getAvailableSeats",[BookingTicketsController::class, "getAvailableSeats"]);
 $app -> getRouter() -> get("/getAllAirports",[BookingTicketsController::class, "getAllAirports"]);
 $app -> getRouter() -> get("/getScheduleForRoute",[BookingTicketsController::class, "getScheduleForRoute"]);
 $app -> getRouter() -> get("/getTargetAirports",[BookingTicketsController::class, "getTargetAirports"]);
-$app -> getRouter() -> get("/getAvailableSeats",[BookingTicketsController::class, "getAvailableSeats"]);
-$app -> getRouter() -> get("/style",[\App\Controllers\LinksController::class,'style']);
-$app -> getRouter() -> post("/",[\App\Controllers\PlannerAppControllers\PlannerLoginController::class,'login']);
+$app -> getRouter() -> get("/insertTicket",[BookingTicketsController::class,'insertTicket']);
+
+
 
 $app -> run();
 
