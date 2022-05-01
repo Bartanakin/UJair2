@@ -32,6 +32,10 @@ class App
         $this -> container -> set(TargetAirportsGetter::class, TargetAirportsGetterImpl::class);
         $this -> container -> set(PlannerLoginInterface::class, PlannerLoginImpl::class);
         $this -> container -> set(FindAllFlights::class, FindAllFlightsImpl::class);
+
+        $this -> container -> set(DataBaseConnection::class,function(Container $c){
+            return App::getDataBaseConnection();
+        });
     }
 
     function getRouter(): Router {

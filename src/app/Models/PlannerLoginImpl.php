@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\DataBaseConnection;
 use App\Exceptions\IncorrectLoginException;
 use App\Exceptions\IncorrectPasswordException;
 use App\Interfaces\PlannerLoginInterface;
@@ -10,8 +11,8 @@ use function PHPUnit\Framework\throwException;
 
 class PlannerLoginImpl extends Model implements PlannerLoginInterface
 {
-    public function __construct(){
-        parent::__construct();
+    public function __construct( DataBaseConnection $dataBaseConnection){
+        parent::__construct( $dataBaseConnection );
     }
     public function login($login, $password): bool
     {

@@ -2,14 +2,15 @@
 
 namespace App\Models\BookingTicketsModels;
 
+use App\DataBaseConnection;
 use App\Entities\Airport;
 
 class TargetAirportsGetterImpl extends \App\Model implements \App\Interfaces\BookingTicketsInterfaces\TargetAirportsGetter
 {
 
     protected array $airports = [];
-    public function __construct(){
-        parent::__construct();
+    public function __construct( DataBaseConnection $dataBaseConnection){
+        parent::__construct($dataBaseConnection);
     }
 
     function run(int $start): array

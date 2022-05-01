@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\DataBaseConnection;
 use App\Model;
 
 class DataBaseTest extends Model
 {
-    public function __construct(){
-        parent::__construct();
+    public function __construct(DataBaseConnection $dataBaseConnection){
+        parent::__construct($dataBaseConnection);
     }
     public function addRow(): string {
         $query = 'INSERT INTO TestTable (value1) VALUES (?);';

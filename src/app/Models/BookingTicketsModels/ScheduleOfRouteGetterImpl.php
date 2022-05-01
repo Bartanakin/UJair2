@@ -2,14 +2,15 @@
 
 namespace App\Models\BookingTicketsModels;
 
+use App\DataBaseConnection;
 use App\Entities\Flight;
 use DateTime;
 
 class ScheduleOfRouteGetterImpl extends \App\Model implements \App\Interfaces\BookingTicketsInterfaces\ScheduleOfRouteGetter
 {
     protected array $flights = [];
-    public function __construct(){
-        parent::__construct();
+    public function __construct( DataBaseConnection $dataBaseConnection){
+        parent::__construct($dataBaseConnection);
     }
 
     function run(int $start, int $target): array
