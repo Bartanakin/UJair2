@@ -3,12 +3,11 @@
 namespace App\Entities;
 
 use App\Model;
-use Cassandra\Date;
 use DateTime;
 use JsonSerializable;
 
 class Flight implements JsonSerializable {
-    public function __construct(
+    protected function __construct(
         protected ?int $id = null,
         protected ?Airport $startingAirport = null,
         protected ?Airport $targetAirport = null,
@@ -19,6 +18,16 @@ class Flight implements JsonSerializable {
         protected ?string $warning = null
     ) {
 
+    }
+
+    public static function createForBookingTickets(
+        int $id,
+        string $date
+    ) {
+        return new static(
+            id: $id,
+            dateOfDeparture: DateTime::createFromFormat(Model::$dateFormat, $date)
+        );
     }
 
     public static function createForAllFlights(

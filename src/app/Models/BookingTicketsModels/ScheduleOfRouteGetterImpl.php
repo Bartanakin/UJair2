@@ -22,7 +22,7 @@ class ScheduleOfRouteGetterImpl extends \App\Model implements \App\Interfaces\Bo
         $statement = $this -> getDBConnection() -> prepare($query);
         $statement -> execute([$target, $start]);
         while($data = $statement -> fetch()) {
-            $this->flights[] = new Flight($data['ID'], DateTime::createFromFormat(static::$dateFormat, $data['DateTimeOfDeparture']));
+            $this->flights[] = Flight::createForBookingTickets($data['ID'], $data['DateTimeOfDeparture']);
 //            echo $data['ID'] . " " . $data['Airport_name'] . '<br/ >';
         }
         return $this -> flights;
