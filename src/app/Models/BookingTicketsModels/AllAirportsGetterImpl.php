@@ -15,7 +15,7 @@ class AllAirportsGetterImpl extends \App\Model implements \App\Interfaces\Bookin
         $statement = $this -> getDBConnection() -> prepare($query);
         $statement -> execute();
         while($data = $statement -> fetch()) {
-            $this -> airports[] = new Airport($data['ID'], $data['Airport_name']);
+            $this -> airports[] = Airport::createForBookingtickets($data['ID'], $data['Airport_name']);
         }
         return $this -> airports;
     }

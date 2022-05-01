@@ -4,6 +4,7 @@ namespace App\Controllers\PassengerAppControllers;
 
 use App\Interfaces\BookingTicketsInterfaces\AllAirportsGetter;
 use App\Interfaces\BookingTicketsInterfaces\ScheduleOfRouteGetter;
+use App\Interfaces\BookingTicketsInterfaces\SeatsGetter;
 use App\Interfaces\BookingTicketsInterfaces\TargetAirportsGetter;
 use App\View;
 use App\ViewPaths;
@@ -12,7 +13,8 @@ class BookingTicketsController {
 
     public function __construct(protected AllAirportsGetter $airportsGetter,
                                 protected ScheduleOfRouteGetter $scheduleOfRouteGetter,
-                                protected TargetAirportsGetter $targetAirportsGetter) {
+                                protected TargetAirportsGetter $targetAirportsGetter,
+                                protected  SeatsGetter $seatsGetter) {
 
     }
     public function getAllAirports() {
@@ -36,5 +38,10 @@ class BookingTicketsController {
     public function getTargetAirports() {
         $start = $_GET['start'];
         echo json_encode($this -> targetAirportsGetter -> run($start));
+    }
+
+    public function getAvailableSeats() {
+        $flightID = $_GET['flightID'];
+        echo json_encode($this -> seatsGetter -> run($flightID));
     }
 }

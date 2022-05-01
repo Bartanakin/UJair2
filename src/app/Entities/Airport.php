@@ -2,11 +2,10 @@
 
 namespace App\Entities;
 
-use JetBrains\PhpStorm\Internal\TentativeType;
 use JsonSerializable;
 
 class Airport implements JsonSerializable{
-    public function __construct(
+    protected function __construct(
         protected ?int $id = null,
         protected ?string $airportName = null
     ) {
@@ -18,6 +17,16 @@ class Airport implements JsonSerializable{
             'ID' => $this->id,
             'Airport_name' => $this->airportName
         ];
+    }
+
+    public static function createForBookingtickets(
+        int $id,
+        string $airportName
+    ) {
+        return new static(
+            id: $id,
+            airportName: $airportName
+        );
     }
 
     public static function createForAllFlights(string $airportName){

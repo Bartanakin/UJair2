@@ -2,8 +2,9 @@
 
 namespace App\Interfaces\BookingTicketsInterfaces;
 
+use App\Entities\SeatsWrapper;
+
 interface SeatsGetter
 {
-    function getMaxSeats(int $flightId): int;
-    function getReservedSeats(int $flightId): array;
+    function run(int $flightId): SeatsWrapper;
 }

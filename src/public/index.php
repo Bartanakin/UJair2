@@ -20,6 +20,7 @@ $app -> getRouter() -> get("/check",[TestPageController::class, "check"]);
 $app -> getRouter() -> get("/getAllAirports",[BookingTicketsController::class, "getAllAirports"]);
 $app -> getRouter() -> get("/getScheduleForRoute",[BookingTicketsController::class, "getScheduleForRoute"]);
 $app -> getRouter() -> get("/getTargetAirports",[BookingTicketsController::class, "getTargetAirports"]);
+$app -> getRouter() -> get("/getAvailableSeats",[BookingTicketsController::class, "getAvailableSeats"]);
 $app -> getRouter() -> get("/style",[\App\Controllers\LinksController::class,'style']);
 $app -> getRouter() -> post("/",[\App\Controllers\PlannerAppControllers\PlannerLoginController::class,'login']);
 

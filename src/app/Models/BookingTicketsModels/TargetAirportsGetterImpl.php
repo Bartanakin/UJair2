@@ -21,7 +21,7 @@ class TargetAirportsGetterImpl extends \App\Model implements \App\Interfaces\Boo
         $statement = $this -> getDBConnection() -> prepare($query);
         $statement -> execute([$start]);
         while($data = $statement -> fetch()) {
-            $this->airports[] = new Airport($data['ID'], $data['Airport_name']);
+            $this->airports[] = Airport::createForBookingtickets($data['ID'], $data['Airport_name']);
 //            echo $data['ID'] . " " . $data['Airport_name'] . '<br/ >';
         }
         return $this -> airports;
