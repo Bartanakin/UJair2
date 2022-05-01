@@ -27,6 +27,7 @@ $app -> getRouter() -> get("/getTargetAirports",[BookingTicketsController::class
 $app -> getRouter() -> get("/insertTicket",[BookingTicketsController::class,'insertTicket']);
 $app -> getRouter() -> get("/getPassengerIDIfExists",[PassengerLoginController::class,'getPassengerIDIfExists']);
 $app -> getRouter() -> get("/canAddLogin",[PassengerRegistrationController::class,'canAddLogin']);
+$app -> getRouter() -> get("/loadCountries",[PassengerRegistrationController::class,'loadCountries']);
 
 
 $app -> run();

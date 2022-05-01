@@ -11,6 +11,7 @@ use App\Interfaces\BookingTicketsInterfaces\SeatsGetter;
 use App\Interfaces\BookingTicketsInterfaces\TargetAirportsGetter;
 use App\Interfaces\FindAllFlights;
 use App\Interfaces\PassengerLoginInterfaces\LoginAndPasswordVerification;
+use App\Interfaces\PassengerRegistrationInterfaces\CountriesLoader;
 use App\Interfaces\PassengerRegistrationInterfaces\LoginChecker;
 use App\Interfaces\PlannerLoginInterface;
 use App\Models\BookingTicketsModels\AllAirportsGetterImpl;
@@ -20,6 +21,7 @@ use App\Models\BookingTicketsModels\SeatsGetterImpl;
 use App\Models\BookingTicketsModels\TargetAirportsGetterImpl;
 use App\Models\FindAllFlightsImpl;
 use App\Models\PassengerLoginModels\LoginAndPasswordVerificationImpl;
+use App\Models\PassengerRegistrationModels\CountriesLoaderImpl;
 use App\Models\PassengerRegistrationModels\LoginCheckerImpl;
 use App\Models\PlannerLoginImpl;
 
@@ -44,6 +46,7 @@ class App
         $this -> container -> set(InsertionNewTicket::class, InsertionNewTicketImpl::class);
         $this -> container -> set(LoginAndPasswordVerification::class, LoginAndPasswordVerificationImpl::class);
         $this -> container -> set(LoginChecker::class, LoginCheckerImpl::class);
+        $this -> container -> set(CountriesLoader::class, CountriesLoaderImpl::class);
 
         $this -> container -> set(DataBaseConnection::class,function(Container $c){
             return App::getDataBaseConnection();
