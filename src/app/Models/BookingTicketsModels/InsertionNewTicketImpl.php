@@ -13,6 +13,6 @@ class InsertionNewTicketImpl extends \App\Model implements \App\Interfaces\Booki
 
     function run(Ticket $ticket): bool
     {
-        // TODO: Implement run() method.
+
     }
 }
