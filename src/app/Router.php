@@ -35,7 +35,6 @@ class Router{
         if( ! $action ){
             throw new UnknownUriException();
         }
-
         if( is_array($action) ){
             [$class, $method] = $action;
             if( class_exists($class) ){

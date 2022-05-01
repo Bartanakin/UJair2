@@ -1,7 +1,7 @@
 <?php
 
 use App\App;
-use App\Controllers\BookingTicketsController;
+use App\Controllers\PassengerAppControllers\BookingTicketsController;
 use App\Controllers\PlannerAppControllers\HomeController;
 use App\Controllers\TestPageController;
 

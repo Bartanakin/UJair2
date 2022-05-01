@@ -6,8 +6,6 @@ use App\Controllers\PlannerAppControllers\PlannerLoginController;
 use App\Entities\Flight;
 use App\Exceptions\IncorrectLoginException;
 use App\Exceptions\IncorrectPasswordException;
-use App\Interfaces\FindAllFlights;
-use App\Interfaces\PlannerLoginInterface;
 use App\Models\FindAllFlightsImpl;
 use App\Models\PlannerLoginImpl;
 use App\View;
@@ -16,8 +14,8 @@ use App\ViewPaths;
 class PlannerLoginControllerTest extends \PHPUnit\Framework\TestCase
 {
     private PlannerLoginController $plannerLoginController;
-    private $plannerLoginMock;
-    private $findAllFlightsMock;
+    private PlannerLoginImpl $plannerLoginMock;
+    private FindAllFlightsImpl $findAllFlightsMock;
     protected function setUp(): void
     {
         parent::setUp();
