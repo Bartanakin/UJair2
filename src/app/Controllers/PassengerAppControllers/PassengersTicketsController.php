@@ -1,13 +1,16 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\PassengerAppControllers;
 
-use App\View;
-use App\ViewPaths;
+use App\Interfaces\PassengersTicketsInterfaces\AllTicketsForPassengerGetter;
 
-class HomeController
+class PassengersTicketsController
 {
-    public function index(): View {
-        return View::make(ViewPaths::HOME_PAGE);
+    public function __construct(protected AllTicketsForPassengerGetter $allTicketsGetter) {
+
+    }
+
+    public function getTicketsForPassengerID() {
+        echo json_encode($this -> allTicketsGetter -> run($_GET['passID']));
     }
 }
