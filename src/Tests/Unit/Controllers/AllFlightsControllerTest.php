@@ -32,7 +32,7 @@ class AllFlightsControllerTest extends TestCase
     public function check_redirect_to_create_flight_page_when_editing_flight(){
 
         $_POST['flightID'] = 4;
-        $this -> allFlightsController -> editFlight();
+        $this -> allFlightsController -> confirm();
 
         $this -> assertTrue(isset($_SESSION['flightID']));
         $this -> assertEquals($_POST['flightID'],$_SESSION['flightID']);

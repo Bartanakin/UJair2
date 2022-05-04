@@ -14,8 +14,8 @@ class Flight implements JsonSerializable {
         protected ?DateTime $dateOfDeparture = null,
         protected ?DateTime $estimatedArrivalTime = null,
         protected ?Airplane $airplane = null,
-        protected ?float $price = null,
-        protected ?string $warning = null
+        protected float $price = 0,
+        protected string $warning = ""
     ) {
 
     }
@@ -39,7 +39,7 @@ class Flight implements JsonSerializable {
         int $airplaneId,
         string $airplaneTypeName,
         float $price,
-        ?string $warning
+        string $warning
     ){
         return new static(
           id: $id,
@@ -51,6 +51,11 @@ class Flight implements JsonSerializable {
           price: $price,
           warning: $warning
         );
+    }
+
+    public static function createNull(): static
+    {
+        return new static();
     }
 
     public function jsonSerialize(): mixed {
@@ -66,6 +71,22 @@ class Flight implements JsonSerializable {
             return $this -> $name;
         }
         return null;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int|null $id
+     */
+    public function setId(?int $id): void
+    {
+        $this->id = $id;
     }
 
 }

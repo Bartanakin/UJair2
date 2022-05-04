@@ -9,6 +9,7 @@ enum ViewPaths: string
     case EDIT_FLIGHT_PAGE = "PlannerAppPages/flight_editor";
     case EDIT_CREW_PAGE = 'PlannerAppPages/crew_editor';
     case SETTLEMENTS_PAGE = "PlannerAppPages/settlements";
+    case CONFIRMATION_PAGE = "PlannerAppPages/edit_flight_confirmation";
 
     // stylesheets
     case STYLE_SHEET = "styles/styles";
