@@ -13,8 +13,11 @@ class FindCrewForFlightImpl extends Model implements \App\Interfaces\FindCrewFor
         parent::__construct($dataBaseConnection);
     }
 
-    public function findCrewForFlight(): CrewList
-    {
-        return new CrewList();
+    private function findMaxNumberOfFA(int $flightID): int {
+        return 0;
+    }
+
+    public function findCrewForFlight(int $flightID): CrewList {
+        //return
     }
 }

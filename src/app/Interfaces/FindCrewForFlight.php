@@ -6,5 +6,5 @@ use App\Entities\CrewList;
 
 interface FindCrewForFlight
 {
-    public function findCrewForFlight(): CrewList;
+    public function findCrewForFlight(int $flightID): CrewList;
 }

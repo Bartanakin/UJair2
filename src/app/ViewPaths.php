@@ -16,6 +16,7 @@ enum ViewPaths: string
     // Error pages
     case BAD_REQUEST = "ErrorPages/BadRequest";
     case UNAUTHORIZED = "ErrorPages/Unauthorized";
-    
+    case SESSION_EXPIRED = "ErrorPages/SessionHasExpired";
+
 
 }

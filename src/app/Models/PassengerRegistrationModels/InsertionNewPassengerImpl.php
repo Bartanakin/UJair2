@@ -18,8 +18,13 @@ class InsertionNewPassengerImpl extends \App\Model implements \App\Interfaces\Pa
         $statement = $this -> getDBConnection() -> prepare($query);
         try {
             $this->getDBConnection()->beginTransaction();
-            $success = $statement->execute([$passenger->firstName, $passenger->lastName, $passenger->countryID,
-                $passenger->login, $passenger->password]);
+            $success = $statement->execute([
+                $passenger->firstName,
+                $passenger->lastName,
+                $passenger->countryID,
+                $passenger->login,
+                $passenger->password
+            ]);
             $this->getDBConnection()->commit();
         }
         catch(\PDOException $error) {
