@@ -4,7 +4,12 @@
 require __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__.'/../../connect.php';
 
-    $test1 = new \Tests\SQLtests\AvailableAirplanesQueryTest();
+// Add all Test classes to the array
+// Each of them should extend the SQLTest class
+// Each test method should have attribute #[TestAttribute]
 
-    $test1 -> setUp();
-    $test1 -> test();
+$testClasses = [
+    \Tests\SQLtests\AvailableAirplanesQueryTest::class
+];
+
+\Tests\SQLtests\Engine\SQLTest::runAllTests($testClasses,new \App\DataBaseConnection(CONNECT));

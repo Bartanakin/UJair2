@@ -3,11 +3,12 @@
 namespace Tests\SQLtests;
 
 use App\DataBaseConnection;
+use Tests\SQLtests\Engine\TestAttribute;
 
 class AvailableAirplanesQueryTest extends Engine\SQLTest
 {
 
-    public function __construct(?DataBaseConnection $connection = null)
+    public function __construct(DataBaseConnection $connection)
     {
         parent::__construct($connection);
     }
@@ -17,7 +18,8 @@ class AvailableAirplanesQueryTest extends Engine\SQLTest
         $stmt -> execute();
     }
 
-    public function test(){
+    #[TestAttribute]
+    public function test_test(){
         $expected = [
             [ 'id' => 1, 'value1' => 10 ],
             [ 'id' => 2, 'value1' => 10 ]
@@ -26,13 +28,6 @@ class AvailableAirplanesQueryTest extends Engine\SQLTest
         $stmt -> execute();
 
         $result = $stmt -> fetchAll();
-        if( $expected === $result ){
-            print "Congrats test has passed!";
-        }
-        else{
-            print_r($expected);
-            print_r($result) ;
-            print "Warning! Test has failed!";
-        }
+        $this -> assertEquals($expected,$result);
     }
 }
