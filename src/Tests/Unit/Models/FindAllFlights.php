@@ -2,28 +2,35 @@
 
 namespace Tests\Unit\Models;
 
+use App\Interfaces\FlightWarningAdder;
 use App\Models\FindAllFlightsImpl;
+use App\Models\FlightWarningAdderImpl;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class FindAllFlights extends ModelTestBaseClass
 {
     private FindAllFlightsImpl $findAllFlightsImpl;
+
+    private FlightWarningAdder $flightWarningAdder;
     private array $queryKeys = [
-        'ID',
+        'FlightID',
         'StartingAirportName',
         'TargetAirportName',
         'DateTimeOfDeparture',
-        'EstimatedArrivalTime',
-        'AirPlaneID',
+        'AirplaneID',
         'AirplaneTypeName',
-        'Price',
-        'Canceled'
+        'Price'
     ];
 
     protected function setUp(): void
     {
         parent::setUp();
+        $this -> flightWarningAdder = new FlightWarningAdderImpl();
 
-        $this -> findAllFlightsImpl = new FindAllFlightsImpl($this -> dataBaseConnectionMock);
+        $this -> findAllFlightsImpl = new FindAllFlightsImpl(
+            $this -> dataBaseConnectionMock,
+            $this -> flightWarningAdder
+        );
 
     }
 
@@ -58,11 +65,12 @@ class FindAllFlights extends ModelTestBaseClass
                 array_combine($this -> queryKeys, $values[0]),
                 array_combine($this -> queryKeys, $values[1]),
                 array_combine($this -> queryKeys, $values[2]),
-                array_combine($this -> queryKeys, $values[3]),
                 null
             )
         );
         $result = $this -> findAllFlightsImpl -> findAllFlights();
+//        print_r($expected);
+//        print_r($result);
         $this -> assertEquals($expected,$result);
     }
 }

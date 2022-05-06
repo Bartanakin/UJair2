@@ -10,6 +10,7 @@ use App\Interfaces\BookingTicketsInterfaces\ScheduleOfRouteGetter;
 use App\Interfaces\BookingTicketsInterfaces\SeatsGetter;
 use App\Interfaces\BookingTicketsInterfaces\TargetAirportsGetter;
 use App\Interfaces\FindAllFlights;
+use App\Interfaces\FlightWarningAdder;
 use App\Interfaces\PassengerLoginInterfaces\LoginAndPasswordVerification;
 use App\Interfaces\PassengerRegistrationInterfaces\CountriesLoader;
 use App\Interfaces\PassengerRegistrationInterfaces\InsertionNewPassenger;
@@ -22,6 +23,7 @@ use App\Models\BookingTicketsModels\ScheduleOfRouteGetterImpl;
 use App\Models\BookingTicketsModels\SeatsGetterImpl;
 use App\Models\BookingTicketsModels\TargetAirportsGetterImpl;
 use App\Models\FindAllFlightsImpl;
+use App\Models\FlightWarningAdderImpl;
 use App\Models\PassengerLoginModels\LoginAndPasswordVerificationImpl;
 use App\Models\PassengerRegistrationModels\CountriesLoaderImpl;
 use App\Models\PassengerRegistrationModels\InsertionNewPassengerImpl;
@@ -46,6 +48,9 @@ class App
         $this -> container -> set(TargetAirportsGetter::class, TargetAirportsGetterImpl::class);
         $this -> container -> set(PlannerLoginInterface::class, PlannerLoginImpl::class);
         $this -> container -> set(FindAllFlights::class, FindAllFlightsImpl::class);
+        $this -> container -> set(FlightWarningAdder::class, FlightWarningAdderImpl::class);
+
+
         $this -> container -> set(SeatsGetter::class, SeatsGetterImpl::class);
         $this -> container -> set(InsertionNewTicket::class, InsertionNewTicketImpl::class);
         $this -> container -> set(LoginAndPasswordVerification::class, LoginAndPasswordVerificationImpl::class);

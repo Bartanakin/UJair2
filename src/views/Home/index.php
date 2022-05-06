@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="eng">
 <head>
-    <link rel="stylesheet" type="text/css" href="../styles/styles.css"/>
     <link rel="stylesheet" type="text/css" href="style" >
     <title>Planner login</title>
 </head>

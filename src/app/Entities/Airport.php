@@ -32,4 +32,12 @@ class Airport implements JsonSerializable{
     public static function createForAllFlights(string $airportName){
         return new static(airportName: $airportName );
     }
+
+    /**
+     * @return string|null
+     */
+    public function getAirportName(): ?string
+    {
+        return $this->airportName;
+    }
 }

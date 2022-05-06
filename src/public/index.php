@@ -18,7 +18,13 @@ $app = new App($_SERVER["REQUEST_METHOD"],$_SERVER["REQUEST_URI"],CONNECT);
 
 $app -> getRouter() -> get('/',[HomeController::class, 'index']);
 $app -> getRouter() -> post("/",[\App\Controllers\PlannerAppControllers\PlannerLoginController::class,'login']);
-$app -> getRouter() -> get("/style",[\App\Controllers\LinksController::class,'style']);
+$app -> getRouter() -> get("/editFlight",[\App\Controllers\PlannerAppControllers\AllFlightsController::class,'addFlight']);
+$app -> getRouter() -> post("/editFlight",[\App\Controllers\PlannerAppControllers\AllFlightsController::class,'editFlight']);
+$app -> getRouter() -> post("/editCrew",[\App\Controllers\PlannerAppControllers\AllFlightsController::class,'editCrew']);
+
+
+$app -> getRouter() -> get("/style",[\App\Controllers\StyleController::class,'loginPage']);
+$app -> getRouter() -> get("/allFlightsStyles",[\App\Controllers\StyleController::class,'allFlights']);
 
 //==========
 $app -> getRouter() -> get("/getAvailableSeats",[BookingTicketsController::class, "getAvailableSeats"]);
@@ -34,5 +40,3 @@ $app -> getRouter() -> get("/getTicketsForPassengerID",[PassengersTicketsControl
 
 
 $app -> run();
-
-

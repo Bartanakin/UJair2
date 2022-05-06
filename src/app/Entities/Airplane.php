@@ -18,4 +18,17 @@ class Airplane
     {
         return new static(ID: $ID, typeName: $typeName );
     }
+
+    /**
+     * @return int|null
+     */
+    public function getID(): ?int
+    {
+        return $this->ID;
+    }
+
+    public function getTypeName(): string
+    {
+        return $this->typeName;
+    }
 }

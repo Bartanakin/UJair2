@@ -1,0 +1,47 @@
+body{
+    background-color: #f5f5fa;
+}
+header{
+    text-align: center;
+}
+.wrapper{
+    width: 1000px;
+    margin: auto;
+}
+.flight{
+    padding: 10px;
+    height:min-content;
+    border-bottom: solid 2px black;
+}
+.flightData{
+    padding: 2%;
+    width: 66%;
+    float:left;
+}
+.flightEntity{
+    padding: 6px;
+    width: 100%;
+    border: solid 1px black;
+}
+.warning{
+    color: red;
+}
+.actions{
+    margin: 2%;
+    width: 25%;
+    border: solid 1px black;
+    float:left;
+    height: auto;
+}
+.bold{
+    font-weight: bold;
+}
+
+.flightForm{
+    padding: 10px;
+    align-items: center;
+}
+.flightSubmit{
+    width: 50%;
+    margin: auto;
+}

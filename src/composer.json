@@ -2,7 +2,8 @@
     "require": {
         "ramsey/uuid": "^4.2",
       "ext-pdo": "*",
-        "psr/container": "^2.0"
+        "psr/container": "^2.0",
+        "php-ds/php-ds": "^1.4"
     },
     "autoload": {
         "psr-4": {

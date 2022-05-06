@@ -1,12 +1,14 @@
 
+DROP PROCEDURE findAllFlights;
 CREATE PROCEDURE findAllFlights( )
 BEGIN
     SELECT Flights.ID AS FlightID,
-           Flights.DateTimeOfDeparture AS DateTimeOfDeparture,
-           SA.Airport_name AS StartingAirportName,
-           TA.Airport_name AS TargetAirportName,
-           A.ID AS AirplaneID,
-           AType.TypeName AS AirplaneTypeName
+        Flights.DateTimeOfDeparture AS DateTimeOfDeparture,
+        SA.Airport_name AS StartingAirportName,
+        TA.Airport_name AS TargetAirportName,
+        A.ID AS AirplaneID,
+        AType.TypeName AS AirplaneTypeName,
+        Flights.Price AS Price
             FROM Flights
     JOIN Routes R on Flights.RouteID = R.ID
     JOIN Airports SA ON R.StartingAirportID = SA.ID

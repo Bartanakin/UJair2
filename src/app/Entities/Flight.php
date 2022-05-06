@@ -35,21 +35,17 @@ class Flight implements JsonSerializable {
         string $startingAirportName,
         string $targetAirportName,
         string $dateOfDeparture,
-        string $estimatedArrivalTime,
         int $airplaneId,
         string $airplaneTypeName,
-        float $price,
-        string $warning
+        float $price
     ){
         return new static(
           id: $id,
           startingAirport: Airport::createForAllFlights($startingAirportName),
           targetAirport: Airport::createForAllFlights($targetAirportName) ,
-          dateOfDeparture: DateTime::createFromFormat(Model::$dateFormat,$dateOfDeparture) ,
-          estimatedArrivalTime: DateTime::createFromFormat(Model::$dateFormat,$estimatedArrivalTime),
+          dateOfDeparture: DateTime::createFromFormat(Model::$dateFormat,$dateOfDeparture),
           airplane: Airplane::createForAllFlights($airplaneId,$airplaneTypeName),
-          price: $price,
-          warning: $warning
+          price: $price
         );
     }
 
@@ -87,6 +83,62 @@ class Flight implements JsonSerializable {
     public function setId(?int $id): void
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return DateTime|null
+     */
+    public function getDateOfDeparture(): ?DateTime
+    {
+        return $this->dateOfDeparture;
+    }
+
+    /**
+     * @return Airplane|null
+     */
+    public function getAirplane(): ?Airplane
+    {
+        return $this->airplane;
+    }
+
+    /**
+     * @return Airport|null
+     */
+    public function getStartingAirport(): ?Airport
+    {
+        return $this->startingAirport;
+    }
+
+    /**
+     * @return Airport|null
+     */
+    public function getTargetAirport(): ?Airport
+    {
+        return $this->targetAirport;
+    }
+
+    /**
+     * @param string $warning
+     */
+    public function setWarning(string $warning): void
+    {
+        $this->warning = $warning;
+    }
+
+    /**
+     * @return float|int
+     */
+    public function getPrice(): float|int
+    {
+        return $this->price;
+    }
+
+    /**
+     * @return string
+     */
+    public function getWarning(): string
+    {
+        return $this->warning;
     }
 
 }
