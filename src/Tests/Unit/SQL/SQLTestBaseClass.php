@@ -4,6 +4,8 @@ namespace Tests\Unit\SQL;
 
 use App\DataBaseConnection;
 
+require_once __DIR__ . '/../../../connect.php';
+
 class SQLTestBaseClass extends \PHPUnit\Framework\TestCase
 {
     protected DataBaseConnection $connection;
