@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Controllers;
 
-use App\Controllers\PlannerAppControllers\AllFlightsController;
+use App\Controllers\PlannerAppControllers\flightEditorController;
 use App\Entities\Flight;
 use App\Interfaces\FindAllFlights;
 use App\Interfaces\FlightEditorInterfaces\AvailableAirplaneFinder;
@@ -19,7 +19,7 @@ use PHPUnit\Framework\TestCase;
 class FlightEditorControllerTest extends TestCase
 {
 
-    private AllFlightsController $allFlightsController;
+    private FlightEditorController $flightEditorController;
     private MockObject $findFlightDataMock;
     private MockObject $availableAirplaneFinderMock;
     private MockObject $targetAirportFinderMock;
@@ -37,7 +37,7 @@ class FlightEditorControllerTest extends TestCase
         $this -> flightCorrectnessCheckerMock = $this -> createMock(FlightCorrectnessChecker::class);
         $this -> findAllFlights = $this -> createMock(FindAllFlights::class);
 
-        $this -> allFlightsController = new AllFlightsController(
+        $this -> flightEditorController = new FlightEditorController(
             $this -> findFlightDataMock,
             $this -> availableAirplaneFinderMock,
             $this -> targetAirportFinderMock,
@@ -53,13 +53,12 @@ class FlightEditorControllerTest extends TestCase
 
         $expected = ViewPaths::SESSION_EXPIRED;
 
-        $this -> assertEquals($expected, $this -> allFlightsController -> deleteFlight() -> getPath());
-        $this -> assertEquals($expected, $this -> allFlightsController -> loadFlight() -> getPath());
-        $this -> assertEquals($expected, $this -> allFlightsController -> addFlight() -> getPath());
-        $this -> assertEquals($expected, $this -> allFlightsController -> selectDate() -> getPath());
-        $this -> assertEquals($expected, $this -> allFlightsController -> selectAirplane() -> getPath());
-        $this -> assertEquals($expected, $this -> allFlightsController -> selectTargetAirportTicketPriceAndConfirm() -> getPath());
-        $this -> assertEquals($expected, $this -> allFlightsController -> acceptConfirmation() -> getPath());
+        $this -> assertEquals($expected, $this -> flightEditorController -> deleteFlight() -> getPath());
+        $this -> assertEquals($expected, $this -> flightEditorController -> loadFlight() -> getPath());
+        $this -> assertEquals($expected, $this -> flightEditorController -> selectDate() -> getPath());
+        $this -> assertEquals($expected, $this -> flightEditorController -> selectAirplane() -> getPath());
+        $this -> assertEquals($expected, $this -> flightEditorController -> selectTargetAirportTicketPriceAndConfirm() -> getPath());
+        $this -> assertEquals($expected, $this -> flightEditorController -> acceptConfirmation() -> getPath());
 
     }
 
@@ -91,7 +90,7 @@ class FlightEditorControllerTest extends TestCase
             -> expects(($this -> once()))
             -> method('run');
 
-        $this -> assertEquals(ViewPaths::EDIT_FLIGHT_PAGE,$this -> allFlightsController -> loadFlight() -> getPath() );
+        $this -> assertEquals(ViewPaths::EDIT_FLIGHT_PAGE,$this -> flightEditorController -> loadFlight() -> getPath() );
     }
 
     /** @test */
@@ -105,7 +104,7 @@ class FlightEditorControllerTest extends TestCase
             -> with(\DateTime::createFromFormat(Model::$dateFormat,$_POST['pickedDate']));
 
 
-        $this -> assertEquals(ViewPaths::EDIT_FLIGHT_PAGE,$this -> allFlightsController -> selectDate() -> getPath() );
+        $this -> assertEquals(ViewPaths::EDIT_FLIGHT_PAGE,$this -> flightEditorController -> selectDate() -> getPath() );
 
     }
 
@@ -119,7 +118,7 @@ class FlightEditorControllerTest extends TestCase
             -> method('run');
 
 
-        $this -> assertEquals(ViewPaths::EDIT_FLIGHT_PAGE,$this -> allFlightsController -> selectAirplane() -> getPath() );
+        $this -> assertEquals(ViewPaths::EDIT_FLIGHT_PAGE,$this -> flightEditorController -> selectAirplane() -> getPath() );
 
     }
     /** @test */
@@ -127,7 +126,7 @@ class FlightEditorControllerTest extends TestCase
 
         $_POST['pickedTargetAirportID'] = 1;
         $_POST['pickedTicketPrice'] = 100;
-        $this -> allFlightsController -> setEditedFlightID(null);
+        $this -> flightEditorController -> setEditedFlightID(null);
         $this -> flightEditorMock
             -> expects($this -> once())
             -> method('insertFlight');
@@ -135,7 +134,7 @@ class FlightEditorControllerTest extends TestCase
 
         $this -> assertEquals(
             ViewPaths::ALL_FLIGHTS_PAGE,
-            $this -> allFlightsController -> selectTargetAirportTicketPriceAndConfirm() -> getPath()
+            $this -> flightEditorController -> selectTargetAirportTicketPriceAndConfirm() -> getPath()
         );
 
     }
@@ -144,7 +143,7 @@ class FlightEditorControllerTest extends TestCase
 
         $_POST['pickedTargetAirportID'] = 1;
         $_POST['pickedTicketPrice'] = 100;
-        $this -> allFlightsController -> setEditedFlightID(1);
+        $this -> flightEditorController -> setEditedFlightID(1);
         $this -> flightCorrectnessCheckerMock
             -> method('checkFlightEdit')
             -> willReturn(true);
@@ -155,7 +154,7 @@ class FlightEditorControllerTest extends TestCase
             -> method('editFlight');
         $this -> assertEquals(
             ViewPaths::ALL_FLIGHTS_PAGE,
-            $this -> allFlightsController -> selectTargetAirportTicketPriceAndConfirm() -> getPath()
+            $this -> flightEditorController -> selectTargetAirportTicketPriceAndConfirm() -> getPath()
         );
 
     }
@@ -164,12 +163,12 @@ class FlightEditorControllerTest extends TestCase
 
         $_POST['pickedTargetAirportID'] = 1;
         $_POST['pickedTicketPrice'] = 100;
-        $this -> allFlightsController -> setEditedFlightID(1);
+        $this -> flightEditorController -> setEditedFlightID(1);
         $this -> flightCorrectnessCheckerMock
             -> method('checkFlightEdit')
             -> willReturn(false);
 
-        $returnedView = $this -> allFlightsController -> selectTargetAirportTicketPriceAndConfirm();
+        $returnedView = $this -> flightEditorController -> selectTargetAirportTicketPriceAndConfirm();
         $this -> assertEquals(
             ViewPaths::CONFIRMATION_PAGE,
             $returnedView -> getPath()
@@ -184,12 +183,12 @@ class FlightEditorControllerTest extends TestCase
 
         $_POST['pickedTargetAirportID'] = 1;
         $_POST['pickedTicketPrice'] = 100;
-        $this -> allFlightsController -> setEditedFlightID(1);
+        $this -> flightEditorController -> setEditedFlightID(1);
         $this -> flightCorrectnessCheckerMock
             -> method('checkFlightEdit')
             -> willReturn(false);
 
-        $returnedView = $this -> allFlightsController -> selectTargetAirportTicketPriceAndConfirm();
+        $returnedView = $this -> flightEditorController -> selectTargetAirportTicketPriceAndConfirm();
         $this -> assertEquals(
             ViewPaths::CONFIRMATION_PAGE,
             $returnedView -> getPath()
@@ -204,12 +203,12 @@ class FlightEditorControllerTest extends TestCase
 
         $_POST['pickedTargetAirportID'] = 1;
         $_POST['pickedTicketPrice'] = 100;
-        $this -> allFlightsController -> setEditedFlightID(1);
+        $this -> flightEditorController -> setEditedFlightID(1);
         $this -> flightCorrectnessCheckerMock
             -> method('checkFlightEdit')
             -> willReturn(false);
 
-        $returnedView = $this -> allFlightsController -> selectTargetAirportTicketPriceAndConfirm();
+        $returnedView = $this -> flightEditorController -> selectTargetAirportTicketPriceAndConfirm();
         $this -> assertEquals(
             ViewPaths::CONFIRMATION_PAGE,
             $returnedView -> getPath()
@@ -222,7 +221,7 @@ class FlightEditorControllerTest extends TestCase
     /** @test */
     public function check_confirmation_positive_decision(){
         $_POST['decision'] = true;
-        $returnedView = $this -> allFlightsController -> acceptConfirmation();
+        $returnedView = $this -> flightEditorController -> acceptConfirmation();
 
         $this -> findAllFlights
             -> expects($this -> once())
@@ -241,7 +240,7 @@ class FlightEditorControllerTest extends TestCase
     public function check_confirmation_negative_decision(){
         $_POST['decision'] = false;
 
-        $returnedView = $this -> allFlightsController -> acceptConfirmation();
+        $returnedView = $this -> flightEditorController -> acceptConfirmation();
 
         $this -> findFlightDataMock
             -> expects($this -> once())
@@ -257,7 +256,7 @@ class FlightEditorControllerTest extends TestCase
         $this -> findAllFlights
             -> expects($this -> once())
             -> method('findAllFlights');
-        $returnedView = $this -> allFlightsController -> cancel();
+        $returnedView = $this -> flightEditorController -> cancel();
 
         $this -> assertEquals(
             ViewPaths::ALL_FLIGHTS_PAGE,
@@ -269,7 +268,7 @@ class FlightEditorControllerTest extends TestCase
         $_POST['pickedTargetAirportID'] = 1;
         $_POST['pickedTicketPrice'] = -100;
 
-        $returnedView = $this -> allFlightsController -> selectTargetAirportTicketPriceAndConfirm();
+        $returnedView = $this -> flightEditorController -> selectTargetAirportTicketPriceAndConfirm();
 
         $this -> assertEquals(
             ViewPaths::EDIT_FLIGHT_PAGE,

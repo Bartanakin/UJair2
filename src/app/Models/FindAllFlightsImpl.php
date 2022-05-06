@@ -14,6 +14,7 @@ class FindAllFlightsImpl extends \App\Model implements \App\Interfaces\FindAllFl
 
     public function findAllFlights(): array
     {
+        $this -> dataBaseConnection -> getPDO() -> prepare('CALL findAllFlights()');
         return [];
     }
 }

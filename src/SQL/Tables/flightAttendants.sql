@@ -1,4 +1,6 @@
-DROP TABLE FlightAttendants;
+CREATE PROCEDURE resetTableFlightAttendants()
+BEGIN
+DROP TABLE IF EXISTS FlightAttendants;
 CREATE TABLE FlightAttendants
 (
     ID INT PRIMARY KEY AUTO_INCREMENT,
@@ -7,7 +9,7 @@ CREATE TABLE FlightAttendants
     Salary DECIMAL(8,2) NOT NULL,
     Nationality VARCHAR(20)
 );
-
+END
 INSERT INTO FlightAttendants (FirstName, Surname, Salary, Nationality) VALUES
     ('Joanna','Kołaczkowska',6000,'Poland'),
     ('Aniela','Chmielewska',4000,'Poland'),

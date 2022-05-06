@@ -13,22 +13,22 @@ BEGIN
                                          FROM FlightsData
                                          WHERE AirPlaneID = A1.ID AND EstimatedArrivalTime <=_when
                                      ),'2000-01-01 00:00:00' )
-                           THEN "In flight"
+                           THEN 'In flight'
                        WHEN (
                                 SELECT  MIN(DateTimeOfDeparture)
                                 FROM FlightsData
                                 WHERE AirPlaneID = A1.ID AND DateTimeOfDeparture >= _when
                             ) < DATE_ADD(_when,INTERVAL 1 HOUR)
-                           THEN "Preparing for flight"
+                           THEN 'Preparing for flight'
                        WHEN (
                                 SELECT MAX(EstimatedArrivalTime)
                                 FROM FlightsData
                                 WHERE AirPlaneID = A1.ID AND EstimatedArrivalTime <= _when
                             ) > DATE_ADD(_when,INTERVAL -30 MINUTE)
-                           THEN "After flight"
-                       ELSE "Free"
+                           THEN 'After flight'
+                       ELSE 'Free'
         END) AS _Condition,
-           COALESCE( # w ms sql ISNULL(SUM(Przychód),0)
+           COALESCE( 
                    (SELECT F1.TargetAirportName FROM FlightsData AS F1
                     WHERE A1.ID = F1.AirplaneID
                       AND F1.DateTimeOfDeparture =
