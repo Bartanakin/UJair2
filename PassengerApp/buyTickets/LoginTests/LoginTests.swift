@@ -29,12 +29,11 @@ class LoginTests: XCTestCase {
         //given
         let login = "login"
         let password = "password"
+        
         //when
-        do {
-            try await sut.checkCredentials(login: login, password: password)
-        }catch {
+        sut.checkCredentials(login: login, password: password)
             
-        }
+        
         //then
         XCTAssertEqual(sut.passengerID ?? 0, 1, "Return wrong passenger ID")
     }

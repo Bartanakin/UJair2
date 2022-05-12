@@ -12,7 +12,7 @@ class LoginManager {
     var passengerID: Int?
     weak var delegate: LoginManagerDelegate?
     
-    func checkCredentials(login: String, password: String)  {
+    func checkCredentials(login: String, password: String) {
         if password == "" {
             delegate?.showErrorMessage(message: "Enter your login")
         }else if login == "" {
@@ -26,32 +26,20 @@ class LoginManager {
     
     func performRequest(url: String) {
         if let url = URL(string: url) {
-            do {
-                URLSession.shared.dataTask(with: url) { data, response, error in
-                    if(error != nil) {
-                        self.delegate?.showErrorMessage(message: "Failed to load data.")
-                    }else {
-                        if let data = data {
-                            if let parsedData = self.parseJSON(data: data) {
-                                if(parsedData == -1) {
-                                    self.delegate?.showErrorMessage(message: "Invalid login or password.")
-                                }else {
-                                    self.delegate?.updateController()
-                                }
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                if(error != nil) {
+                    self.delegate?.showErrorMessage(message: "Failed to load data.")
+                }else {
+                    if let data = data {
+                        if let parsedData = self.parseJSON(data: data) {
+                            if(parsedData == -1) {
+                                self.delegate?.showErrorMessage(message: "Invalid login or password.")
+                            }else {
+                                self.delegate?.updateController()
                             }
                         }
                     }
                 }
-//                let (data, _) = try await URLSession.shared.data(from: url)
-//                if let parsedData = self.parseJSON(data: data) {
-//                    if(parsedData == -1) {
-//                        delegate?.showErrorMessage(message: "Invalid login or password.")
-//                    }else {
-//                        delegate?.updateController()
-//                    }
-//                }
-            }catch {
-                delegate?.showErrorMessage(message: "Failed to load data.")
             }
         }
     }

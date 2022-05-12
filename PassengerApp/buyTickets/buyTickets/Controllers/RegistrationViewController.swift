@@ -43,7 +43,7 @@ class RegistrationViewController: UIViewController, UIPickerViewDataSource {
         countryPicker.dataSource = self
         
         Task.init {
-            await registrationManager.downloadCountries()
+            try await registrationManager.downloadCountries()
         }
     }
     
