@@ -24,6 +24,7 @@ $app -> getRouter() -> post("/editCrew",[\App\Controllers\PlannerAppControllers\
 
 
 $app -> getRouter() -> get("/style",[\App\Controllers\StyleController::class,'loginPage']);
+$app -> getRouter() -> get("/commonStyle",[\App\Controllers\StyleController::class,'common']);
 $app -> getRouter() -> get("/allFlightsStyles",[\App\Controllers\StyleController::class,'allFlights']);
 
 //==========

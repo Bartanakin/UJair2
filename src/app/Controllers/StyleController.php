@@ -21,4 +21,7 @@ class StyleController
     public function allFlights(){
         $this -> load("/allFlightsStyles.css");
     }
+    public function common(){
+        $this -> load("/common.css");
+    }
 }
