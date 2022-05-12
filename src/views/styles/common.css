@@ -1,6 +1,7 @@
 body{
     background-color: #79DAE8;
     margin: 0;
+    background: linear-gradient(90deg, rgba(121,218,232,1) 0%, rgba(232,249,253,1) 12%, rgba(232,249,253,1) 88%, rgba(121,218,232,1) 100%);
 }
 header{
     text-align: center;
@@ -23,7 +24,6 @@ header{
     min-height: 100vh;
     margin: auto;
     background-color: #E8F9FD;
-    box-shadow: 0 0 100px #E8F9FD;
 }
 
 .shadow{
