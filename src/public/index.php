@@ -10,6 +10,7 @@ use App\Controllers\PlannerAppControllers\HomeController;
 require __DIR__ . '/../vendor/autoload.php';
 
 const VIEW_PATH = __DIR__ . '/../views';
+const VENDOR_PATH = __DIR__ . '/../vendor';
 require_once __DIR__ . '/../connect.php';
 
 session_start();
@@ -26,6 +27,9 @@ $app -> getRouter() -> post("/editCrew",[\App\Controllers\PlannerAppControllers\
 $app -> getRouter() -> get("/style",[\App\Controllers\StyleController::class,'loginPage']);
 $app -> getRouter() -> get("/commonStyle",[\App\Controllers\StyleController::class,'common']);
 $app -> getRouter() -> get("/allFlightsStyles",[\App\Controllers\StyleController::class,'allFlights']);
+$app -> getRouter() -> get("/jsCalendarsStyles",[\App\Controllers\StyleController::class,'JsCalendar']);
+
+$app -> getRouter() -> get("/jsCalendarsScript",[\App\Controllers\ScriptController::class,'JsCalendar']);
 
 //==========
 $app -> getRouter() -> get("/getAvailableSeats",[BookingTicketsController::class, "getAvailableSeats"]);
