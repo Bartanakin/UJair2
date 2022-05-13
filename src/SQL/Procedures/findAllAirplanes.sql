@@ -1,15 +1,16 @@
+DROP PROCEDURE  IF EXISTS  FindAllAirplanes;
 DELIMITER //
 CREATE PROCEDURE FindAllAirplanes(IN _when DATETIME )
 BEGIN
-    SELECT A1.ID,( CASE
+    SELECT A1.ID as AirplaneID,ATypes.TypeName as AirplaneTypeName,( CASE
                        WHEN (
-                                SELECT  MAX(DateTimeOfDeparture)
-                                FROM FlightsData
-                                WHERE AirPlaneID = A1.ID AND DateTimeOfDeparture <=_when
+                                SELECT  MAX(F.DateTimeOfDeparture)
+                                FROM Flights AS F
+                                WHERE F.AirPlaneID = A1.ID AND F.DateTimeOfDeparture <=_when
                             )
                            >
                             COALESCE((
-                                         SELECT  MAX(EstimatedArrivalTime)
+                                         SELECT MAX(EstimatedArrivalTime)
                                          FROM FlightsData
                                          WHERE AirPlaneID = A1.ID AND EstimatedArrivalTime <=_when
                                      ),'2000-01-01 00:00:00' )
@@ -28,7 +29,18 @@ BEGIN
                            THEN 'After flight'
                        ELSE 'Free'
         END) AS _Condition,
-           COALESCE( 
+           COALESCE(
+                   (SELECT F1.TargetAirportID FROM FlightsData AS F1
+                    WHERE A1.ID = F1.AirplaneID
+                      AND F1.DateTimeOfDeparture =
+                          (
+                              SELECT MAX(F2.DateTimeOfDeparture)
+                              FROM FlightsData AS F2
+                              WHERE F2.DateTimeOfDeparture <= _when AND A1.ID = F2.AirplaneID
+                          )),
+                   (SELECT MIN(Ap.ID) FROM Airports AS Ap )
+               ) AS StartingAirportID,
+               COALESCE(
                    (SELECT F1.TargetAirportName FROM FlightsData AS F1
                     WHERE A1.ID = F1.AirplaneID
                       AND F1.DateTimeOfDeparture =
@@ -37,10 +49,10 @@ BEGIN
                               FROM FlightsData AS F2
                               WHERE F2.DateTimeOfDeparture <= _when AND A1.ID = F2.AirplaneID
                           )),
-                   (SELECT A1.Airport_name
-                    FROM Airports AS A1
-                    WHERE A1.ID = ( SELECT MIN(A2.ID) FROM Airports AS A2 )
+                   (SELECT Ap.Airport_name
+                    FROM Airports AS Ap
+                    WHERE Ap.ID = ( SELECT MIN(A2.ID) FROM Airports AS A2 )
                    )
-               ) AS Current_airport
-    FROM Airplanes AS A1;
+               ) AS StartingAirportName
+    FROM Airplanes AS A1 JOIN AirplaneTypes AS ATypes ON A1.AirplaneTypeID = ATypes.ID;
 END // DELIMITER ;

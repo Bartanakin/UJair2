@@ -11,6 +11,9 @@ use App\Interfaces\FlightEditorInterfaces\FlightEditor;
 use App\Interfaces\FlightEditorInterfaces\TargetAirportFinder;
 use App\View;
 use App\ViewPaths;
+use DateTime;
+use PHPUnit\Exception;
+use Ramsey\Uuid\Exception\DateTimeException;
 
 class FlightEditorController
 {
@@ -71,7 +74,16 @@ class FlightEditorController
 
     public function selectDate(): View
     {
-        // TODO
+        if( !isset( $_POST['date'], $_POST['hour'], $_POST['minute']) )
+            return View::make(ViewPaths::BAD_REQUEST);
+        try{
+            $date = DateTime::createFromFormat('Y-m-j H:i',$_POST['date']." ".$_POST['hour'].":".$_POST['minute']);
+        }
+        catch( DateTimeException $e ){
+            return View::make(ViewPaths::EDIT_FLIGHT_PAGE,[ 'errorMessage' => "Incorrect date or time format/", 'editedFlight' => $this -> editedFlight ]);
+        }
+        $availableAirplanes = $this -> availableAirplaneFinder -> run($date);
+
         return View::make(ViewPaths::EDIT_FLIGHT_PAGE);
     }
     public function selectAirplane(): View

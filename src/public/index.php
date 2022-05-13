@@ -17,21 +17,23 @@ session_start();
 
 $app = new App($_SERVER["REQUEST_METHOD"],$_SERVER["REQUEST_URI"],CONNECT);
 
+// Planner app:
 $app -> getRouter() -> get('/',[HomeController::class, 'index']);
 $app -> getRouter() -> post("/",[\App\Controllers\PlannerAppControllers\PlannerLoginController::class,'login']);
 $app -> getRouter() -> get("/editFlight",[\App\Controllers\PlannerAppControllers\AllFlightsController::class,'addFlight']);
+$app -> getRouter() -> get("/settlements",[\App\Controllers\PlannerAppControllers\AllFlightsController::class,'showSettlements']);
 $app -> getRouter() -> post("/editFlight",[\App\Controllers\PlannerAppControllers\AllFlightsController::class,'editFlight']);
 $app -> getRouter() -> post("/editCrew",[\App\Controllers\PlannerAppControllers\AllFlightsController::class,'editCrew']);
 
-
+// styles:
 $app -> getRouter() -> get("/style",[\App\Controllers\StyleController::class,'loginPage']);
 $app -> getRouter() -> get("/commonStyle",[\App\Controllers\StyleController::class,'common']);
 $app -> getRouter() -> get("/allFlightsStyles",[\App\Controllers\StyleController::class,'allFlights']);
 $app -> getRouter() -> get("/jsCalendarsStyles",[\App\Controllers\StyleController::class,'JsCalendar']);
-
+// scripts:
 $app -> getRouter() -> get("/jsCalendarsScript",[\App\Controllers\ScriptController::class,'JsCalendar']);
 
-//==========
+//Passenger app:
 $app -> getRouter() -> get("/getAvailableSeats",[BookingTicketsController::class, "getAvailableSeats"]);
 $app -> getRouter() -> get("/getAllAirports",[BookingTicketsController::class, "getAllAirports"]);
 $app -> getRouter() -> get("/getScheduleForRoute",[BookingTicketsController::class, "getScheduleForRoute"]);

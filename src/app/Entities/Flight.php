@@ -54,6 +54,7 @@ class Flight implements JsonSerializable {
         return new static();
     }
 
+
     public function jsonSerialize(): mixed {
         return [
             'ID' => $this->id,

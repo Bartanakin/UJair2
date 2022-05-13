@@ -28,7 +28,6 @@ class AllFlightsController
         return View::make(ViewPaths::EDIT_CREW_PAGE);
     }
     public function addFlight(): View{
-        // TODO
         return View::make(ViewPaths::EDIT_FLIGHT_PAGE);
     }
     public function editFlight(): View{
@@ -36,7 +35,6 @@ class AllFlightsController
         return View::make(ViewPaths::EDIT_FLIGHT_PAGE);
     }
     public function showSettlements(): View{
-        // TODO
-        return View::make(ViewPaths::EDIT_FLIGHT_PAGE);
+        return View::make(ViewPaths::SHOW_SETTLEMENTS_PATH);
     }
 }
