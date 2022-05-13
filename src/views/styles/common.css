@@ -39,6 +39,7 @@ header{
 }
 
 .submit:hover{
+    cursor: pointer;
     background-color: #2155CD;
     color: #ffffff;
 }
