@@ -30,6 +30,7 @@ $app -> getRouter() -> get("/style",[\App\Controllers\StyleController::class,'lo
 $app -> getRouter() -> get("/commonStyle",[\App\Controllers\StyleController::class,'common']);
 $app -> getRouter() -> get("/allFlightsStyles",[\App\Controllers\StyleController::class,'allFlights']);
 $app -> getRouter() -> get("/jsCalendarsStyles",[\App\Controllers\StyleController::class,'JsCalendar']);
+$app -> getRouter() -> get("/flightEditorStyles",[\App\Controllers\StyleController::class,'flightEditor']);
 // scripts:
 $app -> getRouter() -> get("/jsCalendarsScript",[\App\Controllers\ScriptController::class,'JsCalendar']);
 

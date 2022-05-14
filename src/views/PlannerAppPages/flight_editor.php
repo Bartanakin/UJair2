@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" href="commonStyle" >
     <link rel="stylesheet" type="text/css" href="jsCalendarsStyles">
     <script type="text/javascript" src="jsCalendarsScript"></script>
-    <link rel="stylesheet" type="text/css" href="flightEditorStyle" >
+    <link rel="stylesheet" type="text/css" href="flightEditorStyles" >
 </head>
 <body>
     <header>
@@ -14,13 +14,38 @@
         </div>
     </header>
     <div class="wrapper">
-        <div id="my-calendar"></div>
-        Picked date: <br>
-        <input id="my-input-a"><br>
-        <input id="hour-picker"><br>
-        <input id="minute-picker"><br>
+        <div class="firstContainer">
+            <div class="dateContainer">
+                <div class="calendarContainer">
+                    <div id="my-calendar"></div>
+                </div>
+                <div class="timeInputsContainer">
+                    <form action="" method="post" >
+                        Picked date: <br>
+                        <input id="my-input-a">
+                        <input id="hour-picker">
+                        <input id="minute-picker">
+                        <input type="submit" value="Pick date and time">
+                    </form>
+                </div>
+            </div>
+            <div class="airplanesContainer">
 
+            </div>
+        </div>
+        <div class="secondContainer">
+            <form method="post" action="">
+                <div class="priceContainer">
+                    <input type="text" value="100">
+                </div>
+                <div class="submitConfirm">
+                    <input type="submit" value="confirm edition">
+                </div>
+                <div class="targetAirportsContainer">
 
+                </div>
+            </form>
+        </div>
     </div>
     <script type="text/javascript">
         // Get the element

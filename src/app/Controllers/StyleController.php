@@ -27,4 +27,8 @@ class StyleController
     public function JsCalendar(){
         $this -> load("./../../vendor/jsCalendar/source/jsCalendar.css");
     }
+
+    public function flightEditor(){
+        $this -> load("./../../vendor/jsCalendar/source/flightEditorStyles.css");
+    }
 }
