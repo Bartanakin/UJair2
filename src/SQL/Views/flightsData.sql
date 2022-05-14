@@ -24,4 +24,5 @@ FROM Flights
          JOIN
      Airports AS StartingAirports ON StartingAirports.ID = Routes.StartingAirportID
          JOIN
-     Airports AS TargetAirports ON TargetAirports.ID = Routes.TargetAirportID;
+     Airports AS TargetAirports ON TargetAirports.ID = Routes.TargetAirportID
+WHERE Flights.Canceled = FALSE;

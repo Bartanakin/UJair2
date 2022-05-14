@@ -19,7 +19,7 @@ BEGIN
                                 SELECT  MIN(DateTimeOfDeparture)
                                 FROM FlightsData
                                 WHERE AirPlaneID = A1.ID AND DateTimeOfDeparture >= _when
-                            ) < DATE_ADD(_when,INTERVAL 1 HOUR)
+                            ) < DATE_ADD(_when,INTERVAL 30 MINUTE)
                            THEN 'Preparing for flight'
                        WHEN (
                                 SELECT MAX(EstimatedArrivalTime)

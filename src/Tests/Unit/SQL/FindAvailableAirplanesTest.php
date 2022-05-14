@@ -58,8 +58,8 @@ class FindAvailableAirplanesTest extends SQLTestBaseClass
                         2,
                         'Boeing 737 MAX',
                         AirplanePosition::PREPARING_FOR_FLIGHT->value,
-                        2,
-                        'Y'
+                        1,
+                        'X'
                     ]
                 ]
             ]
