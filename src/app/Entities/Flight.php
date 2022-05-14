@@ -2,7 +2,9 @@
 
 namespace App\Entities;
 
+use App\Exceptions\SessionExpiredException;
 use App\Model;
+use Cassandra\Date;
 use DateTime;
 use JsonSerializable;
 
@@ -142,4 +144,69 @@ class Flight implements JsonSerializable {
         return $this->warning;
     }
 
+    public function unsetToDate(DateTime $date)
+    {
+        $this -> startingAirport = null;
+        $this -> targetAirport = null;
+        $this -> dateOfDeparture = $date;
+        $this -> estimatedArrivalTime = null;
+        $this -> airplane = null;
+        $this -> price = 0;
+        $this -> warning = "";
+    }
+
+    public function assertDate(): void
+    {
+        if($this -> dateOfDeparture === null)
+            throw new SessionExpiredException("Null date detected while adding flight.");
+    }
+
+    public function assertAirplaneAndDateForEditFlight()
+    {
+        $this -> assertDate();
+        if($this -> airplane === null
+            || $this ?-> airplane -> getID() === null
+            || $this ?-> airplane -> getTypeName() === null
+            || $this -> startingAirport === null
+            || $this ?-> startingAirport -> getID() === null
+            || $this ?-> startingAirport -> getAirportName() === null
+        )
+            throw new SessionExpiredException("Null airplane or its components detected.");
+    }
+
+    public function unsetToAirplane(
+        int $airplaneID,
+        string $airplaneTypeName,
+        int $startingAirportID,
+        string $startingAirportName
+    )
+    {
+        $this -> startingAirport = Airport::createForSelectAirplane($startingAirportID,$startingAirportName);
+        $this -> targetAirport = null;
+        $this -> estimatedArrivalTime = null;
+        $this -> airplane = Airplane::createForSelectAirplane($airplaneID,$airplaneTypeName);
+        $this -> price = 0;
+        $this -> warning = "";
+    }
+
+    public function setTicketPrice(float $price)
+    {
+        $this -> price = $price;
+    }
+
+    public function setTargetAirport(Airport $targetAirport)
+    {
+        $this -> targetAirport = $targetAirport;
+    }
+
+    public function assertAirplaneAndDateAndTargetAirportForEditFlight()
+    {
+        $this -> assertAirplaneAndDateForEditFlight();
+        if($this -> price === null
+            || $this -> targetAirport === null
+            || $this ?-> targetAirport -> getID() === null
+            || $this ?-> targetAirport -> getAirportName() === null
+        )
+            throw new SessionExpiredException("Null target airport or price has been detected.");
+    }
 }

@@ -23,6 +23,36 @@ class Airport implements JsonSerializable{
         );
     }
 
+    public static function createForSelectAirplane(
+        int $id,
+        string $airportName
+    ) {
+        return new static(
+            ID: $id,
+            airportName: $airportName
+        );
+    }
+
+    public static function createTargetForSelectAirplane(
+        int $id,
+        string $airportName
+    ) {
+        return new static(
+            ID: $id,
+            airportName: $airportName
+        );
+    }
+
+    public static function createTargetForConfirm(
+        int $id,
+        string $airportName
+    ) {
+        return new static(
+            ID: $id,
+            airportName: $airportName
+        );
+    }
+
     public function jsonSerialize(): array {
         return [
             'ID' => $this->ID,
@@ -50,5 +80,10 @@ class Airport implements JsonSerializable{
     public function getAirportName(): ?string
     {
         return $this->airportName;
+    }
+
+    public function getID(): int
+    {
+        return $this -> ID;
     }
 }

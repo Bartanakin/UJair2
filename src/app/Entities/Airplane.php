@@ -37,6 +37,18 @@ class Airplane
         );
     }
 
+    public static function createForSelectAirplane(
+        int    $airplaneID,
+        string $airplaneTypeName
+    )
+    {
+        return new static(
+            ID: $airplaneID,
+            typeName: $airplaneTypeName,
+            position: AirplanePosition::FREE
+        );
+    }
+
     /**
      * @return int|null
      */
