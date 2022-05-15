@@ -12,6 +12,14 @@
         <div class="headerTitle">
             UJAIR2 - Flight editor
         </div>
+        <div class="headerManager">
+            <form class="headerForm">
+                <input type="submit" class="submit managerSubmit" value="Delete flight">
+            </form>
+            <form class="headerForm">
+                <input type="submit" class="submit managerSubmit" value="Cancel editing">
+            </form>
+        </div>
     </header>
     <div class="wrapper wrapper1">
         <div class="firstContainer">

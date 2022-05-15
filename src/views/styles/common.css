@@ -19,6 +19,25 @@ header{
     color: #0f265c;
 }
 
+.headerManager{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 1%;
+}
+
+.headerForm{
+    margin: 0 2%;
+    min-width: 12%;
+}
+.managerSubmit{
+    align-self: flex-start;
+    padding: 2vh 10%;
+}
+
+
 .wrapper{
     width: 80%;
     min-height: 100vh;

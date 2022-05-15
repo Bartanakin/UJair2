@@ -1,22 +1,4 @@
 
-.headerManager{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    padding: 1%;
-}
-.headerForm{
-    margin: 0 5%;
-    width: 18%;
-}
-.managerSubmit{
-    width: 100%;
-    height: 100%;
-    padding: 0.8em;
-    white-space: normal;
-}
-
-
 .flight{
     border-bottom: solid 2px #0AA1DD;
     display: flex;
