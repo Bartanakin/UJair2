@@ -29,6 +29,6 @@ class StyleController
     }
 
     public function flightEditor(){
-        $this -> load("./../../vendor/jsCalendar/source/flightEditorStyles.css");
+        $this -> load(static::STYLES_PATH."/flightEditorStyles.css");
     }
 }

@@ -43,3 +43,25 @@ header{
     background-color: #2155CD;
     color: #ffffff;
 }
+.textInput{
+    background-color: #79DAE8;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+
+.bold{
+    font-weight: bold;
+}
+
+.defaultContainer{
+    display: flex;
+    flex-direction: column;
+    box-shadow: -5px 5px 5px rgba(64,64,64,196);
+}
+
+.defaultContainerElement{
+    padding: 1% 2%;
+    border: solid 1px #2155CD;
+}

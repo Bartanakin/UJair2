@@ -128,11 +128,12 @@ class FlightEditorController
 
             if( !isset( $_SESSION['airplanes'], $_SESSION['targetAirports'] ) )
                 throw new SessionExpiredException("Airplanes list or target airplanes list has expired.");
-            if( $this -> editedFlight -> getId() === null )
-                $this -> flightEditor ->
+            //if( $this -> editedFlight -> getId() === null )
+                //$this -> flightEditor ->
         }catch( SessionExpiredException $e ){
             return View::make(ViewPaths::SESSION_EXPIRED);
         }
+        return $this -> createDefaultView();
     }
 
     public function deleteFlight(): View

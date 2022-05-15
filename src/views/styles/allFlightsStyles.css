@@ -26,18 +26,12 @@
 .flightData{
     margin: 2%;
     width: 70%;
-    box-shadow: -5px 5px 5px rgba(64,64,64,196);
 }
 .flightEntity{
-    padding: 1% 2%;
     width: 96%;
-    border: solid 1px #0AA1DD;
 }
 .warning{
     color: red;
-}
-.bold{
-    font-weight: bold;
 }
 
 .actions{

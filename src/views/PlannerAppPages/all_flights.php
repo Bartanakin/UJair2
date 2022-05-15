@@ -28,27 +28,27 @@
             foreach ( $this -> params['allFLights'] as $flight ):
         ?>
             <div class="flight">
-                <div class="flightData">
-                    <div class="flightEntity">
+                <div class="defaultContainer flightData ">
+                    <div class="defaultContainerElement flightEntity">
                         <span class="bold">FROM</span>: <?= $flight -> getStartingAirport() -> getAirportName() ?>
                     </div>
-                    <div class="flightEntity">
+                    <div class="defaultContainerElement flightEntity">
                         <span class="bold">TO:</span> <?= $flight -> getTargetAirport() -> getAirportName() ?>
                     </div>
-                    <div class="flightEntity">
+                    <div class="defaultContainerElement flightEntity">
                         <span class="bold">Date of Departure:</span> <?= $flight -> getDateOfDeparture() -> format('Y-m-d H:i:s') ?>
                     </div>
-                    <div class="flightEntity">
+                    <div class="defaultContainerElement flightEntity">
                         <span class="bold">Airplane ID: </span><?= $flight -> getAirplane() -> getID() ?>
                     </div>
-                    <div class="flightEntity">
+                    <div class="defaultContainerElement flightEntity">
                         <span class="bold">Airplane type:</span> <?= $flight -> getAirplane() -> getTypeName() ?>
                     </div>
-                    <div class="flightEntity">
+                    <div class="defaultContainerElement flightEntity">
                         <span class="bold">Ticket price:</span> <?= $flight -> getPrice() ?>
                     </div>
                     <?php if( $flight -> getWarning() ): ?>
-                    <div class="warning">
+                    <div class="defaultContainerElement warning">
                         <span class="bold">Warning:</span><?= $flight -> getWarning() ?>
                     </div>
                     <?php endif; ?>
