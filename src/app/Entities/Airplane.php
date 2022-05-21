@@ -6,7 +6,9 @@ class Airplane
 {
     protected function __construct(
         protected ?int $ID = null,
-        protected ?string $typeName = null
+        protected ?string $typeName = null,
+        protected ?AirplanePosition $position = null,
+        protected ?Airport $currentAirport = null
     ){
 
     }
@@ -17,6 +19,34 @@ class Airplane
     )
     {
         return new static(ID: $ID, typeName: $typeName );
+    }
+
+    public static function createForAvailableAirplanes(
+        int    $airplaneID,
+        string $airplaneTypeName,
+        string $position,
+        int    $airportID,
+        string $airportName
+    )
+    {
+        return new static(
+            ID: $airplaneID,
+            typeName: $airplaneTypeName,
+            position: AirplanePosition::tryFrom($position),
+            currentAirport: Airport::createForAvailableAirplanes($airportID,$airportName)
+        );
+    }
+
+    public static function createForSelectAirplane(
+        int    $airplaneID,
+        string $airplaneTypeName
+    )
+    {
+        return new static(
+            ID: $airplaneID,
+            typeName: $airplaneTypeName,
+            position: AirplanePosition::FREE
+        );
     }
 
     /**
@@ -31,4 +61,5 @@ class Airplane
     {
         return $this->typeName;
     }
+
 }

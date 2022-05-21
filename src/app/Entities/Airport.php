@@ -6,15 +6,56 @@ use JsonSerializable;
 
 class Airport implements JsonSerializable{
     protected function __construct(
-        protected ?int $id = null,
+        protected ?int    $ID = null,
         protected ?string $airportName = null
     ) {
 
     }
 
+    public static function createForAvailableAirplanes(
+        int $airportID,
+        string $airportName
+    ): static
+    {
+        return new static(
+            ID: $airportID,
+            airportName: $airportName
+        );
+    }
+
+    public static function createForSelectAirplane(
+        int $id,
+        string $airportName
+    ) {
+        return new static(
+            ID: $id,
+            airportName: $airportName
+        );
+    }
+
+    public static function createTargetForSelectAirplane(
+        int $id,
+        string $airportName
+    ) {
+        return new static(
+            ID: $id,
+            airportName: $airportName
+        );
+    }
+
+    public static function createTargetForConfirm(
+        int $id,
+        string $airportName
+    ) {
+        return new static(
+            ID: $id,
+            airportName: $airportName
+        );
+    }
+
     public function jsonSerialize(): array {
         return [
-            'ID' => $this->id,
+            'ID' => $this->ID,
             'Airport_name' => $this->airportName
         ];
     }
@@ -24,7 +65,7 @@ class Airport implements JsonSerializable{
         string $airportName
     ) {
         return new static(
-            id: $id,
+            ID: $id,
             airportName: $airportName
         );
     }
@@ -39,5 +80,10 @@ class Airport implements JsonSerializable{
     public function getAirportName(): ?string
     {
         return $this->airportName;
+    }
+
+    public function getID(): int
+    {
+        return $this -> ID;
     }
 }

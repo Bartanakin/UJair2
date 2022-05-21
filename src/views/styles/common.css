@@ -1,0 +1,86 @@
+body{
+    background-color: #79DAE8;
+    margin: 0;
+    background: linear-gradient(90deg, rgba(121,218,232,1) 0%, rgba(232,249,253,1) 12%, rgba(232,249,253,1) 88%, rgba(121,218,232,1) 100%);
+}
+header{
+    text-align: center;
+    text-shadow: 0 0 10px #E8F9FD;
+    background-color: #0AA1DD;
+    z-index: 100;
+    width: 100%;
+}
+.headerTitle{
+    font-size: 2.3em;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    font-family: 'Koulen', cursive, sans-serif;
+    border-bottom: solid 1px #2155CD;
+    color: #0f265c;
+}
+
+.headerManager{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 1%;
+}
+
+.headerForm{
+    margin: 0 2%;
+    min-width: 12%;
+}
+.managerSubmit{
+    align-self: flex-start;
+    padding: 2vh 10%;
+}
+
+
+.wrapper{
+    width: 80%;
+    min-height: 100vh;
+    margin: auto;
+    background-color: #E8F9FD;
+}
+
+.shadow{
+    box-shadow: -5px 5px 5px rgba(64,64,64,196);
+}
+
+.submit{
+    border-radius: 12%;
+    border: solid 2px #0AA1DD;
+    box-shadow: -5px 5px 5px rgba(64,64,64,196);
+    white-space: normal;
+    background-color: #E8F9FD;
+}
+
+.submit:hover{
+    cursor: pointer;
+    background-color: #2155CD;
+    color: #ffffff;
+}
+.textInput{
+    background-color: #79DAE8;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+
+.bold{
+    font-weight: bold;
+}
+
+.defaultContainer{
+    display: flex;
+    flex-direction: column;
+    box-shadow: -5px 5px 5px rgba(64,64,64,196);
+}
+
+.defaultContainerElement{
+    padding: 1% 2%;
+    border: solid 1px #2155CD;
+}

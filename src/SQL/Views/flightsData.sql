@@ -5,12 +5,14 @@ SELECT Flights.ID AS FlightID,
        Flights.DateTimeOfDeparture,
        Flights.RouteID,
        Flights.Price,
+       StartingAirports.ID AS StartingAirportID,
        StartingAirports.Airport_name AS StartingAirportName,
+       TargetAirports.ID AS TargetAirportID,
        TargetAirports.Airport_name AS TargetAirportName,
        Airplanes.ID AS AirplaneID,
        AirplaneTypes.TypeName,
        AirplaneTypes.Max_number_of_stewards,
-       CalculateEstimatedArrivalTime(Avarage_speed_km_per_h,distance,DateTimeOfDeparture) AS EstimatedArrivalTime
+       CalculateEstimatedArrivalTime(AirplaneTypes.Average_speed_km_per_h,distance,DateTimeOfDeparture) AS EstimatedArrivalTime
 
 FROM Flights
          JOIN
@@ -22,4 +24,5 @@ FROM Flights
          JOIN
      Airports AS StartingAirports ON StartingAirports.ID = Routes.StartingAirportID
          JOIN
-     Airports AS TargetAirports ON TargetAirports.ID = Routes.TargetAirportID;
+     Airports AS TargetAirports ON TargetAirports.ID = Routes.TargetAirportID
+WHERE Flights.Canceled = FALSE;
