@@ -19,7 +19,8 @@ class LoginManager {
             delegate?.showErrorMessage(message: "Enter your password")
         }else {
             let hashedPassword = SHA256.hash(data: Data(password.utf8)).description.replacingOccurrences(of: "SHA256 digest: ", with: "")
-            let url = K.URLs.getPassengerIDIfExistsURL + "?login=\(login)&password=\(password)"
+            
+            let url = K.URLs.getPassengerIDIfExistsURL + "?login=\(login)&password=\(hashedPassword)"
             performRequest(url: url)
         }
     }
