@@ -351,9 +351,6 @@
                                 <rect key="frame" x="93" y="752" width="228" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Buy Ticket"/>
-                                <connections>
-                                    <action selector="buyTapped:" destination="V8J-ei-Pwr" eventType="touchUpInside" id="ik5-8f-dMc"/>
-                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seat number:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vjg-B9-kJ9">
                                 <rect key="frame" x="13.000000000000007" y="664" width="102.66666666666669" height="22"/>
@@ -404,14 +401,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="Pyq-1A-i56"/>
                     <connections>
-                        <outlet property="seatsLabel" destination="vjg-B9-kJ9" id="ez3-l8-PEC"/>
-                        <outlet property="seatsPicker" destination="h4k-ZV-Ysu" id="PZ1-3l-65q"/>
-                        <outlet property="startingAirportPicker" destination="JDM-rI-vq9" id="FGC-Ov-xQ5"/>
-                        <outlet property="startingLabel" destination="0mg-Z8-EsP" id="pe8-X0-Tot"/>
-                        <outlet property="targetAirportPicker" destination="xqZ-lY-wdN" id="aw5-f0-ljI"/>
-                        <outlet property="targetLabel" destination="gdS-p1-waa" id="Oa9-MY-xXh"/>
-                        <outlet property="timeLabel" destination="u2h-nJ-zrg" id="2Dx-xk-496"/>
-                        <outlet property="timeOfDeparturePicker" destination="qZ9-k4-ySk" id="0an-HU-tFk"/>
                         <segue destination="fic-Gd-G60" kind="show" identifier="BookingToAllTickets" id="87r-qX-vEu"/>
                     </connections>
                 </viewController>

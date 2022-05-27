@@ -2,8 +2,6 @@
 //  ViewController.swift
 //  buyTickets
 //
-//  Created by Alexey Valevich on 12/01/2022.
-//
 
 import UIKit
 
@@ -89,7 +87,9 @@ extension LoginViewController: LoginManagerDelegate {
     
     func updateController() {
         DispatchQueue.main.async {
+            
             self.performSegue(withIdentifier: K.Segues.loginToBooking, sender: self)
+            print("da")
         }
     }
 }

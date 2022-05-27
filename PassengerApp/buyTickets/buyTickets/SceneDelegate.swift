@@ -2,7 +2,6 @@
 //  SceneDelegate.swift
 //  buyTickets
 //
-//  Created by Alexey Valevich on 12/01/2022.
 //
 
 import UIKit

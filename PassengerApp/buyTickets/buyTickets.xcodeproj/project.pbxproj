@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3A4484F6282466F500DE86E0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4484F5282466F500DE86E0 /* Constants.swift */; };
+		3A80177128416FA100B120F2 /* BookingTicketsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A80177028416FA100B120F2 /* BookingTicketsViewController.swift */; };
+		3A8017732841759B00B120F2 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8017722841759B00B120F2 /* Answer.swift */; };
 		3A938A05282469730011E6BE /* TextFieldProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A938A04282469730011E6BE /* TextFieldProperties.swift */; };
 		3A938A0728246B320011E6BE /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A938A0628246B320011E6BE /* CustomTextField.swift */; };
 		3A938A0928247D4F0011E6BE /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A938A0828247D4F0011E6BE /* LoginManager.swift */; };
@@ -38,6 +40,8 @@
 
 /* Begin PBXFileReference section */
 		3A4484F5282466F500DE86E0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		3A80177028416FA100B120F2 /* BookingTicketsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingTicketsViewController.swift; sourceTree = "<group>"; };
+		3A8017722841759B00B120F2 /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
 		3A938A04282469730011E6BE /* TextFieldProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldProperties.swift; sourceTree = "<group>"; };
 		3A938A0628246B320011E6BE /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		3A938A0828247D4F0011E6BE /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
@@ -82,6 +86,7 @@
 			children = (
 				3AE6CB1B278F43C900D7EBAD /* LoginViewController.swift */,
 				3AE6CB2D278F71A900D7EBAD /* RegistrationViewController.swift */,
+				3A80177028416FA100B120F2 /* BookingTicketsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -96,6 +101,7 @@
 				3A938A0828247D4F0011E6BE /* LoginManager.swift */,
 				3A938A172824950D0011E6BE /* Passenger.swift */,
 				3A938A192824AADF0011E6BE /* RegistrationManager.swift */,
+				3A8017722841759B00B120F2 /* Answer.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -264,12 +270,14 @@
 				3A938A0728246B320011E6BE /* CustomTextField.swift in Sources */,
 				3AE6CB1C278F43C900D7EBAD /* LoginViewController.swift in Sources */,
 				3AA927652799850300162E31 /* Ticket.swift in Sources */,
+				3A8017732841759B00B120F2 /* Answer.swift in Sources */,
 				3A938A0928247D4F0011E6BE /* LoginManager.swift in Sources */,
 				3AE6CB18278F43C900D7EBAD /* AppDelegate.swift in Sources */,
 				3A938A05282469730011E6BE /* TextFieldProperties.swift in Sources */,
 				3A938A1A2824AADF0011E6BE /* RegistrationManager.swift in Sources */,
 				3AE6CB2E278F71A900D7EBAD /* RegistrationViewController.swift in Sources */,
 				3AE6CB30278F7FC100D7EBAD /* Country.swift in Sources */,
+				3A80177128416FA100B120F2 /* BookingTicketsViewController.swift in Sources */,
 				3AE6CB1A278F43C900D7EBAD /* SceneDelegate.swift in Sources */,
 				3A4484F6282466F500DE86E0 /* Constants.swift in Sources */,
 				3A938A182824950D0011E6BE /* Passenger.swift in Sources */,

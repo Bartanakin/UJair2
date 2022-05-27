@@ -2,14 +2,14 @@
 //  RegistrationViewController.swift
 //  buyTickets
 //
-//  Created by Alexey Valevich on 12/01/2022.
-//
 
 import UIKit
 
 
 protocol RegistrationManagerDelegate: AnyObject {
     func showErrorMessage(message: String)
+    func showSuccessMessage(message: String)
+    func updateCountryPickerView()
 }
 
 class RegistrationViewController: UIViewController, UIPickerViewDataSource {
@@ -42,9 +42,8 @@ class RegistrationViewController: UIViewController, UIPickerViewDataSource {
         countryPicker.delegate = self
         countryPicker.dataSource = self
         
-        Task.init {
-            try await registrationManager.downloadCountries()
-        }
+        registrationManager.downloadCountries()
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -52,15 +51,12 @@ class RegistrationViewController: UIViewController, UIPickerViewDataSource {
     }
     
     @IBAction func registerTapped(_ sender: Any) {
-        var message = ""
-        var isFail = false
         let password = passwordField.text ?? ""
         let login = loginField.text ?? ""
         let firstName = firstNameField.text ?? ""
         let lastName = lastNameField.text ?? ""
         let repeatedPassword = repeatPasswordField.text ?? ""
         registrationManager.insertPassenger(firstName: firstName, lastName: lastName, login: login, password: password, repeatPassword: repeatedPassword)
-        
     }
 }
 
@@ -113,6 +109,24 @@ extension RegistrationViewController: RegistrationManagerDelegate {
             let ac = UIAlertController(title: "Fail", message: message, preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(ac, animated: true, completion: nil)
+        }
+    }
+    
+    func showSuccessMessage(message: String) {
+        DispatchQueue.main.async {
+            let ac = UIAlertController(title: "Success", message: message, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                
+                    self.navigationController?.popViewController(animated: true)
+                }))
+            self.present(ac, animated: true, completion: nil)
+            
+        }
+    }
+    
+    func updateCountryPickerView() {
+        DispatchQueue.main.async {
+            self.countryPicker.delegate = self
         }
     }
 }

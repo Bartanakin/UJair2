@@ -20,7 +20,7 @@ class LoginManager {
         }else {
             let hashedPassword = SHA256.hash(data: Data(password.utf8)).description.replacingOccurrences(of: "SHA256 digest: ", with: "")
             
-            let url = K.URLs.getPassengerIDIfExistsURL + "?login=\(login)&password=\(hashedPassword)"
+            let url = K.URLs.getPassengerIDIfExistsURL + "?login=\(login)&password=\(password)"
             performRequest(url: url)
         }
     }
@@ -41,7 +41,7 @@ class LoginManager {
                         }
                     }
                 }
-            }
+            }.resume()
         }
     }
     
