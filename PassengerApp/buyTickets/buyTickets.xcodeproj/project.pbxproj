@@ -26,6 +26,7 @@
 		3AE6CB24278F43CB00D7EBAD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AE6CB22278F43CB00D7EBAD /* LaunchScreen.storyboard */; };
 		3AE6CB2E278F71A900D7EBAD /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE6CB2D278F71A900D7EBAD /* RegistrationViewController.swift */; };
 		3AE6CB30278F7FC100D7EBAD /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE6CB2F278F7FC100D7EBAD /* Country.swift */; };
+		456B57FB224E8A449734955E /* Pods_buyTickets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB1D4C4D3F3222F3D45EC856 /* Pods_buyTickets.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		073561C135B1B38178DA0EC9 /* Pods-buyTickets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-buyTickets.release.xcconfig"; path = "Target Support Files/Pods-buyTickets/Pods-buyTickets.release.xcconfig"; sourceTree = "<group>"; };
 		3A4484F5282466F500DE86E0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3A80177028416FA100B120F2 /* BookingTicketsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingTicketsViewController.swift; sourceTree = "<group>"; };
 		3A8017722841759B00B120F2 /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
@@ -61,6 +63,8 @@
 		3AE6CB25278F43CB00D7EBAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3AE6CB2D278F71A900D7EBAD /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		3AE6CB2F278F7FC100D7EBAD /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		41EF26594393D7352CD6B9A5 /* Pods-buyTickets.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-buyTickets.debug.xcconfig"; path = "Target Support Files/Pods-buyTickets/Pods-buyTickets.debug.xcconfig"; sourceTree = "<group>"; };
+		DB1D4C4D3F3222F3D45EC856 /* Pods_buyTickets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_buyTickets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				456B57FB224E8A449734955E /* Pods_buyTickets.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +135,8 @@
 				3AE6CB16278F43C900D7EBAD /* buyTickets */,
 				3A938A0F28248BEC0011E6BE /* LoginTests */,
 				3AE6CB15278F43C900D7EBAD /* Products */,
+				E51508D2248E1E3A0FDA6B9C /* Pods */,
+				B95ECCF03BA468B1442509B1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -157,6 +164,24 @@
 			path = buyTickets;
 			sourceTree = "<group>";
 		};
+		B95ECCF03BA468B1442509B1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DB1D4C4D3F3222F3D45EC856 /* Pods_buyTickets.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E51508D2248E1E3A0FDA6B9C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				41EF26594393D7352CD6B9A5 /* Pods-buyTickets.debug.xcconfig */,
+				073561C135B1B38178DA0EC9 /* Pods-buyTickets.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -182,9 +207,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3AE6CB28278F43CB00D7EBAD /* Build configuration list for PBXNativeTarget "buyTickets" */;
 			buildPhases = (
+				5664D0988107219F815FE006 /* [CP] Check Pods Manifest.lock */,
 				3AE6CB10278F43C800D7EBAD /* Sources */,
 				3AE6CB11278F43C800D7EBAD /* Frameworks */,
 				3AE6CB12278F43C800D7EBAD /* Resources */,
+				56CC83E06139F515E04F2273 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -252,6 +279,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5664D0988107219F815FE006 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-buyTickets-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		56CC83E06139F515E04F2273 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-buyTickets/Pods-buyTickets-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-buyTickets/Pods-buyTickets-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-buyTickets/Pods-buyTickets-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3A938A0A28248BEC0011E6BE /* Sources */ = {
@@ -470,6 +539,7 @@
 		};
 		3AE6CB29278F43CB00D7EBAD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 41EF26594393D7352CD6B9A5 /* Pods-buyTickets.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-8";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -498,6 +568,7 @@
 		};
 		3AE6CB2A278F43CB00D7EBAD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 073561C135B1B38178DA0EC9 /* Pods-buyTickets.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-8";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
