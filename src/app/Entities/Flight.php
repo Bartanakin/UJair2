@@ -17,6 +17,7 @@ class Flight implements JsonSerializable {
         protected ?DateTime $dateOfDeparture = null,
         protected ?DateTime $estimatedArrivalTime = null,
         protected ?Airplane $airplane = null,
+        protected ?CrewList $crewList = null,
         protected float $price = 0,
         protected string $warning = ""
     ) {
@@ -212,5 +213,10 @@ class Flight implements JsonSerializable {
             || $this ?-> targetAirport -> getAirportName() === null
         )
             throw new SessionExpiredException("Null target airport or price has been detected.");
+    }
+
+    public function setCrewList(CrewList $crewList)
+    {
+        $this -> crewList = $crewList;
     }
 }

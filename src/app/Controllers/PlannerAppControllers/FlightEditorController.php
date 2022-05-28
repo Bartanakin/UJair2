@@ -2,6 +2,7 @@
 
 namespace App\Controllers\PlannerAppControllers;
 
+use App\C\Controller;
 use App\Entities\Airplane;
 use App\Entities\Airport;
 use App\Entities\Flight;
@@ -20,7 +21,7 @@ use DateTime;
 use PHPUnit\Exception;
 use Ramsey\Uuid\Exception\DateTimeException;
 
-class FlightEditorController
+class FlightEditorController extends Controller
 {
     protected ?Flight $editedFlight;
     protected ?array $airplanes;
@@ -41,25 +42,13 @@ class FlightEditorController
         $this -> restoreFromSession('warning','warning','');
     }
 
-    private function restoreFromSession(string $propName, string $sesName, mixed $default){
-        if( isset($_SESSION[$sesName])){
-            $this -> $propName = $_SESSION[$sesName];
-        }
-        else{
-            $this->resetProp($propName,$sesName,$default);
-        }
-    }
-    private function resetProp(string $propName, string $sesName, mixed $default){
-        $this -> $propName = $default;
-        unset($_SESSION[$sesName]);
-    }
-
     public function __destruct()
     {
-        $_SESSION['editedFlight'] = $this -> editedFlight;
-        $_SESSION['airplanes'] = $this -> airplanes;
-        $_SESSION['targetAirports'] = $this -> targetAirports;
-        $_SESSION['warning'] = $this -> warning;
+        if( !$this -> destruct)
+            $_SESSION['editedFlight'] = $this -> editedFlight;
+            $_SESSION['airplanes'] = $this -> airplanes;
+            $_SESSION['targetAirports'] = $this -> targetAirports;
+            $_SESSION['warning'] = $this -> warning;
     }
 
     /**

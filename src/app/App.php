@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace App;
 
 use App\Exceptions\UnauthorizedPageAccessException;
-use App\FlightEditorImpll as FlightEditorImpllAlias;
 use App\Interfaces\BookingTicketsInterfaces\AllAirportsGetter;
 use App\Interfaces\BookingTicketsInterfaces\InsertionNewTicket;
 use App\Interfaces\BookingTicketsInterfaces\ScheduleOfRouteGetter;
@@ -29,8 +28,8 @@ use App\Models\BookingTicketsModels\InsertionNewTicketImpl;
 use App\Models\BookingTicketsModels\ScheduleOfRouteGetterImpl;
 use App\Models\BookingTicketsModels\SeatsGetterImpl;
 use App\Models\BookingTicketsModels\TargetAirportsGetterImpl;
+use App\Models\EditCrewModels\FindCrewForFlightImpl;
 use App\Models\FindAllFlightsImpl;
-use App\Models\FindCrewForFlightImpl;
 use App\Models\FlightEditorModels\AvailableAirplaneFinderImpl;
 use App\Models\FlightEditorModels\FindFlightDataImpl;
 use App\Models\FlightEditorModels\FlightCorrectnessCheckerImpl;

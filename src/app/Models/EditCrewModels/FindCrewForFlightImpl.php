@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\EditCrewModels;
 
 use App\DataBaseConnection;
 use App\Entities\CrewList;
