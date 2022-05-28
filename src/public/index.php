@@ -24,6 +24,8 @@ $app -> getRouter() -> get("/editFlight",[\App\Controllers\PlannerAppControllers
 $app -> getRouter() -> get("/settlements",[\App\Controllers\PlannerAppControllers\AllFlightsController::class,'showSettlements']);
 $app -> getRouter() -> post("/editFlight",[\App\Controllers\PlannerAppControllers\AllFlightsController::class,'editFlight']);
 $app -> getRouter() -> post("/editCrew",[\App\Controllers\PlannerAppControllers\AllFlightsController::class,'editCrew']);
+$app -> getRouter() -> post("/selectDate",[\App\Controllers\PlannerAppControllers\FlightEditorController::class,'selectDate']);
+$app -> getRouter() -> post("/selectAirplane",[\App\Controllers\PlannerAppControllers\FlightEditorController::class,'selectAirplane']);
 
 // styles:
 $app -> getRouter() -> get("/style",[\App\Controllers\StyleController::class,'loginPage']);

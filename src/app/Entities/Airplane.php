@@ -62,4 +62,14 @@ class Airplane
         return $this->typeName;
     }
 
+    public function getCondition(): string
+    {
+        return $this -> position -> value;
+    }
+
+    public function getCurrentAirport(): Airport
+    {
+        return $this -> currentAirport;
+    }
+
 }

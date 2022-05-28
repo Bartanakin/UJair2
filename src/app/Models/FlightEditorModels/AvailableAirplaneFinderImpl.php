@@ -19,8 +19,7 @@ class AvailableAirplaneFinderImpl extends Model implements \App\Interfaces\Fligh
     public function run(\DateTime $date): array
     {
 
-        $statement = $this -> getDBConnection() -> prepare("CALL findAvailableAirplanes(?);");
-
+        $statement = $this -> getDBConnection() -> prepare("CALL FindAllAirplanes(?);");
         $statement->execute([$date->format(Model::$dateFormat)]);
         while( $result = $statement -> fetch() ){
             $this -> flights[] = Airplane::createForAvailableAirplanes(

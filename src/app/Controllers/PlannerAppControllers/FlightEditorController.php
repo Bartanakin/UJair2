@@ -12,6 +12,7 @@ use App\Interfaces\FlightEditorInterfaces\FindFlightData;
 use App\Interfaces\FlightEditorInterfaces\FlightCorrectnessChecker;
 use App\Interfaces\FlightEditorInterfaces\FlightEditor;
 use App\Interfaces\FlightEditorInterfaces\TargetAirportFinder;
+use App\Model;
 use App\View;
 use App\ViewPaths;
 use DateTime;
@@ -21,6 +22,9 @@ use Ramsey\Uuid\Exception\DateTimeException;
 class FlightEditorController
 {
     protected ?Flight $editedFlight;
+    protected ?array $airplanes;
+    protected ?array $targetAirports;
+    protected ?string $warning;
     public function __construct(
         protected FindFlightData $findFlightData,
         protected AvailableAirplaneFinder $availableAirplaneFinder,
@@ -30,17 +34,31 @@ class FlightEditorController
         protected FindAllFlights $findAllFlights
     )
     {
-        if( isset($_SESSION['editedFlight']) && $_SESSION['editedFlight'] instanceof Flight ){
-            $this -> editedFlight = $_SESSION['editedFlight'];
+        $this -> restoreFromSession('editedFlight','editedFlight',Flight::createNull());
+        $this -> restoreFromSession('airplanes','airplanes',[]);
+        $this -> restoreFromSession('targetAirports','targetAirports',[]);
+        $this -> restoreFromSession('warning','warning','');
+    }
+
+    private function restoreFromSession(string $propName, string $sesName, mixed $default){
+        if( isset($_SESSION[$sesName])){
+            $this -> $propName = $_SESSION[$sesName];
         }
         else{
-            $this -> editedFlight = Flight::createNull();
+            $this->resetProp($propName,$sesName,$default);
         }
+    }
+    private function resetProp(string $propName, string $sesName, mixed $default){
+        $this -> $propName = $default;
+        unset($_SESSION[$sesName]);
     }
 
     public function __destruct()
     {
         $_SESSION['editedFlight'] = $this -> editedFlight;
+        $_SESSION['airplanes'] = $this -> airplanes;
+        $_SESSION['targetAirports'] = $this -> targetAirports;
+        $_SESSION['warning'] = $this -> warning;
     }
 
     /**
@@ -80,11 +98,11 @@ class FlightEditorController
         catch( DateTimeException $e ) {
             return View::make(ViewPaths::EDIT_FLIGHT_PAGE, ['errorMessage' => "Incorrect date or time format", 'editedFlight' => $this->editedFlight]);
         }
-        $availableAirplanes = $this -> availableAirplaneFinder -> run($date);
+        $this -> airplanes = $this -> availableAirplaneFinder -> run($date);
 
         $this -> editedFlight -> unsetToDate($date);
-        $_SESSION['airplanes'] = $availableAirplanes;
-        unset($_SESSION['targetAirports']);
+        $this -> resetProp('targetAirports','targetAirports',[]);
+
 
         return $this -> createDefaultView();
     }
@@ -94,10 +112,10 @@ class FlightEditorController
             return View::make(ViewPaths::BAD_REQUEST);
 
         try{
-            if( !isset( $_SESSION['airplanes'] ) )
+            if( !$this -> airplanes )
                 throw new SessionExpiredException("Airplanes list has expired.");
 
-            $this -> editedFlight -> assertAirplaneAndDateForEditFlight();
+            $this -> editedFlight -> assertDate();
 
             $this -> editedFlight -> unsetToAirplane(
                 $_POST['airplaneID'],
@@ -106,14 +124,14 @@ class FlightEditorController
                 $_POST['startingAirportName']
             );
 
-            $targetAirports = $this -> targetAirportFinder -> run($this -> editedFlight);
-        }catch ( \PDOException $e ){
-            return $this->createDefaultView('Invalid airplane data');
-        }catch( SessionExpiredException $e ){
+            $this -> targetAirports = $this -> targetAirportFinder -> run($this -> editedFlight);
+        }
+//        catch ( \PDOException $e ){
+//            return $this->createDefaultView('Invalid airplane data');
+//        }
+        catch( SessionExpiredException $e ){
             return View::make(ViewPaths::SESSION_EXPIRED);
         }
-
-        $_SESSION['targetAirports'] = $targetAirports;
         return $this -> createDefaultView();
     }
 
@@ -151,8 +169,8 @@ class FlightEditorController
     private function createDefaultView($warning = ""):View{
         return View::make(ViewPaths::EDIT_FLIGHT_PAGE, [
             'editedFlight' => $this -> editedFlight,
-            'airplanes' => $_SESSION['airplanes'],
-            'targetAirports' => $_SESSION['targetAirports'],
+            'airplanes' => $this -> airplanes,
+            'targetAirports' => $this -> targetAirports,
             'warning' => $warning
         ]);
     }
