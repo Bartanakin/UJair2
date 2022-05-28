@@ -23,13 +23,25 @@
             UJAIR2 - Flight editor
         </div>
         <div class="headerManager">
-            <form class="headerForm">
-                <input type="submit" class="submit managerSubmit" value="Delete flight">
-            </form>
-            <form class="headerForm">
+            <?php if($editedFlight ?-> getId() !== null): ?>
+                <form class="headerForm" method="post" action="/deleteFlight">
+                    <input type="submit" class="submit managerSubmit" value="Delete flight">
+                </form>
+            <?php endif; ?>
+            <form class="headerForm" method="post" action="/cancelEditing">
                 <input type="submit" class="submit managerSubmit" value="Cancel editing">
             </form>
         </div>
+        <?php if($editedFlight ?-> getId() !== null): ?>
+            <div class="headerMessage headerForm textInfo">
+                Editing flight with ID <?= $editedFlight ?-> getId()  ?>
+            </div>
+        <?php endif; ?>
+        <?php if($warning): ?>
+        <div class="headerMessage headerForm textInfo">
+            <?= $warning ?>
+        </div>
+        <?php endif; ?>
     </header>
     <div class="wrapper wrapper1">
         <div class="firstContainer">
@@ -40,15 +52,15 @@
                 <form action="selectDate" method="post" class="timeAndDateInputsContainer" >
                     <div class="textInfo"> Picked date: </div>
                     <input id="my-input-a" class="textInput dateInput" name="date"
-                        <?= 'value="'. ($editedFlight ?-> getDateOfDeparture() -> format('Y-m-j') ?? (new DateTime()) -> format('Y-m-j')). '"'?>
+                        <?= 'value="'. ($editedFlight ?-> getDateOfDeparture() ?-> format('Y-m-j') ?? (new DateTime()) -> format('Y-m-j')). '"'?>
                     >
                     <div class="textInfo"> Pick hour and minute: </div>
                     <div class="timeInputsContainer" >
                         <input id="hour-picker"  class="textInput timeInput" name="hour"
-                            <?= 'value="'. ($editedFlight ?-> getDateOfDeparture() -> format('H') ?? "00") . '"'?>
+                            <?= 'value="'. ($editedFlight ?-> getDateOfDeparture() ?-> format('H') ?? "00") . '"'?>
                         >
                         <input id="minute-picker" class="textInput timeInput" name="minute"
-                            <?= 'value="'. ($editedFlight ?-> getDateOfDeparture() -> format('i') ?? '00') . '"'?>
+                            <?= 'value="'. ($editedFlight ?-> getDateOfDeparture() ?-> format('i') ?? '00') . '"'?>
                         >
                     </div>
                     <input type="submit" value="Confirm date and time" class="submit dateAndTimeSubmit">
@@ -85,32 +97,45 @@
                         </div>
                         <input type="hidden" name="startingAirportName" value="<?= $airplane -> getCurrentAirport() -> getAirportName() ?>">
                     </div>
+                    <?php if($airplane -> getCondition() === "Free"): ?>
                     <input type="submit" value="Choose this aircraft" class="submit aircraftSubmit">
+                    <?php endif; ?>
                 </form>
                 </form>
                 <?php endforeach; ?>
             </div>
             <?php endif; ?>
         </div>
-        <form method="post" action="" class="secondContainer">
+        <form method="post" action="selectTargetAirportTicketPriceAndConfirm" class="secondContainer">
             <?php if($targetAirports): ?>
             <div class="textInfo" >
                 Select ticket price:
             </div>
-            <input type="text" value="<?= $editedFlight ?-> getPrice() ?? '100' ?>" class="textInput priceInput">
+            <input type="text" value="<?= $editedFlight ?-> getPrice() ?? '100' ?>" class="textInput priceInput" name="ticketPrice">
             <input type="submit" value="confirm edition" class="submit airportSubmit">
             <div class="textInfo" >
                 Select target airport:
             </div>
-            <?php /* @var $targetAirport \App\Entities\Airport */ ?>
-            <?php foreach ($targetAirports as $targetAirport): ?>
             <div class="defaultContainer targetAirportsContainer">
+                <?php /* @var $targetAirport \App\Entities\Airport */ ?>
+                <?php $firstChecked = false ?>
+                <?php foreach ($targetAirports as $targetAirport): ?>
                 <div class="airportName">
-                    <input id="airport<?= $targetAirport -> getID() ?>" type="radio" value="<?= $targetAirport -> getID() ?>" name="targetAirportID">
-                    <label  for="airport<?= $targetAirport -> getID() ?>"><?=$targetAirport -> getAirportName() ?></label>
+                    <input value="<?= $targetAirport -> getID() .'$'.$targetAirport -> getAirportName()?>"
+                           id="airport<?= $targetAirport -> getID() ?>"
+                            <?php
+                                if (!$firstChecked) {
+                                    echo 'checked';
+                                    $firstChecked = true;
+                                }
+                           ?>
+                           type="radio"  name="targetAirportID">
+                    <label for="airport<?= $targetAirport -> getID() ?>" >
+                        <?=$targetAirport -> getAirportName() ?>
+                    </label>
                 </div>
+                <?php  endforeach; ?>
             </div>
-            <?php  endforeach; ?>
             <?php endif; ?>
         </form>
     </div>

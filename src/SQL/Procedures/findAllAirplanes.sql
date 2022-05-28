@@ -6,7 +6,7 @@ BEGIN
                        WHEN (
                                 SELECT  MAX(F.DateTimeOfDeparture)
                                 FROM Flights AS F
-                                WHERE F.AirPlaneID = A1.ID AND F.DateTimeOfDeparture <=_when
+                                WHERE F.AirPlaneID = A1.ID AND F.DateTimeOfDeparture <=_when AND Canceled = FALSE
                             )
                            >
                             COALESCE((
@@ -48,10 +48,11 @@ BEGIN
                               SELECT MAX(F2.DateTimeOfDeparture)
                               FROM FlightsData AS F2
                               WHERE F2.DateTimeOfDeparture <= _when AND A1.ID = F2.AirplaneID
-                          )),
+                          ) LIMIT 1),
                    (SELECT Ap.Airport_name
                     FROM Airports AS Ap
                     WHERE Ap.ID = ( SELECT MIN(A2.ID) FROM Airports AS A2 )
+                    LIMIT 1
                    )
                ) AS StartingAirportName
     FROM Airplanes AS A1 JOIN AirplaneTypes AS ATypes ON A1.AirplaneTypeID = ATypes.ID;

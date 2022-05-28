@@ -28,11 +28,12 @@ class AllFlightsController
         return View::make(ViewPaths::EDIT_CREW_PAGE);
     }
     public function addFlight(): View{
-        return View::make(ViewPaths::EDIT_FLIGHT_PAGE);
-    }
-    public function editFlight(): View{
-        // TODO
-        return View::make(ViewPaths::EDIT_FLIGHT_PAGE);
+        return View::make(ViewPaths::EDIT_FLIGHT_PAGE,[
+            'editedFlight' => null,
+            'airplanes' => [],
+            'targetAirports' => [],
+            'warning' => ""
+        ]);
     }
     public function showSettlements(): View{
         return View::make(ViewPaths::SHOW_SETTLEMENTS_PATH);

@@ -6,6 +6,7 @@ use App\Entities\Airplane;
 use App\Entities\Airport;
 use App\Entities\Flight;
 use App\Exceptions\SessionExpiredException;
+use App\Exceptions\TicketPriceNotPositiveNumberException;
 use App\Interfaces\FindAllFlights;
 use App\Interfaces\FlightEditorInterfaces\AvailableAirplaneFinder;
 use App\Interfaces\FlightEditorInterfaces\FindFlightData;
@@ -75,17 +76,18 @@ class FlightEditorController
     }
 
     public function cancel(): View{
-        // TODO
-        return View::make(ViewPaths::EDIT_FLIGHT_PAGE);
+        return $this -> makeAllFlightsViewAndUnsetState("edition canceled");
     }
 
-    public function confirm(): View{
-        // TODO
-        return View::make(ViewPaths::EDIT_FLIGHT_PAGE);
+    public function cancelConfirmation(): View {
+        return $this->createDefaultView("Confirmation canceled");
     }
+
     public function loadFlight(): View{
-        // TODO
-        return View::make(ViewPaths::EDIT_FLIGHT_PAGE);
+        if( !isset( $_POST['flightID']) )
+            return View::make(ViewPaths::BAD_REQUEST);
+        $this -> editedFlight -> setId($_POST['flightID']);
+        return $this->createDefaultView();
     }
 
     public function selectDate(): View
@@ -126,9 +128,9 @@ class FlightEditorController
 
             $this -> targetAirports = $this -> targetAirportFinder -> run($this -> editedFlight);
         }
-//        catch ( \PDOException $e ){
-//            return $this->createDefaultView('Invalid airplane data');
-//        }
+        catch ( \PDOException $e ){
+            return $this->createDefaultView('Invalid airplane data');
+        }
         catch( SessionExpiredException $e ){
             return View::make(ViewPaths::SESSION_EXPIRED);
         }
@@ -137,33 +139,48 @@ class FlightEditorController
 
     public function selectTargetAirportTicketPriceAndConfirm(): View
     {
-        if( !isset( $_POST['ticketPrice'], $_POST['targetAirportID'], $_POST['targetAirportName']) )
+        if( !isset( $_POST['ticketPrice'], $_POST['targetAirportID'] ) )
             return View::make(ViewPaths::BAD_REQUEST);
         try{
+            [$targetAirportID,$targetAirportName] = explode('$',$_POST['targetAirportID']);
+
+            if( !$targetAirportName || !$targetAirportID )
+                throw new SessionExpiredException("Unable to find airport with id ". $targetAirportID);
+
             $this -> editedFlight -> setTicketPrice($_POST['ticketPrice']);
-            $this -> editedFlight -> setTargetAirport(Airport::createTargetForConfirm( $_POST['targetAirportID'], $_POST['targetAirportName']));
+            $this -> editedFlight -> setTargetAirport(Airport::createTargetForConfirm( $targetAirportID,$targetAirportName));
             $this -> editedFlight -> assertAirplaneAndDateAndTargetAirportForEditFlight();
 
-            if( !isset( $_SESSION['airplanes'], $_SESSION['targetAirports'] ) )
-                throw new SessionExpiredException("Airplanes list or target airplanes list has expired.");
-            //if( $this -> editedFlight -> getId() === null )
-                //$this -> flightEditor ->
+            if( $this -> editedFlight -> getId() === null ){
+                $success = $this -> flightEditor -> insertFlight($this -> editedFlight);
+                return $this -> makeAllFlightsViewAndUnsetState($success ? "New flight added" : "Adding flight unsuccessful");
+            }
+            else{
+                return View::make(ViewPaths::CONFIRMATION_PAGE,['warning' => 'Are you sure you want to edit this flight?','type' => 'edit']);
+            }
         }catch( SessionExpiredException $e ){
             return View::make(ViewPaths::SESSION_EXPIRED);
+        }catch ( TicketPriceNotPositiveNumberException $e ){
+            return $this -> createDefaultView($e -> getMessage() );
         }
-        return $this -> createDefaultView();
     }
 
     public function deleteFlight(): View
     {
-        // TODO
-        return View::make(ViewPaths::EDIT_FLIGHT_PAGE);
+        return View::make(ViewPaths::CONFIRMATION_PAGE,['warning' => 'Are you sure you want to cancel this flight?','type' => 'delete']);
     }
 
     public function acceptConfirmation(): View
     {
-        // TODO
-        return View::make(ViewPaths::EDIT_FLIGHT_PAGE);
+        if( !isset( $_POST['confirmationType']) )
+            return View::make(ViewPaths::BAD_REQUEST);
+
+        $success = false;
+        if( $_POST['confirmationType'] == 'delete' )
+            $success = $this -> flightEditor -> deleteFlight($this -> editedFlight);
+        else if( $_POST['confirmationType'] == 'edit' )
+            $success = $this -> flightEditor -> editFlight($this -> editedFlight);
+        return $this->makeAllFlightsViewAndUnsetState($success ? "Flight edited" : "Edition unsuccessful");
     }
 
     private function createDefaultView($warning = ""):View{
@@ -173,5 +190,22 @@ class FlightEditorController
             'targetAirports' => $this -> targetAirports,
             'warning' => $warning
         ]);
+    }
+
+    private function makeAllFlightsViewAndUnsetState(string $message = ""): View
+    {
+        $this -> unsetState();
+        return View::make(
+            ViewPaths::ALL_FLIGHTS_PAGE,
+            ['allFLights' => $this -> findAllFlights -> findAllFlights(),'message' => $message]
+        );
+    }
+
+    private function unsetState(): void
+    {
+        $this->resetProp('editedFlight','editedFlight',Flight::createNull());
+        $this->resetProp('airplanes','airplanes',[]);
+        $this->resetProp('targetAirports','targetAirports',[]);
+        $this->resetProp('warning','warning',"");
     }
 }
