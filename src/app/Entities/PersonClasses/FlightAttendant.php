@@ -16,13 +16,18 @@ class FlightAttendant extends Employee
 
     public static function createForFindCrew(
         int $ID,
-        string $fulName
+        string $firstName,
+        string $surname
     ): static {
-        $names = explode(' ',$fulName);
         return new static(
             ID: $ID,
-            firstName: $names[0],
-            surname: $names[1]
+            firstName: $firstName,
+            surname: $surname
         );
+    }
+
+    function getDegree(): EmployeeDegree
+    {
+        return EmployeeDegree::FLIGHT_ATTENDANT;
     }
 }
