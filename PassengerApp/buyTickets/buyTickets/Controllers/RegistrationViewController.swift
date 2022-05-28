@@ -116,7 +116,6 @@ extension RegistrationViewController: RegistrationManagerDelegate {
         DispatchQueue.main.async {
             let ac = UIAlertController(title: "Success", message: message, preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                
                     self.navigationController?.popViewController(animated: true)
                 }))
             self.present(ac, animated: true, completion: nil)

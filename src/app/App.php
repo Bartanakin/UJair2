@@ -57,7 +57,6 @@ class App
         $this -> container -> set(SeatsGetter::class, SeatsGetterImpl::class);
         $this -> container -> set(InsertionNewTicket::class, InsertionNewTicketImpl::class);
         $this -> container -> set(LoginAndPasswordVerification::class, LoginAndPasswordVerificationImpl::class);
-        $this -> container -> set(LoginChecker::class, LoginCheckerImpl::class);
         $this -> container -> set(CountriesLoader::class, CountriesLoaderImpl::class);
         $this -> container -> set(InsertionNewPassenger::class, InsertionNewPassengerImpl::class);
         $this -> container -> set(AllTicketsForPassengerGetter::class, AllTicketsForPassengerGetterImpl::class);

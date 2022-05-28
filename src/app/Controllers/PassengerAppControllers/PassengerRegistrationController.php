@@ -10,16 +10,10 @@ use App\Interfaces\PassengerRegistrationInterfaces\LoginChecker;
 class PassengerRegistrationController
 {
     public function __construct(
-        protected LoginChecker $loginChecker,
         protected CountriesLoader $countriesLoader,
         protected InsertionNewPassenger $insertPassenger
     )
     {
-    }
-
-    public function canAddLogin() {
-        $login = $_GET['login'];
-        echo json_encode(['answer' => $this -> loginChecker -> run($login)]);
     }
 
     public function loadCountries() {

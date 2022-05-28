@@ -41,7 +41,6 @@ $app -> getRouter() -> get("/getScheduleForRoute",[BookingTicketsController::cla
 $app -> getRouter() -> get("/getTargetAirports",[BookingTicketsController::class, "getTargetAirports"]);
 $app -> getRouter() -> get("/insertTicket",[BookingTicketsController::class,'insertTicket']);
 $app -> getRouter() -> get("/getPassengerIDIfExists",[PassengerLoginController::class,'getPassengerIDIfExists']);
-$app -> getRouter() -> get("/canAddLogin",[PassengerRegistrationController::class,'canAddLogin']);
 $app -> getRouter() -> get("/loadCountries",[PassengerRegistrationController::class,'loadCountries']);
 $app -> getRouter() -> get("/insertPassenger",[PassengerRegistrationController::class,'insertPassenger']);
 $app -> getRouter() -> get("/getTicketsForPassengerID",[PassengersTicketsController::class,'getTicketsForPassengerID']);

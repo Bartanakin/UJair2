@@ -11,8 +11,18 @@ class InsertionNewPassengerImpl extends \App\Model implements \App\Interfaces\Pa
         parent::__construct($dataBaseConnection);
     }
 
-    function run(Passenger $passenger): bool
+    function run(Passenger $passenger): int
     {
+        $amountOfLogins = 0;
+        $query = 'SELECT Count(*) AS amountOfLogins FROM Passengers WHERE ? LIKE Passengers.Login';
+        $statement = $this -> getDBConnection() -> prepare($query);
+        $statement -> execute([$passenger->login]);
+        while($data = $statement -> fetch()) {
+            $amountOfLogins = $data['amountOfLogins'];
+        }
+        if ($amountOfLogins != 0) {
+            return -1;
+        }
         $query = 'INSERT INTO Passengers VALUES
             (NULL, ?, ?, ?, ?, ?);';
         $statement = $this -> getDBConnection() -> prepare($query);
@@ -31,6 +41,9 @@ class InsertionNewPassengerImpl extends \App\Model implements \App\Interfaces\Pa
                 $this -> getDBConnection() -> rollBack();
                 $success = false;
         }
-        return $success;
+
+
+
+        return (int)$success;
     }
 }

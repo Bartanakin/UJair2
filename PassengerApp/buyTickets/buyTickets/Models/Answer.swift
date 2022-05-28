@@ -8,5 +8,5 @@
 import Foundation
 
 class Answer: Decodable {
-    let answer: Bool?
+    let answer: Int?
 }
