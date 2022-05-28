@@ -142,16 +142,13 @@ class FlightEditorController
         if( !isset( $_POST['ticketPrice'], $_POST['targetAirportID'] ) )
             return View::make(ViewPaths::BAD_REQUEST);
         try{
-            $targetAirportName = array_filter($this -> targetAirports, function($x){
-            /* @var $x \App\Entities\Airport */
-                return $x -> getID() == $_POST['targetAirportID'];
-            })[0] ?-> getAirportName();
+            [$targetAirportID,$targetAirportName] = explode('$',$_POST['targetAirportID']);
 
-            if( !$targetAirportName )
-                throw new SessionExpiredException("Unable to find airport with id ". $_POST['targetAirportID']);
+            if( !$targetAirportName || !$targetAirportID )
+                throw new SessionExpiredException("Unable to find airport with id ". $targetAirportID);
 
             $this -> editedFlight -> setTicketPrice($_POST['ticketPrice']);
-            $this -> editedFlight -> setTargetAirport(Airport::createTargetForConfirm( $_POST['targetAirportID'],$targetAirportName));
+            $this -> editedFlight -> setTargetAirport(Airport::createTargetForConfirm( $targetAirportID,$targetAirportName));
             $this -> editedFlight -> assertAirplaneAndDateAndTargetAirportForEditFlight();
 
             if( $this -> editedFlight -> getId() === null ){

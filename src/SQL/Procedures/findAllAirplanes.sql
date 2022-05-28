@@ -6,7 +6,7 @@ BEGIN
                        WHEN (
                                 SELECT  MAX(F.DateTimeOfDeparture)
                                 FROM Flights AS F
-                                WHERE F.AirPlaneID = A1.ID AND F.DateTimeOfDeparture <=_when
+                                WHERE F.AirPlaneID = A1.ID AND F.DateTimeOfDeparture <=_when AND Canceled = FALSE
                             )
                            >
                             COALESCE((
@@ -57,5 +57,3 @@ BEGIN
                ) AS StartingAirportName
     FROM Airplanes AS A1 JOIN AirplaneTypes AS ATypes ON A1.AirplaneTypeID = ATypes.ID;
 END // DELIMITER ;
-
-CALL FindAllAirplanes('2022-05-31 10:00:00')

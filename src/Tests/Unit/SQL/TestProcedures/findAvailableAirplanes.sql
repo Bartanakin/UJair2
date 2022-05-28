@@ -13,7 +13,7 @@ BEGIN
     INSERT INTO Airplanes
     VALUES (1, 1, '2020-06-06 00:00:00'),
            (2, 1, '2020-06-06 00:00:00');
-    INSERT INTO Airports
+    INSERT INTO Airports(ID,Airport_name,Price_of_reception)
     VALUES (1, 'X', 1000),
            (2, 'Y', 1000),
            (3, 'Z', 1000);

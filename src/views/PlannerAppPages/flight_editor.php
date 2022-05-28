@@ -97,7 +97,9 @@
                         </div>
                         <input type="hidden" name="startingAirportName" value="<?= $airplane -> getCurrentAirport() -> getAirportName() ?>">
                     </div>
+                    <?php if($airplane -> getCondition() === "Free"): ?>
                     <input type="submit" value="Choose this aircraft" class="submit aircraftSubmit">
+                    <?php endif; ?>
                 </form>
                 </form>
                 <?php endforeach; ?>
@@ -119,7 +121,7 @@
                 <?php $firstChecked = false ?>
                 <?php foreach ($targetAirports as $targetAirport): ?>
                 <div class="airportName">
-                    <input value="<?= $targetAirport -> getID() ?>"
+                    <input value="<?= $targetAirport -> getID() .'$'.$targetAirport -> getAirportName()?>"
                            id="airport<?= $targetAirport -> getID() ?>"
                             <?php
                                 if (!$firstChecked) {

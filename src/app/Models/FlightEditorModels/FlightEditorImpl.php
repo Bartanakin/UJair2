@@ -75,7 +75,7 @@ class FlightEditorImpl extends Model implements \App\Interfaces\FlightEditorInte
 
     public function deleteFlight(Flight $flight): bool
     {
-        $statement = $this -> getDBConnection() -> prepare("DELETE FROM Flights WHERE ID = ?");
+        $statement = $this -> getDBConnection() -> prepare("UPDATE Flights SET Canceled = TRUE WHERE ID = ?");
         try{
             $this -> getDBConnection() -> beginTransaction();
 
