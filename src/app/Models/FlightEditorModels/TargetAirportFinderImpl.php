@@ -20,8 +20,8 @@ class TargetAirportFinderImpl extends Model implements \App\Interfaces\FlightEdi
             FROM Airplanes JOIN AirplaneTypes ON Airplanes.AirplaneTypeID = AirplaneTypes.ID
             WHERE Airplanes.ID = ? LIMIT 1"
         );
-        $statement -> execute([$editedFlight -> getId()]);
-        return $statement -> fetch()['maxDistance'];
+        $statement -> execute([$editedFlight -> getAirplane() -> getID()]);
+        return ($statement -> fetch())['maxDistance'];
     }
 
     /**
@@ -33,9 +33,9 @@ class TargetAirportFinderImpl extends Model implements \App\Interfaces\FlightEdi
 
         $maxDistance = $this -> findMaxDistance($editedFlight);
 
-        $statement = $this -> getDBConnection() -> prepare("CALL FindAllTargetAirports(?,?)");
+        $xd = $editedFlight -> getStartingAirport() -> getAirportName();
+        $statement = $this -> getDBConnection() -> prepare('CALL FindAllTargetAirports(?,?)');
         $statement -> execute([$editedFlight -> getStartingAirport() -> getAirportName(), $maxDistance]);
-
         $airports = [];
         while( $row = $statement -> fetch() ){
             $airports[] = Airport::createTargetForSelectAirplane(

@@ -13,4 +13,6 @@ BEGIN
 
     WHERE StartingAirports.Airport_name LIKE starting_airport_name
       AND Routes.Distance <= max_distance;
-END
+END;
+
+CALL FindAllTargetAirports('X',30000);

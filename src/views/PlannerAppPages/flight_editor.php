@@ -1,3 +1,13 @@
+<?php
+    /* @var $editedFlight \App\Entities\Flight */
+    $editedFlight = $this->params['editedFlight'];
+    /* @var $airplanes array */
+    $airplanes = $this->params['airplanes'];
+    /* @var $targetAirports array */
+    $targetAirports = $this->params['targetAirports'];
+    /* @var $warning string */
+    $warning = $this->params['warning'];
+?>
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,64 +37,81 @@
                 <div class="calendarContainer">
                     <div id="my-calendar"></div>
                 </div>
-                <form action="" method="post" class="timeAndDateInputsContainer" >
+                <form action="selectDate" method="post" class="timeAndDateInputsContainer" >
                     <div class="textInfo"> Picked date: </div>
-                    <input id="my-input-a" class="textInput dateInput">
+                    <input id="my-input-a" class="textInput dateInput" name="date"
+                        <?= 'value="'. ($editedFlight ?-> getDateOfDeparture() -> format('Y-m-j') ?? (new DateTime()) -> format('Y-m-j')). '"'?>
+                    >
                     <div class="textInfo"> Pick hour and minute: </div>
                     <div class="timeInputsContainer" >
-                        <input id="hour-picker" value="00" class="textInput timeInput">
-                        <input id="minute-picker" value="00" class="textInput timeInput">
+                        <input id="hour-picker"  class="textInput timeInput" name="hour"
+                            <?= 'value="'. ($editedFlight ?-> getDateOfDeparture() -> format('H') ?? "00") . '"'?>
+                        >
+                        <input id="minute-picker" class="textInput timeInput" name="minute"
+                            <?= 'value="'. ($editedFlight ?-> getDateOfDeparture() -> format('i') ?? '00') . '"'?>
+                        >
                     </div>
                     <input type="submit" value="Confirm date and time" class="submit dateAndTimeSubmit">
                 </form>
             </div>
+            <?php if($airplanes): ?>
             <div class="airplanesContainer">
+                <?php if($editedFlight -> getAirplane() ): ?>
+                    <div class="textInfo">
+                        Chosen aircraft ID: <?= $editedFlight -> getAirplane() -> getID() ?>
+                    </div>
+                <?php endif; ?>
                 <div class="textInfo">
                     Choose an aircraft:
                 </div>
-                <form class=" aircraft">
+                <?php /* @var $airplane \App\Entities\Airplane */ ?>
+                <?php foreach ($airplanes as $airplane ): ?>
+                <form class=" aircraft" method="post" action="selectAirplane">
                     <div class="defaultContainer aircraftData">
-                        <div class="defaultContainerElement aircraftInfo"> <span class="bold">ID:</span> 1</div>
-                        <div class="defaultContainerElement aircraftInfo"> <span class="bold">Type name:</span> Boeing 737 MAX</div>
-                        <div class="defaultContainerElement aircraftInfo"> <span class="bold">Residing in:</span> Heathrow Airport</div>
-                        <div class="defaultContainerElement aircraftInfo"> <span class="bold">Occupancy:</span> Free</div>
+                        <input type="hidden" name="airplaneID" value="<?= $airplane -> getID() ?>">
+                        <div class="defaultContainerElement aircraftInfo"> <span class="bold">ID:</span>
+                            <?= $airplane -> getID() ?>
+                        </div>
+                        <input type="hidden" name="airplaneTypeName" value="<?= $airplane -> getTypeName() ?>">
+                        <div class="defaultContainerElement aircraftInfo"> <span class="bold">Type name:</span>
+                            <?= $airplane -> getTypeName() ?>
+                        </div>
+                        <input type="hidden" name="startingAirportID" value="<?= $airplane -> getCurrentAirport() -> getID()?>">
+                        <div class="defaultContainerElement aircraftInfo"> <span class="bold">Residing in:</span>
+                            <?= $airplane -> getCurrentAirport() -> getAirportName() ?>
+                        </div>
+                        <div class="defaultContainerElement aircraftInfo"> <span class="bold">Occupancy:</span>
+                            <?= $airplane -> getCondition() ?>
+                        </div>
+                        <input type="hidden" name="startingAirportName" value="<?= $airplane -> getCurrentAirport() -> getAirportName() ?>">
                     </div>
                     <input type="submit" value="Choose this aircraft" class="submit aircraftSubmit">
                 </form>
-                <form class=" aircraft">
-                    <div class="defaultContainer aircraftData">
-                        <div class="defaultContainerElement aircraftInfo"> <span class="bold">ID:</span> 1</div>
-                        <div class="defaultContainerElement aircraftInfo"> <span class="bold">Type name:</span> Boeing 737 MAX</div>
-                        <div class="defaultContainerElement aircraftInfo"> <span class="bold">Residing in:</span> Heathrow Airport</div>
-                        <div class="defaultContainerElement aircraftInfo"> <span class="bold">Occupancy:</span> Free</div>
-                    </div>
-                    <input type="submit" value="Choose this aircraft" class="submit aircraftSubmit">
                 </form>
+                <?php endforeach; ?>
             </div>
+            <?php endif; ?>
         </div>
         <form method="post" action="" class="secondContainer">
+            <?php if($targetAirports): ?>
             <div class="textInfo" >
                 Select ticket price:
             </div>
-            <input type="text" value="100" class="textInput priceInput">
+            <input type="text" value="<?= $editedFlight ?-> getPrice() ?? '100' ?>" class="textInput priceInput">
             <input type="submit" value="confirm edition" class="submit airportSubmit">
             <div class="textInfo" >
                 Select target airport:
             </div>
+            <?php /* @var $targetAirport \App\Entities\Airport */ ?>
+            <?php foreach ($targetAirports as $targetAirport): ?>
             <div class="defaultContainer targetAirportsContainer">
                 <div class="airportName">
-                    <input id="airport1" type="radio" value="1" name="xd">
-                    <label  for="airport1">Balice</label>
-                </div>
-                <div class="airportName">
-                    <input id="airport2" type="radio" value="1" name="xd">
-                    <label  for="airport2">Chopin</label>
-                </div>
-                <div class="airportName">
-                    <input id="airport3" type="radio" value="1" name="xd">
-                    <label  for="airport3">Heathrow</label>
+                    <input id="airport<?= $targetAirport -> getID() ?>" type="radio" value="<?= $targetAirport -> getID() ?>" name="targetAirportID">
+                    <label  for="airport<?= $targetAirport -> getID() ?>"><?=$targetAirport -> getAirportName() ?></label>
                 </div>
             </div>
+            <?php  endforeach; ?>
+            <?php endif; ?>
         </form>
     </div>
     <script type="text/javascript">
@@ -100,10 +127,10 @@
             return date.getFullYear() + "-" + month + "-" + date.getDate()
         }
 
-        window.addEventListener('load', (event) => {
-            date = new Date(Date.now());
-            inputA.value = formatDateForMe(date);
-        });
+        // window.addEventListener('load', (event) => {
+        //     date = new Date(Date.now());
+        //     inputA.value = formatDateForMe(date);
+        // });
         myCalendar.onDateClick(function(event, date){
             inputA.value = formatDateForMe(date);
         });

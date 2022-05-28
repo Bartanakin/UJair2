@@ -170,8 +170,9 @@ class Flight implements JsonSerializable {
             || $this -> startingAirport === null
             || $this ?-> startingAirport -> getID() === null
             || $this ?-> startingAirport -> getAirportName() === null
-        )
+        ){
             throw new SessionExpiredException("Null airplane or its components detected.");
+        }
     }
 
     public function unsetToAirplane(

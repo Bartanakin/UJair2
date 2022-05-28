@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App;
 
 use App\Exceptions\UnauthorizedPageAccessException;
+use App\FlightEditorImpll as FlightEditorImpllAlias;
 use App\Interfaces\BookingTicketsInterfaces\AllAirportsGetter;
 use App\Interfaces\BookingTicketsInterfaces\InsertionNewTicket;
 use App\Interfaces\BookingTicketsInterfaces\ScheduleOfRouteGetter;
@@ -11,6 +12,11 @@ use App\Interfaces\BookingTicketsInterfaces\SeatsGetter;
 use App\Interfaces\BookingTicketsInterfaces\TargetAirportsGetter;
 use App\Interfaces\FindAllFlights;
 use App\Interfaces\FindCrewForFlight;
+use App\Interfaces\FlightEditorInterfaces\AvailableAirplaneFinder;
+use App\Interfaces\FlightEditorInterfaces\FindFlightData;
+use App\Interfaces\FlightEditorInterfaces\FlightCorrectnessChecker;
+use App\Interfaces\FlightEditorInterfaces\FlightEditor;
+use App\Interfaces\FlightEditorInterfaces\TargetAirportFinder;
 use App\Interfaces\FlightWarningAdder;
 use App\Interfaces\PassengerLoginInterfaces\LoginAndPasswordVerification;
 use App\Interfaces\PassengerRegistrationInterfaces\CountriesLoader;
@@ -25,6 +31,11 @@ use App\Models\BookingTicketsModels\SeatsGetterImpl;
 use App\Models\BookingTicketsModels\TargetAirportsGetterImpl;
 use App\Models\FindAllFlightsImpl;
 use App\Models\FindCrewForFlightImpl;
+use App\Models\FlightEditorModels\AvailableAirplaneFinderImpl;
+use App\Models\FlightEditorModels\FindFlightDataImpl;
+use App\Models\FlightEditorModels\FlightCorrectnessCheckerImpl;
+use App\Models\FlightEditorModels\FlightEditorImpl;
+use App\Models\FlightEditorModels\TargetAirportFinderImpl;
 use App\Models\FlightWarningAdderImpl;
 use App\Models\PassengerLoginModels\LoginAndPasswordVerificationImpl;
 use App\Models\PassengerRegistrationModels\CountriesLoaderImpl;
@@ -52,6 +63,13 @@ class App
         $this -> container -> set(FindAllFlights::class, FindAllFlightsImpl::class);
         $this -> container -> set(FlightWarningAdder::class, FlightWarningAdderImpl::class);
         $this -> container -> set(FindCrewForFlight ::class, FindCrewForFlightImpl ::class);
+
+        // FlightEditorBindings
+        $this -> container -> set(FindFlightData::class, FindFlightDataImpl::class);
+        $this -> container -> set(AvailableAirplaneFinder ::class, AvailableAirplaneFinderImpl ::class);
+        $this -> container -> set(TargetAirportFinder  ::class, TargetAirportFinderImpl ::class);
+        $this -> container -> set(FlightEditor   ::class, FlightEditorImpl ::class);
+        $this -> container -> set(FlightCorrectnessChecker    ::class, FlightCorrectnessCheckerImpl ::class);
 
 
         $this -> container -> set(SeatsGetter::class, SeatsGetterImpl::class);
