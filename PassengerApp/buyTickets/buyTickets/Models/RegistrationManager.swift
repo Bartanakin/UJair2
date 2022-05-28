@@ -39,8 +39,8 @@ extension RegistrationManager: PassengerInserter {
             message = "Enter your first name."
         }else if lastName.replacingOccurrences(of: " ", with: "") == "" {
             message = "Enter your last name."
-        }else if login.replacingOccurrences(of: " ", with: "") == "" {
-            message = "Enter login."
+        }else if login.contains(" ") {
+            message = "Login cannot contain spaces."
         }else if password == "" {
             message = "Enter password."
         }else if repeatPassword == "" {
@@ -53,6 +53,7 @@ extension RegistrationManager: PassengerInserter {
         if message != "" {
             delegate?.showErrorMessage(message: message)
         }else {
+            //dodać sól
             let hashedPassword = SHA256.hash(data: Data(password.utf8)).description.replacingOccurrences(of: "SHA256 digest: ", with: "")
             let urlS = K.URLs.insertPassengerURL + "?firstN=\(firstName)&lastN=\(lastName)&password=\(hashedPassword)&login=\(login)&countryID=\(selectedCountry!)"
             performRequestPassenger(urlS: urlS)

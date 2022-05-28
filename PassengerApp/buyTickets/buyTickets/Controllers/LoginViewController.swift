@@ -87,9 +87,7 @@ extension LoginViewController: LoginManagerDelegate {
     
     func updateController() {
         DispatchQueue.main.async {
-            
             self.performSegue(withIdentifier: K.Segues.loginToBooking, sender: self)
-            print("da")
         }
     }
 }

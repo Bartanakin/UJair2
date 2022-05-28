@@ -13,10 +13,13 @@ class LoginManager {
     weak var delegate: LoginManagerDelegate?
     
     func checkCredentials(login: String, password: String) {
+        if login.contains(" ") {
+            delegate?.showErrorMessage(message: "Login cannot contain spaces.")
+        }
         if password == "" {
-            delegate?.showErrorMessage(message: "Enter your login")
+            delegate?.showErrorMessage(message: "Enter your login.")
         }else if login == "" {
-            delegate?.showErrorMessage(message: "Enter your password")
+            delegate?.showErrorMessage(message: "Enter your password.")
         }else {
             let hashedPassword = SHA256.hash(data: Data(password.utf8)).description.replacingOccurrences(of: "SHA256 digest: ", with: "")
             //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -47,7 +50,6 @@ class LoginManager {
     
     func parseJSON(data: Data) -> Int? {
         let decoder = JSONDecoder()
-        
         do {
             let decodedData = try decoder.decode(Passenger.self, from: data)
             self.passengerID = decodedData.passengerID
