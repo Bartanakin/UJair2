@@ -1,0 +1,15 @@
+.confirmationContainer{
+    margin-top: 10vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.confirmationForm{
+    margin: 0 4%;
+}
+
+.confirmationSubmit{
+    font-size: max(2vw,1.5em);
+    padding: 2vh 2vw;
+}

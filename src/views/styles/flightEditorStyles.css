@@ -27,11 +27,6 @@
     flex-direction: column;
     justify-content: space-around;
 }
-.textInfo{
-    font-weight: bold;
-    text-align: center;
-    padding: 3vh 0;
-}
 .dateInput{
     max-width:60%;
     margin: 0 auto;

@@ -3,6 +3,7 @@
 namespace App\Entities;
 
 use App\Exceptions\SessionExpiredException;
+use App\Exceptions\TicketPriceNotPositiveNumberException;
 use App\Model;
 use Cassandra\Date;
 use DateTime;
@@ -192,6 +193,8 @@ class Flight implements JsonSerializable {
 
     public function setTicketPrice(float $price)
     {
+        if( $price <= 0 )
+            throw new TicketPriceNotPositiveNumberException("Ticket price should be grater than 0.");
         $this -> price = $price;
     }
 

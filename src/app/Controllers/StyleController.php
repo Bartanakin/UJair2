@@ -31,4 +31,8 @@ class StyleController
     public function flightEditor(){
         $this -> load(static::STYLES_PATH."/flightEditorStyles.css");
     }
+    public function confirmationPage(){
+        $this -> load(static::STYLES_PATH."/confirmationStyles.css");
+    }
+
 }
