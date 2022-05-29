@@ -1,3 +1,12 @@
+<?php
+    /** @var  $flight \App\Entities\Flight*/
+    $flight = $this -> params['flight'];
+    $candidates = $this -> params['candidates'];
+    /** @var  $roleToLink \App\Entities\PersonClasses\EmployeeDegree*/
+    $roleToLink = $this -> params['roleToLink'];
+    /** @var  $message string */
+    $message = $this -> params['message'];
+?>
 <!DOCTYPE html>
 <html lang="eng">
 <head>
@@ -14,58 +23,97 @@
         Crew list
     </div>
     <div class="headerManager">
-        <form class="headerForm">
+        <form class="headerForm" method="post" action="/">
             <input type="submit" value="cancel" class="managerSubmit submit ">
         </form>
     </div>
 </header>
 <div class="wrapper">
     <div class="leftColumn">
+        <?php if($flight -> getCrewList() -> getCaptain() === null ): ?>
+        <section
+            <?php if($roleToLink === \App\Entities\PersonClasses\EmployeeDegree::CAPTAIN):?>
+                class="selectedMember"
+            <?php endif;?>
+        >
+            <form class="crewTileForm" method="post" action="findAvailableMembers">
+                <input type="hidden" name="RoleID" value="C">
+                <input class="submit crewSubmit" type="submit" value="Add captain" >
+            </form>
+        </section>
+        <?php endif; ?>
+        <?php if($flight -> getCrewList() -> getFirstOfficer() === null ): ?>
+        <section
+            <?php if($roleToLink === \App\Entities\PersonClasses\EmployeeDegree::FIRST_OFFICER):?>
+                class="selectedMember"
+            <?php endif;?>
+        >
+            <form class="crewTileForm" method="post" action="findAvailableMembers">
+                <input type="hidden" name="RoleID" value="F">
+                <input class="submit crewSubmit" type="submit" value="Add first officer" >
+            </form>
+        </section>
+        <?php endif; ?>
+        <?php if($flight -> getCrewList() -> getMaxNumberOfFA() > count($flight->getCrewList()->getFlightAttendants()) ): ?>
+        <section
+            <?php if($roleToLink === \App\Entities\PersonClasses\EmployeeDegree::FLIGHT_ATTENDANT):?>
+                class="selectedMember"
+            <?php endif;?>
+        >
+            <form class="crewTileForm " method="post" action="findAvailableMembers">
+                <input type="hidden" name="RoleID" value="S">
+                <input class="submit crewSubmit" type="submit" value="Add flight attendant" >
+            </form>
+        </section>
+        <?php endif; ?>
+        <?php /** @var $Emp \App\Entities\PersonClasses\Employee */ ?>
+        <?php foreach ( $flight -> getCrewList() -> getEmployers() as $Emp ): ?>
         <section>
             <div class="crewTile defaultContainer">
                 <div class="crewSlot defaultContainerElement">
-                    Slot: Captain
+                    Slot: <?= $flight -> getCrewList() ->getSlot($Emp -> getID()) -> getFullString() ?>
                 </div>
                 <div class="crewInfo defaultContainerElement">
-                    Name: Jan Kowalski
+                    Name: <?= $Emp -> getFirstName() . " " . $Emp -> getSurname() ?>
                 </div>
+                <?php if($Emp instanceof \App\Entities\PersonClasses\Pilot): ?>
                 <div class="crewInfo defaultContainerElement">
-                    Degree: Captain
+                    Degree: <?= $Emp -> getDegree() -> getFullString() ?>
                 </div>
+                <?php endif; ?>
             </div>
-            <form class="crewTileForm">
+            <?php if($Emp): ?>
+            <form class="crewTileForm" method="post" action="unlinkMember">
+                <input type="hidden" name="EmployeeID" value="<?= $Emp -> getID()?>">
                 <input class="submit crewSubmit" type="submit" value="unlink member" >
             </form>
+            <?php endif; ?>
         </section>
-        <section class="selectedMember">
-            <div class="crewTile defaultContainer">
-                <div class="crewSlot defaultContainerElement">
-                    Slot: Flight attendant
-                </div>
-                <div class="crewInfo defaultContainerElement">
-                    Name: Adrianna Nowakowska
-                </div>
-            </div>
-            <form class="crewTileForm">
-                <input  class="submit crewSubmit" type="submit" value="unlink member" >
-            </form>
-        </section>
+        <?php endforeach; ?>
     </div>
     <div class="rightColumn">
+        <?php if($candidates ): ?>
         <div class="textInfo">Choose candidate:</div>
+        <?php  /** @var $candidate \App\Entities\PersonClasses\Employee */?>
+        <?php foreach ($candidates as $candidate): ?>
+        <?php if( !$flight -> getCrewList() ->findEmployee($candidate ->getID())): ?>
         <section>
             <div class="selectableCrewTile defaultContainer">
                 <div class="crewInfo defaultContainerElement">
-                    Name: Robert Rewucki
+                    Name: <?= $candidate -> getFirstName() . " " . $candidate -> getSurname() ?>
                 </div>
                 <div class="crewInfo defaultContainerElement">
-                    Degree: Captain
+                    Degree: <?= $candidate -> getDegree() -> getFullString() ?>
                 </div>
             </div>
-            <form class="crewTileForm">
-                <input class="submit crewSubmit" type="submit" value="pick this member" >
+            <form class="crewTileForm" method="post" action="linkMember">
+                <input type="hidden" value="<?= $candidate ->getID() ?>" name="EmployeeID">
+                <input class="submit crewSubmit" type="submit" value="pick member" >
             </form>
         </section>
+        <?php endif; ?>
+        <?php endforeach; ?>
+        <?php endif; ?>
     </div>
 </div>
 </body>

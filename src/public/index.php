@@ -32,6 +32,11 @@ $app -> getRouter() -> post("/deleteFlight",[\App\Controllers\PlannerAppControll
 $app -> getRouter() -> post("/cancelConfirmation",[\App\Controllers\PlannerAppControllers\FlightEditorController::class,'cancelConfirmation']);
 $app -> getRouter() -> post("/acceptConfirmation",[\App\Controllers\PlannerAppControllers\FlightEditorController::class,'acceptConfirmation']);
 
+$app -> getRouter() -> post("/linkMember",[\App\Controllers\PlannerAppControllers\EditCrewController::class,'linkMember']);
+$app -> getRouter() -> post("/unlinkMember",[\App\Controllers\PlannerAppControllers\EditCrewController::class,'unlinkMember']);
+$app -> getRouter() -> post("/findAvailableMembers",[\App\Controllers\PlannerAppControllers\EditCrewController::class,'findAvailableMembers']);
+$app -> getRouter() -> post("/loadCrewList",[\App\Controllers\PlannerAppControllers\EditCrewController::class,'loadCrewList']);
+
 
 // styles:
 $app -> getRouter() -> get("/style",[\App\Controllers\StyleController::class,'loginPage']);

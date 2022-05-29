@@ -2,10 +2,10 @@
 
 namespace App\Entities;
 
+use App\Entities\PersonClasses\Employee;
 use App\Exceptions\SessionExpiredException;
 use App\Exceptions\TicketPriceNotPositiveNumberException;
 use App\Model;
-use Cassandra\Date;
 use DateTime;
 use JsonSerializable;
 
@@ -56,6 +56,14 @@ class Flight implements JsonSerializable {
     public static function createNull(): static
     {
         return new static();
+    }
+
+    public static function createForFlightDataFinderForCrewEditionImpl(int $flightID, DateTime $dateTimeOfDeparture)
+    {
+        return new static(
+            ID: $flightID,
+            dateOfDeparture: $dateTimeOfDeparture
+        );
     }
 
 
@@ -220,12 +228,27 @@ class Flight implements JsonSerializable {
         $this -> crewList = $crewList;
     }
 
-    public function assertCrewListWithemplouee(mixed $EmployeeID)
+    public function assertCrewListWithEmployee(int $EmployeeID)
     {
         if($this -> crewList === null
-            || $this -> crewList ->  === null
+            || $this -> crewList -> findEmployee($EmployeeID) === null
         )
-            throw new SessionExpiredException("Null target airport or price has been detected.");
+            throw new SessionExpiredException("Improper crew list detected.");
 
     }
+
+    /**
+     * @return CrewList|null
+     */
+    public function getCrewList(): ?CrewList
+    {
+        return $this->crewList;
+    }
+
+    public function assertFlightID()
+    {
+        if( $this -> getId() === null )
+            throw new SessionExpiredException("Flight id is null!");
+    }
+
 }

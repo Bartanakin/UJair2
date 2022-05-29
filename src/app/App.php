@@ -9,6 +9,8 @@ use App\Interfaces\BookingTicketsInterfaces\InsertionNewTicket;
 use App\Interfaces\BookingTicketsInterfaces\ScheduleOfRouteGetter;
 use App\Interfaces\BookingTicketsInterfaces\SeatsGetter;
 use App\Interfaces\BookingTicketsInterfaces\TargetAirportsGetter;
+use App\Interfaces\EditCrewInterfaces\AvailableMemberFinder;
+use App\Interfaces\EditCrewInterfaces\CrewEditor;
 use App\Interfaces\FindAllFlights;
 use App\Interfaces\FindCrewForFlight;
 use App\Interfaces\FlightEditorInterfaces\AvailableAirplaneFinder;
@@ -28,6 +30,8 @@ use App\Models\BookingTicketsModels\InsertionNewTicketImpl;
 use App\Models\BookingTicketsModels\ScheduleOfRouteGetterImpl;
 use App\Models\BookingTicketsModels\SeatsGetterImpl;
 use App\Models\BookingTicketsModels\TargetAirportsGetterImpl;
+use App\Models\EditCrewModels\AvailableMemberFinderImpl;
+use App\Models\EditCrewModels\CrewEditorImpl;
 use App\Models\EditCrewModels\FindCrewForFlightImpl;
 use App\Models\FindAllFlightsImpl;
 use App\Models\FlightEditorModels\AvailableAirplaneFinderImpl;
@@ -70,6 +74,10 @@ class App
         $this -> container -> set(FlightEditor   ::class, FlightEditorImpl ::class);
         $this -> container -> set(FlightCorrectnessChecker    ::class, FlightCorrectnessCheckerImpl ::class);
 
+        // Find crew bindings
+        $this -> container -> set(FindCrewForFlight::class, FindCrewForFlightImpl::class);
+        $this -> container -> set(AvailableMemberFinder ::class, AvailableMemberFinderImpl ::class);
+        $this -> container -> set(CrewEditor::class, CrewEditorImpl::class);
 
         $this -> container -> set(SeatsGetter::class, SeatsGetterImpl::class);
         $this -> container -> set(InsertionNewTicket::class, InsertionNewTicketImpl::class);

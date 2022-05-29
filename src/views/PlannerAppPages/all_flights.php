@@ -58,7 +58,7 @@
                         <input name="flightID" value="<?= $flight -> getId() ?>" type="hidden"/>
                         <input type="submit" value="edit flight" class="flightSubmit submit"/>
                     </form>
-                    <form action="editCrew" method="post" class="flightForm">
+                    <form action="loadCrewList" method="post" class="flightForm">
                         <input name="flightID" value="<?= $flight -> getId() ?>" type="hidden"/>
                         <input type="submit" value="edit crew" class="flightSubmit submit"/>
                     </form>
