@@ -9,8 +9,7 @@ class Pilot extends Employee
         ?string $firstName = null,
         ?string $surname = null,
         ?\DateTime $dateOfEmployment = null,
-        protected ?EmployeeDegree $degree = null,
-        protected ?int $timeOfFlight = 0
+        protected ?EmployeeDegree $degree = null
     )
     {
         parent::__construct($ID,$firstName,$surname,$dateOfEmployment);
@@ -18,13 +17,19 @@ class Pilot extends Employee
 
     public static function createForFindCrew(
         int $ID,
-        string $fulName
+        string $firstName,
+        string $Surname,
+        string $degreeString
     ): static {
-        $names = explode(' ',$fulName);
         return new static(
             ID: $ID,
-            firstName: $names[0],
-            surname: $names[1]
+            firstName: $firstName,
+            surname: $Surname,
+            degree: EmployeeDegree::tryFrom($degreeString)
         );
+    }
+
+    function getDegree(): EmployeeDegree {
+        return $this -> degree ?? EmployeeDegree::UNDEFINED;
     }
 }

@@ -14,4 +14,5 @@ abstract class Employee extends Person
         parent::__construct($ID,$firstName,$surname);
     }
 
+    abstract function getDegree(): EmployeeDegree;
 }

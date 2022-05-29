@@ -72,6 +72,7 @@ header{
     background-color: #2155CD;
     color: #ffffff;
 }
+
 .textInput{
     background-color: #79DAE8;
     border-radius: 10px;
@@ -93,4 +94,5 @@ header{
 .defaultContainerElement{
     padding: 1% 2%;
     border: solid 1px #2155CD;
+    background-color: #E8F9FD;
 }

@@ -2,6 +2,8 @@
 
 namespace App\Controllers\PlannerAppControllers;
 
+use App\C\Controller;
+use App\Container;
 use App\Entities\Flight;
 use App\Interfaces\FindAllFlights;
 use App\Interfaces\FindCrewForFlight;
@@ -13,7 +15,7 @@ use App\Interfaces\FlightEditorInterfaces\TargetAirportFinder;
 use App\View;
 use App\ViewPaths;
 
-class AllFlightsController
+class AllFlightsController extends Controller
 {
     protected ?Flight $editedFlight;
     public function __construct(

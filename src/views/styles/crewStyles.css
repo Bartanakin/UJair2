@@ -1,0 +1,46 @@
+.wrapper{
+    display: flex;
+    flex-direction: row;
+}
+.headerSubmit{
+
+}
+.leftColumn{
+    margin: 2% 0;
+    width: 55%;
+}
+.rightColumn{
+    margin: 2% 0;
+    padding: 2% 4%;
+    width: 45%;
+    border-left:solid 2px #0AA1DD;
+}
+
+section{
+    border-bottom: solid 2px #0AA1DD;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2vh 10%;
+}
+.crewTile{
+    width: 100%;
+}
+.crewTileForm{
+    margin: 3vh 0 ;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.crewSubmit{
+    padding: 2vh 3%;
+}
+
+.selectableCrewTile{
+    width: 100%;
+}
+.selectedMember{
+    background-color: #79DAE8;
+}

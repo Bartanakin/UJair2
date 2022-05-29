@@ -115,7 +115,7 @@ class FlightEditorControllerTest extends TestCase
         $_SESSION['targetAirports'] = [ Airport::createTargetForSelectAirplane(2,'X')];
         $this -> make();
 
-        $_POST['targetAirportID'] = 2;
+        $_POST['targetAirportID'] = '2$X';;
         $_POST['ticketPrice'] = 100;
 
         $this -> flightEditorMock
@@ -165,7 +165,7 @@ class FlightEditorControllerTest extends TestCase
 
         $this -> make();
 
-        $_POST['targetAirportID'] = 2;
+        $_POST['targetAirportID'] = '2$X';
         $_POST['ticketPrice'] = 100;
 
 

@@ -3,7 +3,7 @@
 namespace Tests\Unit\Models;
 
 use App\Interfaces\FindCrewForFlight;
-use App\Models\FindCrewForFlightImpl;
+use App\Models\EditCrewModels\FindCrewForFlightImpl;
 
 class FindCrewForFlightTest extends ModelTestBaseClass
 {

@@ -1,7 +1,7 @@
-CREATE PROCEDURE resetTablePilots()
+CREATE PROCEDURE resetTableEmployees()
 BEGIN
-DROP TABLE IF EXISTS Pilots;
-CREATE TABLE Pilots
+DROP TABLE IF EXISTS Employees;
+CREATE TABLE Employees
 (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     FirstName VARCHAR(30) NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE Pilots
     Nationality VARCHAR(20),
     Degree VARCHAR(1)
 );
-END
+END;
 
 # INSERT INTO Pilots (FirstName,Surname,Salary,Nationality,Degree) VALUES
 #  ('Albert','Kowalski',12000,'Poland','C'),

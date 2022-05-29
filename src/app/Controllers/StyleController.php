@@ -34,5 +34,8 @@ class StyleController
     public function confirmationPage(){
         $this -> load(static::STYLES_PATH."/confirmationStyles.css");
     }
+    public function crewPage(){
+        $this -> load(static::STYLES_PATH."/crewStyles.css");
+    }
 
 }
