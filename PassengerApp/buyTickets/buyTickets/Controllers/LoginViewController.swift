@@ -44,6 +44,14 @@ class LoginViewController: UIViewController {
         self.performSegue(withIdentifier: K.Segues.loginToRegister, sender: self)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == K.Segues.loginToBooking {
+            if let destinationVC = segue.destination as? BookingTicketsViewController {
+                destinationVC.bookingManager.passengerID = loginManager.passengerID
+            }
+        }
+    }
+    
     
     
     @IBAction func signInTapped(_ sender: Any) {

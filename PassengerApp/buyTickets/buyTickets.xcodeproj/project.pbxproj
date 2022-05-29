@@ -18,6 +18,14 @@
 		3A938A1A2824AADF0011E6BE /* RegistrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A938A192824AADF0011E6BE /* RegistrationManager.swift */; };
 		3A938A1C2824B4E90011E6BE /* RegistrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A938A1B2824B4E90011E6BE /* RegistrationTests.swift */; };
 		3AA927652799850300162E31 /* Ticket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA927642799850300162E31 /* Ticket.swift */; };
+		3AD699B32843B5CA0097DC5F /* ChoosingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD699B22843B5CA0097DC5F /* ChoosingListViewController.swift */; };
+		3AD699B52843B97A0097DC5F /* BookingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD699B42843B97A0097DC5F /* BookingManager.swift */; };
+		3AD699B72843BEBB0097DC5F /* ChoosingListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD699B62843BEBB0097DC5F /* ChoosingListManager.swift */; };
+		3AD699B92843D40A0097DC5F /* Airport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD699B82843D40A0097DC5F /* Airport.swift */; };
+		3AD699BB2843F4110097DC5F /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD699BA2843F4110097DC5F /* Route.swift */; };
+		3AD699BD284406020097DC5F /* Seats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD699BC284406020097DC5F /* Seats.swift */; };
+		3AD699BF284415EA0097DC5F /* MyTicketsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD699BE284415EA0097DC5F /* MyTicketsViewController.swift */; };
+		3AD699C1284416300097DC5F /* MyTicketsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD699C0284416300097DC5F /* MyTicketsManager.swift */; };
 		3AE6CB18278F43C900D7EBAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE6CB17278F43C900D7EBAD /* AppDelegate.swift */; };
 		3AE6CB1A278F43C900D7EBAD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE6CB19278F43C900D7EBAD /* SceneDelegate.swift */; };
 		3AE6CB1C278F43C900D7EBAD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE6CB1B278F43C900D7EBAD /* LoginViewController.swift */; };
@@ -53,6 +61,14 @@
 		3A938A192824AADF0011E6BE /* RegistrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationManager.swift; sourceTree = "<group>"; };
 		3A938A1B2824B4E90011E6BE /* RegistrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTests.swift; sourceTree = "<group>"; };
 		3AA927642799850300162E31 /* Ticket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ticket.swift; sourceTree = "<group>"; };
+		3AD699B22843B5CA0097DC5F /* ChoosingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoosingListViewController.swift; sourceTree = "<group>"; };
+		3AD699B42843B97A0097DC5F /* BookingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingManager.swift; sourceTree = "<group>"; };
+		3AD699B62843BEBB0097DC5F /* ChoosingListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoosingListManager.swift; sourceTree = "<group>"; };
+		3AD699B82843D40A0097DC5F /* Airport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Airport.swift; sourceTree = "<group>"; };
+		3AD699BA2843F4110097DC5F /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		3AD699BC284406020097DC5F /* Seats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seats.swift; sourceTree = "<group>"; };
+		3AD699BE284415EA0097DC5F /* MyTicketsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTicketsViewController.swift; sourceTree = "<group>"; };
+		3AD699C0284416300097DC5F /* MyTicketsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTicketsManager.swift; sourceTree = "<group>"; };
 		3AE6CB14278F43C800D7EBAD /* buyTickets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = buyTickets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AE6CB17278F43C900D7EBAD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3AE6CB19278F43C900D7EBAD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +108,8 @@
 				3AE6CB1B278F43C900D7EBAD /* LoginViewController.swift */,
 				3AE6CB2D278F71A900D7EBAD /* RegistrationViewController.swift */,
 				3A80177028416FA100B120F2 /* BookingTicketsViewController.swift */,
+				3AD699B22843B5CA0097DC5F /* ChoosingListViewController.swift */,
+				3AD699BE284415EA0097DC5F /* MyTicketsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -107,6 +125,12 @@
 				3A938A172824950D0011E6BE /* Passenger.swift */,
 				3A938A192824AADF0011E6BE /* RegistrationManager.swift */,
 				3A8017722841759B00B120F2 /* Answer.swift */,
+				3AD699B42843B97A0097DC5F /* BookingManager.swift */,
+				3AD699B62843BEBB0097DC5F /* ChoosingListManager.swift */,
+				3AD699B82843D40A0097DC5F /* Airport.swift */,
+				3AD699BA2843F4110097DC5F /* Route.swift */,
+				3AD699BC284406020097DC5F /* Seats.swift */,
+				3AD699C0284416300097DC5F /* MyTicketsManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -178,7 +202,6 @@
 				41EF26594393D7352CD6B9A5 /* Pods-buyTickets.debug.xcconfig */,
 				073561C135B1B38178DA0EC9 /* Pods-buyTickets.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -337,19 +360,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A938A0728246B320011E6BE /* CustomTextField.swift in Sources */,
+				3AD699B72843BEBB0097DC5F /* ChoosingListManager.swift in Sources */,
 				3AE6CB1C278F43C900D7EBAD /* LoginViewController.swift in Sources */,
 				3AA927652799850300162E31 /* Ticket.swift in Sources */,
+				3AD699B52843B97A0097DC5F /* BookingManager.swift in Sources */,
+				3AD699BF284415EA0097DC5F /* MyTicketsViewController.swift in Sources */,
 				3A8017732841759B00B120F2 /* Answer.swift in Sources */,
 				3A938A0928247D4F0011E6BE /* LoginManager.swift in Sources */,
 				3AE6CB18278F43C900D7EBAD /* AppDelegate.swift in Sources */,
+				3AD699B32843B5CA0097DC5F /* ChoosingListViewController.swift in Sources */,
+				3AD699B92843D40A0097DC5F /* Airport.swift in Sources */,
 				3A938A05282469730011E6BE /* TextFieldProperties.swift in Sources */,
 				3A938A1A2824AADF0011E6BE /* RegistrationManager.swift in Sources */,
 				3AE6CB2E278F71A900D7EBAD /* RegistrationViewController.swift in Sources */,
 				3AE6CB30278F7FC100D7EBAD /* Country.swift in Sources */,
 				3A80177128416FA100B120F2 /* BookingTicketsViewController.swift in Sources */,
 				3AE6CB1A278F43C900D7EBAD /* SceneDelegate.swift in Sources */,
+				3AD699C1284416300097DC5F /* MyTicketsManager.swift in Sources */,
 				3A4484F6282466F500DE86E0 /* Constants.swift in Sources */,
 				3A938A182824950D0011E6BE /* Passenger.swift in Sources */,
+				3AD699BD284406020097DC5F /* Seats.swift in Sources */,
+				3AD699BB2843F4110097DC5F /* Route.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

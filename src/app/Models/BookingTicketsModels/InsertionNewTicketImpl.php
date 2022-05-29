@@ -11,7 +11,7 @@ class InsertionNewTicketImpl extends \App\Model implements \App\Interfaces\Booki
         parent::__construct($dataBaseConnection);
     }
 
-    function run(Ticket $ticket): bool
+    function run(Ticket $ticket): int
     {
         $query = 'INSERT INTO Tickets VALUES
             (NULL, ?, ?, ?)';
@@ -25,6 +25,6 @@ class InsertionNewTicketImpl extends \App\Model implements \App\Interfaces\Booki
             $this -> getDBConnection() -> rollBack();
             $success = false;
         }
-        return $success;
+        return (int)$success;
     }
 }

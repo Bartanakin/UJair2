@@ -7,5 +7,5 @@ use App\Entities\Ticket;
 
 interface InsertionNewTicket
 {
-    function run(Ticket $ticket): bool;
+    function run(Ticket $ticket): int;
 }
