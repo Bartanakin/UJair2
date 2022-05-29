@@ -219,4 +219,13 @@ class Flight implements JsonSerializable {
     {
         $this -> crewList = $crewList;
     }
+
+    public function assertCrewListWithemplouee(mixed $EmployeeID)
+    {
+        if($this -> crewList === null
+            || $this -> crewList ->  === null
+        )
+            throw new SessionExpiredException("Null target airport or price has been detected.");
+
+    }
 }

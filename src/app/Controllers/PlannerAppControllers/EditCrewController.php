@@ -20,8 +20,8 @@ class EditCrewController extends Controller
         protected FindCrewForFlight $findCrewForFlight
     )
     {
-        $this ->resetProp('flight','flight',Flight::createNull());
-        $this ->resetProp('candidates','candidates',[]);
+        $this ->restoreFromSession('flight','flight',Flight::createNull());
+        $this ->restoreFromSession('candidates','candidates',[]);
     }
 
     public function __destruct()
@@ -41,11 +41,24 @@ class EditCrewController extends Controller
     }
 
     public function findAvailableMembers(): View {
+        if( $this -> assertPostVariables(['EmployeeID']))
+            return View::make(ViewPaths::BAD_REQUEST);
+        try{
+
+            $this -> flight -> assertCrewListWithemplouee($_POST['EmployeeID']);
+
+        }catch( SessionExpiredException $e ){
+            return View::make(ViewPaths::SESSION_EXPIRED,['warning' => $e -> getMessage()]);
+        }
 
     }
 
     public function loadCrewList(): View {
-        if( !isset($_POST['flightID']))
+
+        $this ->resetProp('flight','flight',Flight::createNull());
+        $this ->resetProp('candidates','candidates',[]);
+
+        if( $this -> assertPostVariables(['flightID']))
             return View::make(ViewPaths::BAD_REQUEST);
         try{
             $this -> flight -> setId($_POST['flightID']);

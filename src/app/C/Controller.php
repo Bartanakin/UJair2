@@ -19,4 +19,12 @@ abstract class Controller
             $this->resetProp($propName,$sesName,$default);
         }
     }
+
+    protected function assertPostVariables(array $names): bool {
+        foreach ( $names as $name ){
+            if( !isset( $_POST[$name]) )
+                return false;
+        }
+        return true;
+    }
 }

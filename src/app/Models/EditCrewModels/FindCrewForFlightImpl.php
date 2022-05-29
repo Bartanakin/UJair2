@@ -16,14 +16,7 @@ class FindCrewForFlightImpl extends Model implements \App\Interfaces\FindCrewFor
     }
 
     private function findMaxNumberOfFA(int $flightID): int {
-        $statement = $this -> getDBConnection() -> prepare('
-            SELECT AirplaneTypes.Max_number_of_stewards as maxNumberOfFA
-            FROM Flights 
-                JOIN Airplanes ON Airplanes.ID = Flights.AirPlaneID  
-                JOIN AirplaneTypes ON AirplaneTypes.ID = Airplanes.AirplaneTypeID    
-            WHERE Flights.ID = ?
-            LIMIT 1
-        ');
+        $statement = $this -> getDBConnection() -> prepare('CALL findMaxNumberOfFA(?);');
 
         $statement -> execute([$flightID]);
         $result = $statement -> fetch()['maxNumberOfFA'];
@@ -33,16 +26,7 @@ class FindCrewForFlightImpl extends Model implements \App\Interfaces\FindCrewFor
     }
 
     public function findCrewForFlight(int $flightID): CrewList {
-        $statement = $this -> getDBConnection() -> prepare('
-            SELECT CrewList.RoleID AS RoleID, 
-                   Employees.ID AS EmployeeID,
-                   Employees.FirstName AS FirstName,
-                   Employees.Surname AS Surname,
-                   Employees.Degree AS Degree
-            FROM CrewList 
-                JOIN Employees ON CrewList.EmployeeID = Employees.ID 
-            WHERE FlightID = ?
-        ');
+        $statement = $this -> getDBConnection() -> prepare('CALL findCrewListOfFlight(?)');
         $statement -> execute([$flightID]);
 
         $FA = [];
