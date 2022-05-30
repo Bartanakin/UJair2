@@ -89,7 +89,18 @@ class ChoosingListViewController: UITableViewController {
         listManager.delegate = self
         searchBar.delegate = self
         
+        let tableViewTap = UITapGestureRecognizer(target: self, action: #selector(tableViewTapped))
+        tableView.addGestureRecognizer(tableViewTap)
+        
         listManager.downloadData()
+    }
+    
+    @objc func tableViewTapped() {
+        searchBar.endEditing(true)
+    }
+
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        searchBar.endEditing(true)
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {

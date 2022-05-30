@@ -62,7 +62,7 @@ extension BookingManager {
             if decodedData.answer == 0 {
                 delegate?.showErrorMessage(message: "Ticket was not added. Try again.")
             }else {
-                delegate?.showErrorMessage(message: "Ticket was successfully added.")
+                delegate?.showSuccessMessage(message: "Ticket was successfully added.")
             }
             delegate?.clearSeatsPicker()
             delegate?.clearDatesField()

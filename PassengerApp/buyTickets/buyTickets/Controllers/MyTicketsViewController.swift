@@ -13,6 +13,7 @@ protocol MyTicketsManagerDelegate {
     func updateList()
     func setEmptyMessage(_ message: String)
     func restore()
+    func endRefreshing()
 }
 
 extension MyTicketsViewController: MyTicketsManagerDelegate {
@@ -26,7 +27,13 @@ extension MyTicketsViewController: MyTicketsManagerDelegate {
     
     func updateList() {
         DispatchQueue.main.async {
-            self.tableView.reloadData()
+            UIView.transition(with: self.tableView,
+                              duration: 0.35,
+                              options: .transitionCrossDissolve,
+                              animations: { () -> Void in
+                                self.tableView.reloadData()
+                              },
+                              completion: nil);
         }
     }
     
@@ -47,10 +54,17 @@ extension MyTicketsViewController: MyTicketsManagerDelegate {
         self.tableView.backgroundView = nil
         self.tableView.separatorStyle = .singleLine
     }
+    
+    func endRefreshing() {
+        DispatchQueue.main.async {
+            self.tableView.refreshControl?.endRefreshing()
+        }
+    }
 }
-class MyTicketsViewController: UITableViewController {
+class MyTicketsViewController: UITableViewController, UISearchBarDelegate {
     
     @IBOutlet var filterButton: UIBarButtonItem!
+    @IBOutlet var searchBar: UISearchBar!
     var myTicketsManager = MyTicketsManager()
     var topbarHeight: CGFloat {
         return (view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0.0) +
@@ -60,94 +74,71 @@ class MyTicketsViewController: UITableViewController {
         super.viewDidLoad()
         title = "My Tickets"
         myTicketsManager.delegate = self
+        searchBar.delegate = self
         myTicketsManager.downloadTickets()
         
         myTicketsManager.dropDown.anchorView = filterButton
         myTicketsManager.setUpFilterList(height: topbarHeight)
         
+        let tableViewTap = UITapGestureRecognizer(target: self, action: #selector(tableViewTapped))
+        tableView.addGestureRecognizer(tableViewTap)
         
-        
+        let refreshControl = UIRefreshControl()
+        tableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshWeatherData(_:)), for: .valueChanged)
+    }
+    
+    @objc private func refreshWeatherData(_ sender: Any) {
+        myTicketsManager.downloadTickets()
     }
     
     @IBAction func filter(_ sender: Any) {
         myTicketsManager.dropDown.show()
     }
+    
+    @objc func tableViewTapped() {
+        searchBar.endEditing(true)
+    }
 
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        searchBar.endEditing(true)
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let count = myTicketsManager.tickets?.count {
+        if let count = myTicketsManager.filteredData?.count {
             if count == 0 {
                 setEmptyMessage("No Results.")
             }else {
                 restore()
             }
             return count
-        }else {
-            setEmptyMessage("No Results.")
         }
         
-        return myTicketsManager.tickets?.count ?? 0
+        return myTicketsManager.filteredData?.count ?? 0
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Ticket", for: indexPath)
         var content = cell.defaultContentConfiguration()
-        if let ticket = myTicketsManager.tickets?[indexPath.row] {
+        if let ticket = myTicketsManager.filteredData?[indexPath.row] {
             content.text = ticket.start! + " -> " + ticket.target!
-            content.secondaryText = ticket.dateOfDeparture
+            content.secondaryText = ticket.dateOfDeparture! + " Seat: " + String(ticket.numberOfSeat!)
         }
         cell.contentConfiguration = content
         return cell
     }
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        myTicketsManager.filteredData = searchText.isEmpty ? myTicketsManager.tickets : myTicketsManager.tickets?.filter { (item: Ticket) -> Bool in
+            return item.start!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil || item.target!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil ||
+                item.dateOfDeparture!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+        tableView.reloadData()
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

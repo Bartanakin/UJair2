@@ -12,6 +12,7 @@ class MyTicketsManager {
     var passengerID: Int?
     var delegate: MyTicketsManagerDelegate?
     var tickets: [Ticket]?
+    var filteredData: [Ticket]?
     let dropDown = DropDown()
     func downloadTickets() {
         let urlS = K.URLs.downloadTicketsForPassengerURL + "?passID=\(passengerID!)"
@@ -24,7 +25,7 @@ class MyTicketsManager {
         dropDown.bottomOffset = CGPoint(x: 0, y: Int(height))
         dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             if index == 0 {
-                self.tickets?.sort(by: { t1, t2 in
+                self.filteredData?.sort(by: { t1, t2 in
                     let date1 = t1.dateOfDeparture!
                     let date2 = t2.dateOfDeparture!
                     let dateFormatter = DateFormatter()
@@ -32,7 +33,7 @@ class MyTicketsManager {
                     return dateFormatter.date(from: date1)! < dateFormatter.date(from: date2)!
                 })
             }else {
-                self.tickets?.sort(by: { t1, t2 in
+                self.filteredData?.sort(by: { t1, t2 in
                     t1.start! < t2.start!
                 })
             }
@@ -59,7 +60,9 @@ class MyTicketsManager {
         
         do {
             tickets = try decoder.decode([Ticket].self, from: data)
+            filteredData = tickets
             delegate?.updateList()
+            delegate?.endRefreshing()
         }catch {
             delegate?.showErrorMessage(message: "Failed to parse data.")
         }

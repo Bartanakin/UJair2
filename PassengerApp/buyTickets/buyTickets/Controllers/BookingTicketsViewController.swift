@@ -62,9 +62,7 @@ extension BookingTicketsViewController: BookingManagerDelegate {
     func showSuccessMessage(message: String) {
         DispatchQueue.main.async {
             let ac = UIAlertController(title: "Success", message: message, preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                    self.navigationController?.popViewController(animated: true)
-                }))
+            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(ac, animated: true, completion: nil)
             
         }
@@ -192,7 +190,7 @@ class BookingTicketsViewController: UIViewController {
     }
     
     @IBAction func buyTicketTapped(_ sender: UIButton) {
-        //"are you sure" screen
+        //confirm
         bookingManager.insertTicket()
     }
 }
