@@ -1,5 +1,5 @@
 
-DROP PROCEDURE findAllFlights;
+DROP PROCEDURE IF EXISTS findAllFlights;
 CREATE PROCEDURE findAllFlights( )
 BEGIN
     SELECT Flights.ID AS FlightID,

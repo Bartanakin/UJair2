@@ -14,9 +14,10 @@ class AllTicketsForPassengerGetterImpl extends \App\Model implements \App\Interf
     function run(int $passID): array
     {
         $tickets = [];
-        $query = 'SELECT T.NumberOfSeat, FD.DateTimeOfDeparture, FD.StartingAirportName, FD.TargetAirportName FROM Tickets AS T
-            JOIN FlightsData AS FD ON T.FlightID = FD.FlightID
-            WHERE T.PassengerID = ?;';
+        $query = 'SELECT T.NumberOfSeat, FD.DateTimeOfDeparture, FD.StartingAirportName, FD.TargetAirportName, FD.Canceled
+                    FROM Tickets AS T
+                    JOIN FlightsData AS FD ON T.FlightID = FD.FlightID
+                    WHERE T.PassengerID = ?;';
         $statement = $this -> getDBConnection() -> prepare($query);
         $statement -> execute([$passID]);
         while($data = $statement -> fetch()) {
@@ -24,7 +25,8 @@ class AllTicketsForPassengerGetterImpl extends \App\Model implements \App\Interf
                 $data['StartingAirportName'],
                 $data['TargetAirportName'],
                 $data['NumberOfSeat'],
-                $data['DateTimeOfDeparture']
+                $data['DateTimeOfDeparture'],
+                $data['Canceled']
             );
         }
         return $tickets;

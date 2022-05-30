@@ -1,4 +1,4 @@
-
+DROP PROCEDURE IF EXISTS getReservedSeatsForFlightID;
 DELIMITER //
 CREATE  PROCEDURE getReservedSeatsForFlightID(IN FlightID INT)
 BEGIN

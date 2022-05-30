@@ -5,7 +5,8 @@ CREATE TABLE Airports
 (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     Airport_name VARCHAR(30) NOT NULL,
-    Price_of_reception DECIMAL(12,2) NOT NULL
+    Price_of_reception DECIMAL(12,2) NOT NULL,
+    CountryID INT NOT NULL
 );
 END;
 

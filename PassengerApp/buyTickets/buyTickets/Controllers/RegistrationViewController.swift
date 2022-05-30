@@ -4,6 +4,7 @@
 //
 
 import UIKit
+import PMAlertController
 
 
 protocol RegistrationManagerDelegate: AnyObject {
@@ -106,18 +107,18 @@ extension RegistrationViewController: RegistrationManagerDelegate {
             self.loginField.text = ""
             self.passwordField.text = ""
             self.repeatPasswordField.text = ""
-            let ac = UIAlertController(title: "Fail", message: message, preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            let ac = PMAlertController(title: "Fail", description: message, image: nil, style: .alert)
+            ac.addAction(PMAlertAction(title: "OK", style: .default, action: nil))
             self.present(ac, animated: true, completion: nil)
         }
     }
     
     func showSuccessMessage(message: String) {
         DispatchQueue.main.async {
-            let ac = UIAlertController(title: "Success", message: message, preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                    self.navigationController?.popViewController(animated: true)
-                }))
+            let ac = PMAlertController(title: "Success", description: message, image: nil, style: .alert)
+            ac.addAction(PMAlertAction(title: "OK", style: .default, action: {
+                self.navigationController?.popViewController(animated: true)
+            }))
             self.present(ac, animated: true, completion: nil)
             
         }

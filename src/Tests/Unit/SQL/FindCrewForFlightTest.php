@@ -2,7 +2,8 @@
 
 namespace Tests\Unit\SQL;
 
-class FindCrewForFlightTest extends SQLTestBaseClass
+class
+FindCrewForFlightTest extends SQLTestBaseClass
 {
     protected function setUp(): void
     {

@@ -7,6 +7,7 @@
 
 import UIKit
 import DropDown
+import PMAlertController
 
 protocol MyTicketsManagerDelegate {
     func showErrorMessage(message: String)
@@ -19,8 +20,8 @@ protocol MyTicketsManagerDelegate {
 extension MyTicketsViewController: MyTicketsManagerDelegate {
     func showErrorMessage(message: String) {
         DispatchQueue.main.async {
-            let ac = UIAlertController(title: "Fail", message: message, preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            let ac = PMAlertController(title: "Fail", description: message, image: nil, style: .alert)
+            ac.addAction(PMAlertAction(title: "OK", style: .default, action: nil))
             self.present(ac, animated: true, completion: nil)
         }
     }
@@ -61,8 +62,10 @@ extension MyTicketsViewController: MyTicketsManagerDelegate {
         }
     }
 }
-class MyTicketsViewController: UITableViewController, UISearchBarDelegate {
+class MyTicketsViewController: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, UITabBarDelegate {
     
+    @IBOutlet var tabBar: UITabBar!
+    @IBOutlet var tableView: UITableView!
     @IBOutlet var filterButton: UIBarButtonItem!
     @IBOutlet var searchBar: UISearchBar!
     var myTicketsManager = MyTicketsManager()
@@ -75,6 +78,12 @@ class MyTicketsViewController: UITableViewController, UISearchBarDelegate {
         title = "My Tickets"
         myTicketsManager.delegate = self
         searchBar.delegate = self
+        tableView.delegate = self
+        tableView.dataSource = self
+        tabBar.delegate = self
+        
+        tabBar.selectedItem = tabBar.items?[0]
+        myTicketsManager.selectedTicketType = K.TicketType.canceled
         myTicketsManager.downloadTickets()
         
         myTicketsManager.dropDown.anchorView = filterButton
@@ -85,30 +94,57 @@ class MyTicketsViewController: UITableViewController, UISearchBarDelegate {
         
         let refreshControl = UIRefreshControl()
         tableView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refreshWeatherData(_:)), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
     }
     
-    @objc private func refreshWeatherData(_ sender: Any) {
+    @objc private func refreshData(_ sender: Any) {
         myTicketsManager.downloadTickets()
     }
     
     @IBAction func filter(_ sender: Any) {
+        DropDown.appearance().backgroundColor = UIColor(named: "FilterListColor")
         myTicketsManager.dropDown.show()
     }
     
     @objc func tableViewTapped() {
         searchBar.endEditing(true)
     }
+    
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        tabBar.selectedItem = item
+        switch item.tag {
+            case K.TicketType.canceled:
+                myTicketsManager.filteredData = myTicketsManager.tickets?.filter({ t in
+                    t.canceled!
+                })
+                myTicketsManager.selectedTicketType = K.TicketType.canceled
+            case K.TicketType.active:
+                myTicketsManager.filteredData = myTicketsManager.tickets?.filter({ t in
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = K.dateFormat
+                    return dateFormatter.date(from: t.dateOfDeparture!)! > Date() && !t.canceled!
+                })
+                myTicketsManager.selectedTicketType = K.TicketType.active
+            default:
+                myTicketsManager.filteredData = myTicketsManager.tickets?.filter({ t in
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = K.dateFormat
+                    return dateFormatter.date(from: t.dateOfDeparture!)! < Date() && !t.canceled!
+                })
+            myTicketsManager.selectedTicketType = K.TicketType.finished
+        }
+        tableView.reloadData()
+    }
 
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         searchBar.endEditing(true)
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let count = myTicketsManager.filteredData?.count {
             if count == 0 {
                 setEmptyMessage("No Results.")
@@ -122,7 +158,7 @@ class MyTicketsViewController: UITableViewController, UISearchBarDelegate {
     }
 
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Ticket", for: indexPath)
         var content = cell.defaultContentConfiguration()
         if let ticket = myTicketsManager.filteredData?[indexPath.row] {

@@ -14,6 +14,7 @@ class MyTicketsManager {
     var tickets: [Ticket]?
     var filteredData: [Ticket]?
     let dropDown = DropDown()
+    var selectedTicketType: Int?
     func downloadTickets() {
         let urlS = K.URLs.downloadTicketsForPassengerURL + "?passID=\(passengerID!)"
         performRequest(urlS: urlS)
@@ -29,7 +30,7 @@ class MyTicketsManager {
                     let date1 = t1.dateOfDeparture!
                     let date2 = t2.dateOfDeparture!
                     let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                    dateFormatter.dateFormat = K.dateFormat
                     return dateFormatter.date(from: date1)! < dateFormatter.date(from: date2)!
                 })
             }else {
@@ -60,7 +61,24 @@ class MyTicketsManager {
         
         do {
             tickets = try decoder.decode([Ticket].self, from: data)
-            filteredData = tickets
+            switch selectedTicketType! {
+                case K.TicketType.canceled:
+                    filteredData = tickets?.filter({ t in
+                        t.canceled!
+                    })
+                case K.TicketType.active:
+                    filteredData = tickets?.filter({ t in
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = K.dateFormat
+                        return dateFormatter.date(from: t.dateOfDeparture!)! > Date() && !t.canceled!
+                    })
+                default:
+                    filteredData = tickets?.filter({ t in
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = K.dateFormat
+                        return dateFormatter.date(from: t.dateOfDeparture!)! < Date() && !t.canceled!
+                    })
+            }
             delegate?.updateList()
             delegate?.endRefreshing()
         }catch {

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PMAlertController
 
 protocol ChoosingListManagerDelegate: AnyObject {
     func showErrorMessage(message: String)
@@ -16,8 +17,8 @@ protocol ChoosingListManagerDelegate: AnyObject {
 extension ChoosingListViewController: ChoosingListManagerDelegate {
     func showErrorMessage(message: String) {
         DispatchQueue.main.async {
-            let ac = UIAlertController(title: "Fail", message: message, preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            let ac = PMAlertController(title: "Fail", description: message, image: nil, style: .alert)
+            ac.addAction(PMAlertAction(title: "OK", style: .default, action: nil))
             self.present(ac, animated: true, completion: nil)
         }
     }
@@ -35,7 +36,7 @@ extension ChoosingListViewController: UISearchBarDelegate {
         if listManager.identifier == K.ListType.Destination || listManager.identifier == K.ListType.Departure {
             listManager.filteredData = searchText.isEmpty ? listManager.airports : listManager.airports?.filter { (item: Any) -> Bool in
                 if let item = item as? Airport {
-                    return item.Airport_name!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+                    return item.Airport_name!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil || item.countryName!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
                 }else if let item = item as? Route {
                     return item.DateTimeOfDeparture!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
                 }
@@ -78,18 +79,22 @@ extension ChoosingListViewController {
 
 }
 
-class ChoosingListViewController: UITableViewController {
+class ChoosingListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet var tableView: UITableView!
     @IBOutlet var searchBar: UISearchBar!
     var listManager = ChoosingListManager()
-    var parentController: UIViewController? //change to delegate???
+    var parentController: UIViewController? 
 
     override func viewDidLoad() {
         super.viewDidLoad()
         listManager.delegate = self
+        tableView.delegate = self
         searchBar.delegate = self
+        tableView.dataSource = self
         
         let tableViewTap = UITapGestureRecognizer(target: self, action: #selector(tableViewTapped))
+        tableViewTap.cancelsTouchesInView = false
         tableView.addGestureRecognizer(tableViewTap)
         
         listManager.downloadData()
@@ -99,15 +104,15 @@ class ChoosingListViewController: UITableViewController {
         searchBar.endEditing(true)
     }
 
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         searchBar.endEditing(true)
     }
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let count = listManager.filteredData?.count {
             if count == 0 {
                 setEmptyMessage("No Results.")
@@ -122,7 +127,7 @@ class ChoosingListViewController: UITableViewController {
         return listManager.filteredData?.count ?? 0
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "OptionToChoose", for: indexPath)
         var content = cell.defaultContentConfiguration()
@@ -133,26 +138,25 @@ class ChoosingListViewController: UITableViewController {
         }else {
             if let airport = listManager.filteredData?[indexPath.row] as? Airport {
                 content.text = airport.Airport_name
+                content.secondaryText = airport.countryName
             }
         }
         cell.contentConfiguration = content
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let parentVC = self.parentController {
-            
             if let parentVC = parentVC as? BookingTicketsViewController {
                 if listManager.identifier == K.ListType.Departure {
                     if let airport = listManager.filteredData?[indexPath.row] as? Airport {
                         parentVC.bookingManager.selectedDeparturePlace = airport
-                        parentVC.departureField.text = airport.Airport_name
+                        parentVC.departureField.text = airport.Airport_name! + " - " + airport.countryName!
                     }
                 }else if listManager.identifier == K.ListType.Destination {
                     if let airport = listManager.filteredData?[indexPath.row] as? Airport {
                         parentVC.bookingManager.selectedDistanationPlace = airport
-                        parentVC.destinationField.text = airport.Airport_name
+                        parentVC.destinationField.text = airport.Airport_name! + " - " + airport.countryName!
                     }
                 }else {
                     if let route = listManager.filteredData?[indexPath.row] as? Route {
@@ -160,6 +164,7 @@ class ChoosingListViewController: UITableViewController {
                         parentVC.datesField.text = route.DateTimeOfDeparture
                         let urlS = K.URLs.downloadAvailableSeatsURL + "?flightID=\(route.ID!)"
                         parentVC.bookingManager.performRequest(urlS: urlS)
+                        parentVC.seatPicker.isHidden = false
                     }
                 }
                 self.dismiss(animated: true)

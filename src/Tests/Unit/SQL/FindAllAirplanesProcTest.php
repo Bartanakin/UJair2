@@ -4,7 +4,8 @@ namespace Tests\Unit\SQL;
 
 use App\DataBaseConnection;
 
-class FindAllAirplanesProcTest extends SQLTestBaseClass
+class
+FindAllAirplanesProcTest extends SQLTestBaseClass
 {
     protected function setUp(): void
     {

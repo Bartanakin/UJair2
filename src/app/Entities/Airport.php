@@ -7,7 +7,8 @@ use JsonSerializable;
 class Airport implements JsonSerializable{
     protected function __construct(
         protected ?int    $ID = null,
-        protected ?string $airportName = null
+        protected ?string $airportName = null,
+        protected ?string $countryName = null,
     ) {
 
     }
@@ -56,17 +57,20 @@ class Airport implements JsonSerializable{
     public function jsonSerialize(): array {
         return [
             'ID' => $this->ID,
-            'Airport_name' => $this->airportName
+            'Airport_name' => $this->airportName,
+            'countryName' => $this -> countryName
         ];
     }
 
     public static function createForBookingtickets(
         int $id,
-        string $airportName
+        string $airportName,
+        string $countryName
     ) {
         return new static(
             ID: $id,
-            airportName: $airportName
+            airportName: $airportName,
+            countryName: $countryName
         );
     }
 
@@ -85,5 +89,10 @@ class Airport implements JsonSerializable{
     public function getID(): int
     {
         return $this -> ID;
+    }
+
+    public function getCountryName(): int
+    {
+        return $this -> countryName;
     }
 }

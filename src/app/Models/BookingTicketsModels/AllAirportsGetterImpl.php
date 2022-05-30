@@ -11,11 +11,12 @@ class AllAirportsGetterImpl extends \App\Model implements \App\Interfaces\Bookin
         parent::__construct($dataBaseConnection);
     }
     function run(): array {
-        $query = 'SELECT Airports.ID, Airports.Airport_name FROM Airports;';
+        $query = 'SELECT Airports.ID, Airports.Airport_name, Countries.CountryName FROM Airports
+                  JOIN Countries ON Airports.CountryID = Countries.ID;';
         $statement = $this -> getDBConnection() -> prepare($query);
         $statement -> execute();
         while($data = $statement -> fetch()) {
-            $this -> airports[] = Airport::createForBookingtickets($data['ID'], $data['Airport_name']);
+            $this -> airports[] = Airport::createForBookingtickets($data['ID'], $data['Airport_name'], $data['CountryName']);
         }
         return $this -> airports;
     }

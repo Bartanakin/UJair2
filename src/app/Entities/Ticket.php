@@ -13,7 +13,9 @@ class Ticket implements JsonSerializable {
                                 protected ?int $passengerID = null,
                                 protected ?string $start = null,
                                 protected ?string $target = null,
-                                protected ?DateTime $dateOfDeparture = null) {
+                                protected ?DateTime $dateOfDeparture = null,
+                                   protected ?bool $canceled = null)
+                                {
 
     }
 
@@ -30,12 +32,13 @@ class Ticket implements JsonSerializable {
         );
     }
 
-    public static function createForPassengersTickets(string $start, string $target, int $numberOfSeat, string $dateOfDeparture) {
+    public static function createForPassengersTickets(string $start, string $target, int $numberOfSeat, string $dateOfDeparture, bool $canceled) {
         return new static(
             numberOfSeat: $numberOfSeat,
             start: $start,
             target: $target,
-            dateOfDeparture: DateTime::createFromFormat(Model::$dateFormat, $dateOfDeparture)
+            dateOfDeparture: DateTime::createFromFormat(Model::$dateFormat, $dateOfDeparture),
+            canceled: $canceled
         );
     }
     public function jsonSerialize(): array {
@@ -43,7 +46,8 @@ class Ticket implements JsonSerializable {
             'numberOfSeat' => $this->numberOfSeat,
             'start' => $this->start,
             'target' => $this->target,
-            'dateOfDeparture' => date_format($this->dateOfDeparture, Model::$dateFormat)
+            'dateOfDeparture' => date_format($this->dateOfDeparture, Model::$dateFormat),
+            'canceled' => $this->canceled
         ];
     }
 }

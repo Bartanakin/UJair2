@@ -10,4 +10,5 @@ import Foundation
 struct Airport: Decodable {
     var ID: Int?
     var Airport_name: String?
+    var countryName: String?
 }

@@ -1,6 +1,6 @@
 CREATE TABLE Planners
 (
-    ID int auto_increment,
+    ID int auto_increment PRIMARY KEY,
     Username NVARCHAR(20),
     PasswordHash NVARCHAR(60)
 );

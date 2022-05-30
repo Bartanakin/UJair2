@@ -4,6 +4,7 @@
 //
 
 import UIKit
+import PMAlertController
 
 protocol LoginManagerDelegate: AnyObject {
     func showErrorMessage(message: String);
@@ -41,6 +42,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func registerTapped(_ sender: Any) {
+        view.endEditing(true)
         self.performSegue(withIdentifier: K.Segues.loginToRegister, sender: self)
     }
     
@@ -57,7 +59,7 @@ class LoginViewController: UIViewController {
     @IBAction func signInTapped(_ sender: Any) {
         let login = loginField.text ?? ""
         let password = passwordField.text ?? ""
-        
+        view.endEditing(true)
         loginManager.checkCredentials(login: login, password: password)
     }
 }
@@ -87,8 +89,8 @@ extension LoginViewController: LoginManagerDelegate {
         DispatchQueue.main.async {
             self.loginField.text = ""
             self.passwordField.text = ""
-            let ac = UIAlertController(title: "Fail", message: message, preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            let ac = PMAlertController(title: "Fail", description: message, image: nil, style: .alert)
+            ac.addAction(PMAlertAction(title: "OK", style: .default, action: nil))
             self.present(ac, animated: true, completion: nil)
         }
     }

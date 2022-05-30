@@ -16,11 +16,11 @@ class SeatsGetterImpl extends \App\Model implements \App\Interfaces\BookingTicke
         $reservedSeats = [];
         $maxSeats = 0;
 
-        $query = 'SELECT RSFF.NumberOfSeat FROM ReservedSeatsForFlight AS RSFF WHERE RSFF.FlightID = ?;';
+        $query = 'SELECT RSFF.NumberOfSeat FROM ReservedSeatsForFlight AS RSFF WHERE RSFF.ID = ?;';
         $statement = $this -> getDBConnection() -> prepare($query);
         $statement -> execute([$flightId]);
 
-        $query2 = 'SELECT AT.Max_number_of_passangers FROM Flights AS F
+        $query2 = 'SELECT AT.Max_number_of_passengers FROM Flights AS F
             JOIN Airplanes AS A ON F.AirPlaneID = A.ID
             JOIN AirplaneTypes AS AT ON A.AirplaneTypeID = AT.ID
             WHERE ? = F.ID;';
@@ -32,7 +32,7 @@ class SeatsGetterImpl extends \App\Model implements \App\Interfaces\BookingTicke
         }
 
         while($data = $statement2 -> fetch()) {
-            $maxSeats = $data['Max_number_of_passangers'];
+            $maxSeats = $data['Max_number_of_passengers'];
         }
 
         for ($i = 1; $i <= $maxSeats; $i++) {

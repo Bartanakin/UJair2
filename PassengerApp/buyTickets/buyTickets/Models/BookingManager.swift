@@ -27,6 +27,7 @@ extension BookingManager {
         let decoder = JSONDecoder()
         do {
             availableSeats = try decoder.decode(Seats.self, from: data).seats
+            selectedSeat = availableSeats?[0]
             delegate?.updatePicker()
         }catch {
             delegate?.showErrorMessage(message: "Error occured when parsing data.")
@@ -37,8 +38,10 @@ extension BookingManager {
 //MARK: - Insertion of Ticket functions
 extension BookingManager {
     func insertTicket() {
-        let urlS = K.URLs.insertTicketURL + "?flightID=\(selectedRoute!.ID!)&numberOfSeat=\(selectedSeat!)&passengerID=\(passengerID!)"
-        performRequestTicket(urlS: urlS)
+        if let selectedSeat = selectedSeat {
+            let urlS = K.URLs.insertTicketURL + "?flightID=\(selectedRoute!.ID!)&numberOfSeat=\(selectedSeat)&passengerID=\(passengerID!)"
+            performRequestTicket(urlS: urlS)
+        }
     }
     
     func performRequestTicket(urlS: String) {

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PMAlertController
 
 protocol BookingManagerDelegate: AnyObject {
     func clearDestinationField()
@@ -22,18 +23,21 @@ extension BookingTicketsViewController: BookingManagerDelegate {
     func clearDestinationField() {
         DispatchQueue.main.async {
             self.destinationField.text = ""
+            self.seatPicker.isHidden = true
         }
     }
     
     func clearDatesField() {
         DispatchQueue.main.async {
             self.datesField.text = ""
+            self.seatPicker.isHidden = true
         }
     }
     
     func clearDepartureField() {
         DispatchQueue.main.async {
             self.departureField.text = ""
+            self.seatPicker.isHidden = true
         }
     }
     
@@ -52,8 +56,8 @@ extension BookingTicketsViewController: BookingManagerDelegate {
     
     func showErrorMessage(message: String) {
         DispatchQueue.main.async {
-            let ac = UIAlertController(title: "Fail", message: message, preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            let ac = PMAlertController(title: "Fail", description: message, image: nil, style: .alert)
+            ac.addAction(PMAlertAction(title: "OK", style: .default, action: nil))
             self.present(ac, animated: true, completion: nil)
             
         }
@@ -61,8 +65,8 @@ extension BookingTicketsViewController: BookingManagerDelegate {
     
     func showSuccessMessage(message: String) {
         DispatchQueue.main.async {
-            let ac = UIAlertController(title: "Success", message: message, preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            let ac = PMAlertController(title: "Success", description: message, image: nil, style: .alert)
+            ac.addAction(PMAlertAction(title: "OK", style: .default, action: nil))
             self.present(ac, animated: true, completion: nil)
             
         }
@@ -190,7 +194,23 @@ class BookingTicketsViewController: UIViewController {
     }
     
     @IBAction func buyTicketTapped(_ sender: UIButton) {
-        //confirm
-        bookingManager.insertTicket()
+        if let selectedSeat = bookingManager.selectedSeat {
+            let alertVC = PMAlertController(title: "Confirmation", description: """
+                                                                                From: \(bookingManager.selectedDeparturePlace!.Airport_name!)
+                                                                                To: \(bookingManager.selectedDistanationPlace!.Airport_name!)
+                                                                                Seat: \(selectedSeat)
+                                                                                """,
+                                            image: UIImage(named: "ticket.png"), style: .alert)
+
+            alertVC.addAction(PMAlertAction(title: "Cancel", style: .cancel, action: nil))
+
+            alertVC.addAction(PMAlertAction(title: "Confirm", style: .default, action: { () in
+                self.bookingManager.insertTicket()
+            }))
+            
+
+            self.present(alertVC, animated: true, completion: nil)
+        }
+        
     }
 }

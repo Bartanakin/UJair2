@@ -11,4 +11,5 @@ struct Ticket: Decodable {
     var target: String?
     var numberOfSeat: Int?
     var dateOfDeparture: String?
+    var canceled: Bool?
 }

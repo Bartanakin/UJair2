@@ -7,5 +7,5 @@ target 'buyTickets' do
 
   # Pods for buyTickets
   pod 'DropDown'
-
+  pod 'PMAlertController'
 end

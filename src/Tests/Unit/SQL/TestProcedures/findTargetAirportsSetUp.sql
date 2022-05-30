@@ -6,9 +6,9 @@ BEGIN
     CALL resetTableRoutes();
 
     INSERT INTO Airports
-    VALUES (1, 'X', 1000),
-           (2, 'Y', 1000),
-           (3, 'Z', 1000);
+    VALUES (1, 'X', 1000, 1),
+           (2, 'Y', 1000, 2),
+           (3, 'Z', 1000, 3);
     INSERT INTO Routes
     VALUES (1, 1, 2, 1000),
            (2, 1, 3, 2000),

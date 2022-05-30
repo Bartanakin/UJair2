@@ -36,4 +36,12 @@ struct K {
         static let Destination = 2
         static let Dates = 3
     }
+    
+    struct TicketType {
+        static let canceled = 1
+        static let active = 2
+        static let finished = 3
+    }
+    
+    static let dateFormat = "yyyy-MM-dd HH:mm:ss"
 }
