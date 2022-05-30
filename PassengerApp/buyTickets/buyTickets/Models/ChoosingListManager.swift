@@ -40,6 +40,7 @@ extension ChoosingListManager {
 //MARK: - Schedule Loader functions
 extension ChoosingListManager {
     func performRequestDate(urlS: String) {
+        print(urlS)
         if let url = URL(string: urlS) {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 if error != nil {

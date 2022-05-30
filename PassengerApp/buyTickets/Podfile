@@ -6,6 +6,6 @@ target 'buyTickets' do
   use_frameworks!
 
   # Pods for buyTickets
-  pod 'SearchTextField'
+  pod 'DropDown'
 
 end

@@ -19,6 +19,7 @@ struct K {
         static let downloadScheduleURL = "http://localhost:8002/getScheduleForRoute"
         static let downloadAvailableSeatsURL = "http://localhost:8002/getAvailableSeats"
         static let insertTicketURL = "http://localhost:8002/insertTicket"
+        static let downloadTicketsForPassengerURL = "http://localhost:8002/getTicketsForPassengerID"
         
     }
     

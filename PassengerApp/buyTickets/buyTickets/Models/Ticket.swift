@@ -6,9 +6,9 @@
 
 import Foundation
 
-struct Ticket {
+struct Ticket: Decodable {
     var start: String?
     var target: String?
-    var seatNumber: String?
+    var numberOfSeat: Int?
     var dateOfDeparture: String?
 }

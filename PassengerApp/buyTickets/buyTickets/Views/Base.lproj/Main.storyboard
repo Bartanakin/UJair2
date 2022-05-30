@@ -536,7 +536,16 @@
                             <outlet property="delegate" destination="fic-Gd-G60" id="IQA-i3-Cdh"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="aNa-XS-inD"/>
+                    <navigationItem key="navigationItem" id="aNa-XS-inD">
+                        <barButtonItem key="rightBarButtonItem" title="Filter" id="55g-Hs-8xo">
+                            <connections>
+                                <action selector="filter:" destination="fic-Gd-G60" id="jAs-5Q-DLC"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="filterButton" destination="55g-Hs-8xo" id="Dqe-Zt-DYE"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="smz-3n-Eyy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

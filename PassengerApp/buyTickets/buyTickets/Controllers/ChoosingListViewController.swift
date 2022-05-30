@@ -82,7 +82,7 @@ class ChoosingListViewController: UITableViewController {
     
     @IBOutlet var searchBar: UISearchBar!
     var listManager = ChoosingListManager()
-    var parentController: UIViewController?
+    var parentController: UIViewController? //change to delegate???
 
     override func viewDidLoad() {
         super.viewDidLoad()

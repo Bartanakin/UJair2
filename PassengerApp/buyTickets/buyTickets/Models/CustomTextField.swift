@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SearchTextField
 
 class CustomUIField: UITextField {
     public func setProperties(_ properties: TextFieldProperties) {

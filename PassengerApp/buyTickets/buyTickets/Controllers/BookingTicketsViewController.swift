@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SearchTextField
 
 protocol BookingManagerDelegate: AnyObject {
     func clearDestinationField()
@@ -15,6 +14,7 @@ protocol BookingManagerDelegate: AnyObject {
     func updatePicker()
     func clearSeatsPicker()
     func clearDepartureField()
+    func showSuccessMessage(message: String)
 }
 
 //MARK: - Booking Manager Delegate functions
@@ -54,6 +54,17 @@ extension BookingTicketsViewController: BookingManagerDelegate {
         DispatchQueue.main.async {
             let ac = UIAlertController(title: "Fail", message: message, preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(ac, animated: true, completion: nil)
+            
+        }
+    }
+    
+    func showSuccessMessage(message: String) {
+        DispatchQueue.main.async {
+            let ac = UIAlertController(title: "Success", message: message, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    self.navigationController?.popViewController(animated: true)
+                }))
             self.present(ac, animated: true, completion: nil)
             
         }
@@ -128,6 +139,7 @@ class BookingTicketsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Book Ticket"
         
         let scrollViewTap = UITapGestureRecognizer(target: self, action: #selector(scrollViewTapped))
         scrollView.addGestureRecognizer(scrollViewTap)
