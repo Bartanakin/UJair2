@@ -11,4 +11,28 @@ abstract class Person
     )
     {
     }
+
+    /**
+     * @return int|null
+     */
+    public function getID(): ?int
+    {
+        return $this->ID;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSurname(): ?string
+    {
+        return $this->surname;
+    }
 }

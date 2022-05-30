@@ -15,4 +15,8 @@ abstract class Employee extends Person
     }
 
     abstract function getDegree(): EmployeeDegree;
+
+    public function getID(): int {
+        return $this -> ID;
+    }
 }

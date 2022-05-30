@@ -26,6 +26,8 @@ class FindCrewForFlightImpl extends Model implements \App\Interfaces\FindCrewFor
     }
 
     public function findCrewForFlight(int $flightID): CrewList {
+        $maxNumberOfFA = $this -> findMaxNumberOfFA($flightID);
+
         $statement = $this -> getDBConnection() -> prepare('CALL findCrewListOfFlight(?)');
         $statement -> execute([$flightID]);
 
@@ -63,7 +65,7 @@ class FindCrewForFlightImpl extends Model implements \App\Interfaces\FindCrewFor
         }
 
         return CrewList::createForFindCrew(
-            $this -> findMaxNumberOfFA($flightID),
+            $maxNumberOfFA,
             $FA,
             $Cap,
             $FO
