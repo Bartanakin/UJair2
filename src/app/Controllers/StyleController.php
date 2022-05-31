@@ -37,5 +37,7 @@ class StyleController
     public function crewPage(){
         $this -> load(static::STYLES_PATH."/crewStyles.css");
     }
-
+    public function settlementsPage(){
+        $this -> load(static::STYLES_PATH."/settlements.css");
+    }
 }
