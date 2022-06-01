@@ -6,5 +6,5 @@ interface SettlementFinder
 {
     public function findSalaries(): array;
     public function findAirplanesLeasing(): array;
-    public function flights(): array;
+    public function ticketsPayment(): array;
 }

@@ -9,6 +9,7 @@ use App\Interfaces\BookingTicketsInterfaces\InsertionNewTicket;
 use App\Interfaces\BookingTicketsInterfaces\ScheduleOfRouteGetter;
 use App\Interfaces\BookingTicketsInterfaces\SeatsGetter;
 use App\Interfaces\BookingTicketsInterfaces\TargetAirportsGetter;
+use App\Interfaces\Currents;
 use App\Interfaces\EditCrewInterfaces\AvailableMemberFinder;
 use App\Interfaces\EditCrewInterfaces\CrewEditor;
 use App\Interfaces\FindAllFlights;
@@ -25,11 +26,13 @@ use App\Interfaces\PassengerRegistrationInterfaces\InsertionNewPassenger;
 use App\Interfaces\PassengerRegistrationInterfaces\LoginChecker;
 use App\Interfaces\PassengersTicketsInterfaces\AllTicketsForPassengerGetter;
 use App\Interfaces\PlannerLoginInterface;
+use App\Interfaces\SettlementInterfaces\SettlementFinder;
 use App\Models\BookingTicketsModels\AllAirportsGetterImpl;
 use App\Models\BookingTicketsModels\InsertionNewTicketImpl;
 use App\Models\BookingTicketsModels\ScheduleOfRouteGetterImpl;
 use App\Models\BookingTicketsModels\SeatsGetterImpl;
 use App\Models\BookingTicketsModels\TargetAirportsGetterImpl;
+use App\Models\CurrentsImpl;
 use App\Models\EditCrewModels\AvailableMemberFinderImpl;
 use App\Models\EditCrewModels\CrewEditorImpl;
 use App\Models\EditCrewModels\FindCrewForFlightImpl;
@@ -46,6 +49,7 @@ use App\Models\PassengerRegistrationModels\InsertionNewPassengerImpl;
 use App\Models\PassengerRegistrationModels\LoginCheckerImpl;
 use App\Models\PassengersTicketsModels\AllTicketsForPassengerGetterImpl;
 use App\Models\PlannerLoginImpl;
+use App\Models\SettlementModels\SettlementFinderImpl;
 
 class App
 {
@@ -86,9 +90,15 @@ class App
         $this -> container -> set(InsertionNewPassenger::class, InsertionNewPassengerImpl::class);
         $this -> container -> set(AllTicketsForPassengerGetter::class, AllTicketsForPassengerGetterImpl::class);
 
+        // Settlements
+        $this -> container -> set(SettlementFinder::class, SettlementFinderImpl::class);
+
         $this -> container -> set(DataBaseConnection::class,function(Container $c){
             return App::getDataBaseConnection();
         });
+
+        // other
+        $this -> container -> set(Currents::class, CurrentsImpl::class);
     }
 
     function getRouter(): Router {

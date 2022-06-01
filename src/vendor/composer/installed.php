@@ -47,12 +47,12 @@
             'dev_requirement' => true,
         ),
         'nikic/php-parser' => array(
-            'pretty_version' => 'v4.13.2',
-            'version' => '4.13.2.0',
+            'pretty_version' => 'v4.14.0',
+            'version' => '4.14.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../nikic/php-parser',
             'aliases' => array(),
-            'reference' => '210577fe3cf7badcc5814d99455df46564f3c077',
+            'reference' => '34bea19b6e03d8153165d8f30bba4c3be86184c1',
             'dev_requirement' => true,
         ),
         'phar-io/manifest' => array(

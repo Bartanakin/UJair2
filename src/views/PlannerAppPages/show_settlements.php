@@ -1,3 +1,15 @@
+<?php
+    /** @var  $payments  \App\Entities\SettlementClasses\Payment[]  */
+    $payments = $this -> params['payments'];
+
+    function addColour(float $value): string {
+        $colour = "black";
+        if( $value > 0 ) $colour = "green";
+        if( $value < 0 ) $colour = "red";
+        return $colour;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="eng">
 <head>
@@ -31,11 +43,17 @@
             <div class="date tileInfo"><span class="bold">Date</span></div>
             <div class="amount tileInfo"><span class="bold">Amount</span></div>
         </div>
+        <?php foreach ( $payments as $payment ): ?>
         <div class="defaultContainerElement tile">
-            <div class="setInfo tileInfo">Salary</div>
-            <div class="date tileInfo">2022-06-06</div>
-            <div class="amount tileInfo">1000</div>
+            <div class="setInfo tileInfo"><?= $payment -> getInfo() ?></div>
+            <div class="date tileInfo"><?= $payment ->getDateString() ?></div>
+            <div class="amount tileInfo">
+                <span style="color: <?= addColour($payment ->getValue()) ?>;">
+                    <?= $payment ->getValue() ?>
+                </span>
+            </div>
         </div>
+        <?php endforeach; ?>
     </div>
 </div>
 </body>

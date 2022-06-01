@@ -2,7 +2,7 @@
 
 namespace App\Entities\SettlementClasses;
 
-class TicketIncome extends Payment
+class FlightPayment extends Payment
 {
 
     public function __construct($value, $date)

@@ -10,13 +10,17 @@ use App\ViewPaths;
 class SettlementController extends Controller
 {
     protected array $payments = [];
-    protected SettlementFinder $finder;
+
+    public function __construct(protected SettlementFinder $finder)
+    {
+
+    }
 
     public function settlementsPage(): View {
         try{
             array_merge($this -> payments, $this -> finder -> findSalaries());
             array_merge($this -> payments, $this -> finder -> findAirplanesLeasing());
-            array_merge($this -> payments, $this -> finder -> flights());
+            array_merge($this -> payments, $this -> finder -> ticketsPayment());
         }catch( \PDOException $e ){
             // TODO
         }
