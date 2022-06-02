@@ -41,7 +41,7 @@ class SettlementFinderImpl extends Model implements \App\Interfaces\SettlementIn
             $payments = array_merge(
                 $payments,
                 $this -> allSalaryMonths(
-                    \DateTime::createFromFormat(Model::$dateFormat,$row['DateOfEmployment']),
+                    \DateTime::createFromFormat("Y-m-d",$row['DateOfEmployment']),
                     -$row['Salary'],
                     SalaryExpense::class
                 )
@@ -60,12 +60,11 @@ class SettlementFinderImpl extends Model implements \App\Interfaces\SettlementIn
 
         $statement -> execute();
         $payments = [];
-
         while( $row = $statement -> fetch() ){
             $payments = array_merge(
                 $payments,
                 $this -> allSalaryMonths(
-                    \DateTime::createFromFormat(Model::$dateFormat,$row['Date']),
+                    \DateTime::createFromFormat("Y-m-d",$row['Date']),
                         -$row['Cost'],
                         AirplaneLeasingPayment::class
                     )
@@ -78,10 +77,10 @@ class SettlementFinderImpl extends Model implements \App\Interfaces\SettlementIn
     public function ticketsPayment(): array
     {
         $statement = $this -> getDBConnection() -> prepare('
-            SELECT Count(*)*Flights.Price - Airports.Price_of_reception as TotalPayment, 
+            SELECT Count(Tickets.ID)*Flights.Price - Airports.Price_of_reception as TotalPayment, 
                    DateTimeOfDeparture AS Date
             FROM Flights
-                JOIN Tickets ON Tickets.FlightID = Flights.ID
+                LEFT JOIN Tickets ON Tickets.FlightID = Flights.ID
                 JOIN Routes ON Flights.RouteID = Routes.ID
                 JOIN Airports ON Routes.TargetAirportID = Airports.ID
             GROUP BY Flights.ID, Flights.Price, DateTimeOfDeparture, Airports.Price_of_reception
@@ -92,7 +91,7 @@ class SettlementFinderImpl extends Model implements \App\Interfaces\SettlementIn
 
         while( $row = $statement -> fetch() ){
             $payments[] = FlightPayment::createForAllSalaryMonths(
-                \DateTime::createFromFormat(Model::$dateFormat,$row['Date']),
+                \DateTime::createFromFormat("Y-m-d H:i:m",$row['Date']),
                 $row['TotalPayment']
             );
         }

@@ -1,5 +1,5 @@
 <?php
-    /** @var  $payments  \App\Entities\SettlementClasses\Payment[]  */
+    /** @var  $payments  \App\Entities\SettlementClasses\PaymentList  */
     $payments = $this -> params['payments'];
 
     function addColour(float $value): string {
@@ -33,9 +33,9 @@
 </header>
 <div class="wrapper">
     <div class="totals defaultContainer">
-        <div class="totalsTile defaultContainerElement"><span class="bold">Total income: </span>200</div>
-        <div class="totalsTile defaultContainerElement"><span class="bold">Total expense: </span>100</div>
-        <div class="totalsTile defaultContainerElement"><span class="bold">Total sum: </span>100</div>
+<!--        <div class="totalsTile defaultContainerElement"><span class="bold">Total income: </span>200</div>-->
+<!--        <div class="totalsTile defaultContainerElement"><span class="bold">Total expense: </span>100</div>-->
+        <div class="totalsTile defaultContainerElement"><span class="bold">Total sum: </span><span style="color:<?= addColour($payments -> getSum()) ?> ;"><?= $payments -> getSum() ?></span></div>
     </div>
     <div class="tilesContainer defaultContainer">
         <div class="defaultContainerElement tile">
@@ -43,7 +43,7 @@
             <div class="date tileInfo"><span class="bold">Date</span></div>
             <div class="amount tileInfo"><span class="bold">Amount</span></div>
         </div>
-        <?php foreach ( $payments as $payment ): ?>
+        <?php foreach ( $payments -> getPayments() as $payment ): ?>
         <div class="defaultContainerElement tile">
             <div class="setInfo tileInfo"><?= $payment -> getInfo() ?></div>
             <div class="date tileInfo"><?= $payment ->getDateString() ?></div>
