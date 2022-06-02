@@ -2,6 +2,9 @@
 
 namespace App\C;
 
+use App\View;
+use App\ViewPaths;
+
 abstract class Controller
 {
 
@@ -44,5 +47,12 @@ abstract class Controller
                 return true;
         }
         return false;
+    }
+
+    public function createSessionExpiredView(string $message = "Session expired"): View {
+        return View::make(ViewPaths::HOME_PAGE,['serverMessage' => $message ]);
+    }
+    public function createBadRequestView(string $message = "Bad post request"): View {
+        return View::make(ViewPaths::BAD_REQUEST,['message' => $message ]);
     }
 }
