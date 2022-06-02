@@ -180,11 +180,15 @@ class BookingTicketsViewController: UIViewController {
                     destinationVC.listManager.selectedDistanationPlace = bookingManager.selectedDistanationPlace?.ID
                 }
                 destinationVC.listManager.identifier = bookingManager.selectedField
+                destinationVC.listManager.hashP = bookingManager.hashP
+                destinationVC.listManager.login = bookingManager.login
                 destinationVC.parentController = self
             }
         }else if segue.identifier == K.Segues.bookingToAllTickets {
             if let destinationVC = segue.destination as? MyTicketsViewController {
                 destinationVC.myTicketsManager.passengerID = bookingManager.passengerID
+                destinationVC.myTicketsManager.hashP = bookingManager.hashP
+                destinationVC.myTicketsManager.login = bookingManager.login
             }
         }
     }

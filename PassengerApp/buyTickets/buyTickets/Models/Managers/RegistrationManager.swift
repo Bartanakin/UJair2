@@ -16,7 +16,7 @@ protocol CountryLoader {
 
 protocol PassengerInserter {
     func insertPassenger(firstName: String, lastName: String, login: String, password: String, repeatPassword: String)
-    func performRequestPassenger(urlS: String)
+    func performRequestPassenger(parametrs: String)
     func parseJSONPassenger(data: Data)
 }
 
@@ -55,13 +55,19 @@ extension RegistrationManager: PassengerInserter {
         }else {
             //dodać sól
             let hashedPassword = SHA256.hash(data: Data(password.utf8)).description.replacingOccurrences(of: "SHA256 digest: ", with: "")
-            let urlS = K.URLs.insertPassengerURL + "?firstN=\(firstName)&lastN=\(lastName)&password=\(hashedPassword)&login=\(login)&countryID=\(selectedCountry!)"
-            performRequestPassenger(urlS: urlS)
+            let parametrs = "firstN=\(firstName)&lastN=\(lastName)&password=\(hashedPassword)&login=\(login)&countryID=\(selectedCountry!)"
+            performRequestPassenger(parametrs: parametrs)
         }
     }
-    func performRequestPassenger(urlS: String) {
-        if let url = URL(string: urlS) {
-            URLSession.shared.dataTask(with: url) { data, response, error in
+    func performRequestPassenger(parametrs: String) {
+        if let url = URL(string: K.URLs.insertPassengerURL) {
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            let hashedToken = SHA256.hash(data: Data(K.token.utf8)).description.replacingOccurrences(of: "SHA256 digest: ", with: "")
+            let body = parametrs + "&token=\(hashedToken)"
+            let finalBody = body.data(using: .utf8)
+            request.httpBody = finalBody
+            URLSession.shared.dataTask(with: request) { data, response, error in
                 if error != nil {
                     self.delegate?.showErrorMessage(message: "Failed to load data.")
                 }else {
@@ -103,7 +109,13 @@ extension RegistrationManager: CountryLoader {
     
     func performRequestCountry(urlS: String) {
         if let url = URL(string: urlS) {
-            URLSession.shared.dataTask(with: url) { data, response, error in
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            let hashedToken = SHA256.hash(data: Data(K.token.utf8)).description.replacingOccurrences(of: "SHA256 digest: ", with: "")
+            let body = "token=\(hashedToken)"
+            let finalBody = body.data(using: .utf8)
+            request.httpBody = finalBody
+            URLSession.shared.dataTask(with: request) { data, response, error in
                 if error != nil {
                     self.delegate?.showErrorMessage(message: "Failed to load data.")
                 }else {

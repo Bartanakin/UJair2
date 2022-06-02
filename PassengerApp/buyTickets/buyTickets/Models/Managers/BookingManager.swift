@@ -6,12 +6,20 @@
 //
 
 import Foundation
+import CryptoKit
 
 //MARK: - Seats Loader functions
 extension BookingManager {
-    func performRequest(urlS: String) {
-        if let url = URL(string: urlS) {
-            URLSession.shared.dataTask(with: url) { data, response, error in
+    func performRequest(parametrs: String) {
+        if let url = URL(string: K.URLs.downloadAvailableSeatsURL) {
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            let token = login! + hashP! + hashP!
+            let hashedToken = SHA256.hash(data: Data(token.utf8)).description.replacingOccurrences(of: "SHA256 digest: ", with: "")
+            let body = parametrs + "&token=\(hashedToken)&login=\(login!)&hashP=\(hashP!)"
+            let finalBody = body.data(using: .utf8)
+            request.httpBody = finalBody
+            URLSession.shared.dataTask(with: request) { data, response, error in
                 if error != nil {
                     self.delegate?.showErrorMessage(message: "Failed to get data from the server. Check your connection.")
                 }else {
@@ -39,14 +47,22 @@ extension BookingManager {
 extension BookingManager {
     func insertTicket() {
         if let selectedSeat = selectedSeat {
-            let urlS = K.URLs.insertTicketURL + "?flightID=\(selectedRoute!.ID!)&numberOfSeat=\(selectedSeat)&passengerID=\(passengerID!)"
-            performRequestTicket(urlS: urlS)
+            let parametrs = "flightID=\(selectedRoute!.ID!)&numberOfSeat=\(selectedSeat)&passengerID=\(passengerID!)&login=\(login!)&hashP=\(hashP!)"
+            performRequestTicket(parametrs: parametrs)
         }
     }
     
-    func performRequestTicket(urlS: String) {
-        if let url = URL(string: urlS) {
-            URLSession.shared.dataTask(with: url) { data, response, error in
+    func performRequestTicket(parametrs: String) {
+        if let url = URL(string: K.URLs.insertTicketURL) {
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            let token = login! + hashP! + hashP!
+            let hashedToken = SHA256.hash(data: Data(token.utf8)).description.replacingOccurrences(of: "SHA256 digest: ", with: "")
+            let body = parametrs + "&token=\(hashedToken)"
+            let finalBody = body.data(using: .utf8)
+            request.httpBody = finalBody
+            
+            URLSession.shared.dataTask(with: request) { data, response, error in
                 if error != nil {
                     self.delegate?.showErrorMessage(message: "Failed to download data from the server. Try again.")
                 }else {
@@ -86,6 +102,8 @@ class BookingManager {
     var availableSeats: [Int]?
     var selectedSeat: Int?
     var passengerID: Int?
+    var login: String?
+    var hashP: String?
     
     func canPerformSegue(destText: String?, depText: String?) -> Bool {
         let destText = destText ?? ""

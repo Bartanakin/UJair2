@@ -162,8 +162,8 @@ class ChoosingListViewController: UIViewController, UITableViewDelegate, UITable
                     if let route = listManager.filteredData?[indexPath.row] as? Route {
                         parentVC.bookingManager.selectedRoute = route
                         parentVC.datesField.text = route.DateTimeOfDeparture
-                        let urlS = K.URLs.downloadAvailableSeatsURL + "?flightID=\(route.ID!)"
-                        parentVC.bookingManager.performRequest(urlS: urlS)
+                        let parametrs = "flightID=\(route.ID!)"
+                        parentVC.bookingManager.performRequest(parametrs: parametrs)
                         parentVC.seatPicker.isHidden = false
                     }
                 }

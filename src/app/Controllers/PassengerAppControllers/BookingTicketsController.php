@@ -10,46 +10,68 @@ use App\Interfaces\BookingTicketsInterfaces\InsertionNewTicket;
 use App\Interfaces\BookingTicketsInterfaces\ScheduleOfRouteGetter;
 use App\Interfaces\BookingTicketsInterfaces\SeatsGetter;
 use App\Interfaces\BookingTicketsInterfaces\TargetAirportsGetter;
+use App\Interfaces\PassengerLoginInterfaces\LoginAndPasswordVerification;
+use App\Models\PassengerLoginModels\LoginAndPasswordVerificationImpl;
 use App\View;
 use App\ViewPaths;
 
 class BookingTicketsController extends  Controller {
 
+    protected string $login;
+
     public function __construct(protected AllAirportsGetter $airportsGetter,
                                 protected ScheduleOfRouteGetter $scheduleOfRouteGetter,
                                 protected TargetAirportsGetter $targetAirportsGetter,
                                 protected SeatsGetter $seatsGetter,
-                                protected InsertionNewTicket $insertionNewTicket) {
-
+                                protected InsertionNewTicket $insertionNewTicket,
+                                LoginAndPasswordVerification $loginAndPasswordVerification) {
+        parent::__construct($loginAndPasswordVerification);
+        $this -> trackSessionVariable("login", "login", "");
     }
     public function getAllAirports() {
-        // Jesli token jest zły
-//        return View::make( ViewPaths::UNAUTHORIZED);
-        $airports = $this -> airportsGetter -> run();
-        echo json_encode($airports);
+
+        if($this->verifyAccount()) {
+            $airports = $this->airportsGetter->run();
+            return json_encode($airports);
+        }else {
+            return $this->createUnauthorizedView();
+        }
     }
 
     public function getScheduleForRoute() {
-        $start = $_GET['start'];
-        $target = $_GET['target'];
-        echo json_encode($this -> scheduleOfRouteGetter -> run($start, $target));
+        $start = $_POST['start'];
+        $target = $_POST['target'];
+        if($this->verifyAccount()) {
+            return json_encode($this->scheduleOfRouteGetter->run($start, $target));
+        }else {
+            return $this->createUnauthorizedView();
+        }
     }
 
     public function getTargetAirports() {
-        $start = $_GET['start'];
-        echo json_encode($this -> targetAirportsGetter -> run($start));
+        $start = $_POST['start'];
+        if($this->verifyAccount()) {
+            return json_encode($this->targetAirportsGetter->run($start));
+        }else {
+            return $this->createUnauthorizedView();
+        }
     }
 
     public function getAvailableSeats() {
-        $flightID = $_GET['flightID'];
-        echo json_encode($this -> seatsGetter -> run($flightID));
+        $flightID = $_POST['flightID'];
+        if($this->verifyAccount()) {
+            return json_encode($this->seatsGetter->run($flightID));
+        }else {
+            return $this->createUnauthorizedView();
+        }
     }
 
     public function insertTicket() {
-        if (!isset($_GET['flightID'], $_GET['numberOfSeat'], $_GET['passengerID'])) {
-            throw new ParameterNotSetException();
+        $ticket = Ticket::createForBookingTickets($_POST['flightID'], $_POST['numberOfSeat'], $_POST['passengerID']);
+        if($this->verifyAccount()) {
+            return json_encode(['answer' => $this->insertionNewTicket->run($ticket)]);
+        }else {
+            return $this->createUnauthorizedView();
         }
-        $ticket = Ticket::createForBookingTickets($_GET['flightID'], $_GET['numberOfSeat'], $_GET['passengerID']);
-        echo json_encode(['answer' => $this -> insertionNewTicket -> run($ticket)]);
     }
 }

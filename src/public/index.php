@@ -50,15 +50,15 @@ $app -> getRouter() -> get("/settlementsStyle",[\App\Controllers\StyleController
 $app -> getRouter() -> get("/jsCalendarsScript",[\App\Controllers\ScriptController::class,'JsCalendar']);
 
 //Passenger app:
-$app -> getRouter() -> get("/getAvailableSeats",[BookingTicketsController::class, "getAvailableSeats"]);
-$app -> getRouter() -> get("/getAllAirports",[BookingTicketsController::class, "getAllAirports"]);
-$app -> getRouter() -> get("/getScheduleForRoute",[BookingTicketsController::class, "getScheduleForRoute"]);
-$app -> getRouter() -> get("/getTargetAirports",[BookingTicketsController::class, "getTargetAirports"]);
-$app -> getRouter() -> get("/insertTicket",[BookingTicketsController::class,'insertTicket']);
-$app -> getRouter() -> get("/getPassengerIDIfExists",[PassengerLoginController::class,'getPassengerIDIfExists']);
-$app -> getRouter() -> get("/loadCountries",[PassengerRegistrationController::class,'loadCountries']);
-$app -> getRouter() -> get("/insertPassenger",[PassengerRegistrationController::class,'insertPassenger']);
-$app -> getRouter() -> get("/getTicketsForPassengerID",[PassengersTicketsController::class,'getTicketsForPassengerID']);
+$app -> getRouter() -> post("/getAvailableSeats",[BookingTicketsController::class, "getAvailableSeats"]);
+$app -> getRouter() -> post("/getAllAirports",[BookingTicketsController::class, "getAllAirports"]);
+$app -> getRouter() -> post("/getScheduleForRoute",[BookingTicketsController::class, "getScheduleForRoute"]);
+$app -> getRouter() -> post("/getTargetAirports",[BookingTicketsController::class, "getTargetAirports"]);
+$app -> getRouter() -> post("/insertTicket",[BookingTicketsController::class,'insertTicket']);
+$app -> getRouter() -> post("/getPassengerIDIfExists",[PassengerLoginController::class,'getPassengerIDIfExists']);
+$app -> getRouter() -> post("/loadCountries",[PassengerRegistrationController::class,'loadCountries']);
+$app -> getRouter() -> post("/insertPassenger",[PassengerRegistrationController::class,'insertPassenger']);
+$app -> getRouter() -> post("/getTicketsForPassengerID",[PassengersTicketsController::class,'getTicketsForPassengerID']);
 
 
 $app -> run();

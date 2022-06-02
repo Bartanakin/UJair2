@@ -9,17 +9,19 @@ import Foundation
 
 struct K {
     struct URLs {
-        //dodać tokeny
-        static let getPassengerIDIfExistsURL = "https://github.frege.ii.uj.edu.pl/getPassengerIDIfExists"
-        static let verifyLoginURL = "https://github.frege.ii.uj.edu.pl/canAddLogin"
-        static let loadCountriesURL = "https://github.frege.ii.uj.edu.pl/loadCountries"
-        static let insertPassengerURL = "https://github.frege.ii.uj.edu.pl/insertPassenger"
-        static let downloadStartingAirportsURL = "https://github.frege.ii.uj.edu.pl/getAllAirports"
-        static let downloadTargetAirportsURL = "https://github.frege.ii.uj.edu.pl/getTargetAirports"
-        static let downloadScheduleURL = "https://github.frege.ii.uj.edu.pl/getScheduleForRoute"
-        static let downloadAvailableSeatsURL = "https://github.frege.ii.uj.edu.pl/getAvailableSeats"
-        static let insertTicketURL = "https://github.frege.ii.uj.edu.pl/insertTicket"
-        static let downloadTicketsForPassengerURL = "https://github.frege.ii.uj.edu.pl/getTicketsForPassengerID"
+        //https://github.frege.ii.uj.edu.pl/
+        //http://localhost:8002/
+        static let address = "http://localhost:8002/"
+        static let getPassengerIDIfExistsURL = address + "getPassengerIDIfExists"
+        static let verifyLoginURL = address + "canAddLogin"
+        static let loadCountriesURL = address + "loadCountries"
+        static let insertPassengerURL = address + "insertPassenger"
+        static let downloadStartingAirportsURL = address + "getAllAirports"
+        static let downloadTargetAirportsURL = address + "getTargetAirports"
+        static let downloadScheduleURL = address + "getScheduleForRoute"
+        static let downloadAvailableSeatsURL = address + "getAvailableSeats"
+        static let insertTicketURL = address + "insertTicket"
+        static let downloadTicketsForPassengerURL = address + "getTicketsForPassengerID"
         
     }
     
@@ -44,4 +46,5 @@ struct K {
     }
     
     static let dateFormat = "yyyy-MM-dd HH:mm:ss"
+    static let token = "UJAIR2"
 }

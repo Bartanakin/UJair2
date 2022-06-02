@@ -11,6 +11,8 @@ import CryptoKit
 class LoginManager {
     var passengerID: Int?
     weak var delegate: LoginManagerDelegate?
+    var login: String?
+    var hashP: String?
     
     func checkCredentials(login: String, password: String) {
         if login.contains(" ") {
@@ -23,14 +25,21 @@ class LoginManager {
         }else {
             let hashedPassword = SHA256.hash(data: Data(password.utf8)).description.replacingOccurrences(of: "SHA256 digest: ", with: "")
             //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            let url = K.URLs.getPassengerIDIfExistsURL + "?login=\(login)&password=\(password)"
-            performRequest(url: url)
+            performRequest(login: login, password: password)
         }
     }
     
-    func performRequest(url: String) {
-        if let url = URL(string: url) {
-            URLSession.shared.dataTask(with: url) { data, response, error in
+    func performRequest(login: String, password: String) {
+        if let url = URL(string: K.URLs.getPassengerIDIfExistsURL) {
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            let token = login + password + password
+            let hashedToken = SHA256.hash(data: Data(token.utf8)).description.replacingOccurrences(of: "SHA256 digest: ", with: "")
+            let body = "login=\(login)&hashP=\(password)" + "&token=\(hashedToken)"
+            let finalBody = body.data(using: .utf8)
+            request.httpBody = finalBody
+            
+            URLSession.shared.dataTask(with: request) { data, response, error in
                 if(error != nil) {
                     self.delegate?.showErrorMessage(message: "Failed to load data.")
                 }else {
@@ -39,12 +48,15 @@ class LoginManager {
                             if(parsedData == -1) {
                                 self.delegate?.showErrorMessage(message: "Invalid login or password.")
                             }else {
+                                self.login = login
+                                self.hashP = password
                                 self.delegate?.updateController()
                             }
                         }
                     }
                 }
             }.resume()
+            
         }
     }
     

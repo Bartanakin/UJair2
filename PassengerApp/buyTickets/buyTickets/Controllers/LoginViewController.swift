@@ -5,6 +5,7 @@
 
 import UIKit
 import PMAlertController
+import CryptoKit
 
 protocol LoginManagerDelegate: AnyObject {
     func showErrorMessage(message: String);
@@ -50,12 +51,12 @@ class LoginViewController: UIViewController {
         if segue.identifier == K.Segues.loginToBooking {
             if let destinationVC = segue.destination as? BookingTicketsViewController {
                 destinationVC.bookingManager.passengerID = loginManager.passengerID
+                destinationVC.bookingManager.login = loginManager.login
+                destinationVC.bookingManager.hashP = loginManager.hashP
             }
         }
     }
-    
-    
-    
+
     @IBAction func signInTapped(_ sender: Any) {
         let login = loginField.text ?? ""
         let password = passwordField.text ?? ""

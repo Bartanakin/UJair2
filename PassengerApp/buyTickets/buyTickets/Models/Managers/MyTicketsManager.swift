@@ -7,6 +7,7 @@
 
 import Foundation
 import DropDown
+import CryptoKit
 
 class MyTicketsManager {
     var passengerID: Int?
@@ -15,9 +16,12 @@ class MyTicketsManager {
     var filteredData: [Ticket]?
     let dropDown = DropDown()
     var selectedTicketType: Int?
+    var login: String?
+    var hashP: String?
+    
     func downloadTickets() {
-        let urlS = K.URLs.downloadTicketsForPassengerURL + "?passID=\(passengerID!)"
-        performRequest(urlS: urlS)
+        let parametrs = "passID=\(passengerID!)&login=\(login!)&hashP=\(hashP!)"
+        performRequest(parametrs: parametrs)
     }
     
     func setUpFilterList(height: CGFloat) {
@@ -42,9 +46,16 @@ class MyTicketsManager {
         }
     }
     
-    func performRequest(urlS: String) {
-        if let url = URL(string: urlS) {
-            URLSession.shared.dataTask(with: url) { data, response, error in
+    func performRequest(parametrs: String) {
+        if let url = URL(string: K.URLs.downloadTicketsForPassengerURL) {
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            let token = login! + hashP! + hashP!
+            let hashedToken = SHA256.hash(data: Data(token.utf8)).description.replacingOccurrences(of: "SHA256 digest: ", with: "")
+            let body = parametrs + "&token=\(hashedToken)"
+            let finalBody = body.data(using: .utf8)
+            request.httpBody = finalBody
+            URLSession.shared.dataTask(with: request) { data, response, error in
                 if error != nil {
                     self.delegate?.showErrorMessage(message: "Error occured when downloading data from the server.")
                 }else {

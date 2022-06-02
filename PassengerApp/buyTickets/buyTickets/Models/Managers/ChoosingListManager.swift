@@ -6,12 +6,20 @@
 //
 
 import Foundation
+import CryptoKit
 
 //MARK: - Airports Loader functions
 extension ChoosingListManager {
-    func performRequestAirport(urlS: String) {
+    func performRequestAirport(parametrs: String, urlS: String) {
         if let url = URL(string: urlS) {
-            URLSession.shared.dataTask(with: url) { data, response, error in
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            let token = login! + hashP! + hashP!
+            let hashedToken = SHA256.hash(data: Data(token.utf8)).description.replacingOccurrences(of: "SHA256 digest: ", with: "")
+            let body = parametrs + "login=\(login!)&hashP=\(hashP!)&token=\(hashedToken)"
+            let finalBody = body.data(using: .utf8)
+            request.httpBody = finalBody
+            URLSession.shared.dataTask(with: request) { data, response, error in
                 if error != nil {
                     self.delegate?.showErrorMessage(message: "Failed to get data from the server. Check your connection.")
                 }else {
@@ -28,7 +36,10 @@ extension ChoosingListManager {
     func parseJSONAirport(data: Data) {
         let decoder = JSONDecoder()
         do {
+            let str = String(decoding: data, as: UTF8.self)
+            print(str)
             airports = try decoder.decode([Airport].self, from: data)
+            
             filteredData = airports
             delegate?.updateTableView()
         }catch {
@@ -39,9 +50,16 @@ extension ChoosingListManager {
 
 //MARK: - Schedule Loader functions
 extension ChoosingListManager {
-    func performRequestDate(urlS: String) {
-        if let url = URL(string: urlS) {
-            URLSession.shared.dataTask(with: url) { data, response, error in
+    func performRequestDate(parametrs: String) {
+        if let url = URL(string: K.URLs.downloadScheduleURL) {
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            let token = login! + hashP! + hashP!
+            let hashedToken = SHA256.hash(data: Data(token.utf8)).description.replacingOccurrences(of: "SHA256 digest: ", with: "")
+            let body = parametrs + "&token=\(hashedToken)&login=\(login!)&hashP=\(hashP!)"
+            let finalBody = body.data(using: .utf8)
+            request.httpBody = finalBody
+            URLSession.shared.dataTask(with: request) { data, response, error in
                 if error != nil {
                     self.delegate?.showErrorMessage(message: "Failed to get data from the server. Check your connection.")
                 }else {
@@ -76,16 +94,19 @@ class ChoosingListManager {
     var selectedDeparturePlace: Int?
     var selectedDistanationPlace: Int?
     var selectedRoute: Int?
+    var login: String?
+    var hashP: String?
     
     func downloadData() {
         if identifier == K.ListType.Departure {
-            performRequestAirport(urlS: K.URLs.downloadStartingAirportsURL)
+            performRequestAirport(parametrs: "", urlS: K.URLs.downloadStartingAirportsURL)
         }else if identifier == K.ListType.Destination {
-            let urlS = K.URLs.downloadTargetAirportsURL + "?start=\(selectedDeparturePlace!)"
-            performRequestAirport(urlS: urlS)
+            let parametrs = "start=\(selectedDeparturePlace!)&"
+            let urlS = K.URLs.downloadTargetAirportsURL
+            performRequestAirport(parametrs: parametrs, urlS: urlS)
         }else {
-            let urlS = K.URLs.downloadScheduleURL + "?start=\(selectedDeparturePlace!)&target=\(selectedDistanationPlace!)"
-            performRequestDate(urlS: urlS)
+            let parametrs = "start=\(selectedDeparturePlace!)&target=\(selectedDistanationPlace!)"
+            performRequestDate(parametrs: parametrs)
         }
     }
 }

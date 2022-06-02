@@ -2,6 +2,7 @@
 
 namespace App\C;
 
+use App\Interfaces\PassengerLoginInterfaces\LoginAndPasswordVerification;
 use App\View;
 use App\ViewPaths;
 
@@ -12,11 +13,26 @@ abstract class Controller
     protected array $sessionVariables = [];
     protected bool $logged = false;
 
-    public function __construct()
+    public function __construct(protected LoginAndPasswordVerification $loginAndPasswordVerification)
     {
         $this -> trackSessionVariable('logged','logged',false);
     }
 
+    protected function verifyAccount(): bool {
+        $token = $_POST['token'];
+        $login = $_POST['login'];
+        $hashP = $_POST['hashP'];
+        if(hash("sha256", $login . $hashP . $hashP) == $token) {
+            if($this -> loginAndPasswordVerification -> run($login, $hashP) != -1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    protected function createUnauthorizedView(): View {
+        return View::make( ViewPaths::UNAUTHORIZED);
+    }
     protected function trackSessionVariable(string $propName, string $sesName, mixed $default){
         $this -> sessionVariables[$propName] = [ 'sesName' => $sesName, 'defaultVar' => $default ];
         $this -> restoreFromSession($propName);
