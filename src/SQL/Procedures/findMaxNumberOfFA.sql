@@ -1,4 +1,5 @@
 DROP PROCEDURE IF EXISTS findMaxNumberOfFA;
+DELIMITER //
 CREATE PROCEDURE findMaxNumberOfFA(in flightID int)
 BEGIN
 
@@ -8,4 +9,5 @@ BEGIN
              JOIN AirplaneTypes ON AirplaneTypes.ID = Airplanes.AirplaneTypeID
     WHERE Flights.ID = flightID
     LIMIT 1;
-end;
+end; //
+DELIMITER ;

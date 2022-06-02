@@ -1,11 +1,13 @@
-CREATE PROCEDURE restTableTickets()
+DROP PROCEDURE IF EXISTS resetTableTickets;
+DELIMITER //
+CREATE PROCEDURE resetTableTickets()
 BEGIN
-DROP TABLE IF EXISTS Tickets;
-CREATE TABLE Tickets (
-     ID INT PRIMARY KEY AUTO_INCREMENT,
-     FlightID INT NOT NULL,
-     NumberOfSeat INT NOT NULL,
-     PassengerID INT NOT NULL,
+    DROP TABLE IF EXISTS Tickets;
+    CREATE TABLE Tickets (
+                             ID INT PRIMARY KEY AUTO_INCREMENT,
+                             FlightID INT NOT NULL,
+                             NumberOfSeat INT NOT NULL,
+                             PassengerID INT NOT NULL,
 
 #      CONSTRAINT FK_FlightID_in_Tickets FOREIGN KEY (FlightID)
 #          REFERENCES Flights(ID)
@@ -17,6 +19,7 @@ CREATE TABLE Tickets (
 #          ON DELETE CASCADE
 #          ON UPDATE CASCADE,
 
-     CONSTRAINT uc UNIQUE (FlightID,NumberOfSeat)
-);
-END;
+                             CONSTRAINT uc UNIQUE (FlightID,NumberOfSeat)
+    );
+END; //
+DELIMITER ;

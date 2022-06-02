@@ -1,4 +1,5 @@
 DROP PROCEDURE IF EXISTS FindSuitableEmployees;
+DELIMITER //
 CREATE PROCEDURE FindSuitableEmployees(
     IN degree VARCHAR(1)
 ) BEGIN
@@ -10,7 +11,8 @@ CREATE PROCEDURE FindSuitableEmployees(
     FROM Employees AS P1
     WHERE P1.Degree IN ( 'C', 'F') AND degree like 'F'
        OR
-    P1.Degree LIKE 'C' AND degree LIKE 'C'
-        OR
-    P1.Degree LIKE 'S' AND degree LIKE 'S';
-END;
+                P1.Degree LIKE 'C' AND degree LIKE 'C'
+       OR
+                P1.Degree LIKE 'S' AND degree LIKE 'S';
+END; //
+DELIMITER ;

@@ -1,3 +1,4 @@
+DROP PROCEDURE IF EXISTS resetTableAirplanes;
 CREATE PROCEDURE resetTableAirplanes()
 BEGIN
     DROP TABLE IF EXISTS Airplanes;
