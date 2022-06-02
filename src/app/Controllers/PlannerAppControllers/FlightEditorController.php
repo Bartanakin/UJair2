@@ -36,20 +36,22 @@ class FlightEditorController extends Controller
         protected FindAllFlights $findAllFlights
     )
     {
-        $this -> restoreFromSession('editedFlight','editedFlight',Flight::createNull());
-        $this -> restoreFromSession('airplanes','airplanes',[]);
-        $this -> restoreFromSession('targetAirports','targetAirports',[]);
-        $this -> restoreFromSession('warning','warning','');
+        parent::__construct();
+        $this -> trackSessionVariable('editedFlight','editedFlight',Flight::createNull());
+        $this -> trackSessionVariable('airplanes','airplanes',[]);
+        $this -> trackSessionVariable('targetAirports','targetAirports',[]);
+        $this -> trackSessionVariable('warning','warning','');
     }
 
-    public function __destruct()
-    {
-        if( !$this -> destruct)
-            $_SESSION['editedFlight'] = $this -> editedFlight;
-            $_SESSION['airplanes'] = $this -> airplanes;
-            $_SESSION['targetAirports'] = $this -> targetAirports;
-            $_SESSION['warning'] = $this -> warning;
+
+    public function addFlight(): View{
+        if( ! $this -> logged ) return $this -> createSessionExpiredView();
+
+        $this ->unsetState();
+
+        return View::make(ViewPaths::EDIT_FLIGHT_PAGE);
     }
+
 
     /**
      * @return Flight|null
@@ -65,24 +67,32 @@ class FlightEditorController extends Controller
     }
 
     public function cancel(): View{
+        if( ! $this -> logged ) return $this -> createSessionExpiredView();
+
         return $this -> makeAllFlightsViewAndUnsetState("edition canceled");
     }
 
     public function cancelConfirmation(): View {
+        if( ! $this -> logged ) return $this -> createSessionExpiredView();
+
         return $this->createDefaultView("Confirmation canceled");
     }
 
     public function loadFlight(): View{
-        if( !isset( $_POST['flightID']) )
-            return View::make(ViewPaths::BAD_REQUEST);
+        if( ! $this -> logged ) return $this -> createSessionExpiredView();
+        if( $this -> assertPostVariables(['flightID']) ) return $this -> createBadRequestView();
+
+        $this ->unsetState();
+
         $this -> editedFlight -> setId($_POST['flightID']);
         return $this->createDefaultView();
     }
 
     public function selectDate(): View
     {
-        if( !isset( $_POST['date'], $_POST['hour'], $_POST['minute']) )
-            return View::make(ViewPaths::BAD_REQUEST);
+        if( ! $this -> logged ) return $this -> createSessionExpiredView();
+        if( $this -> assertPostVariables(['date','hour','minute']) ) return $this -> createBadRequestView();
+
         try{
             $date = DateTime::createFromFormat('Y-m-j H:i',$_POST['date']." ".$_POST['hour'].":".$_POST['minute']);
         }
