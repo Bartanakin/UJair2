@@ -16,6 +16,6 @@ class ScriptController
     }
 
     public function JsCalendar(){
-        $this -> load("./../../vendor/jsCalendar/jsCalendar/source/jsCalendar.js");
+        $this -> load("./../../vendor/jsCalendar/source/jsCalendar.js");
     }
 }
