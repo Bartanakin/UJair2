@@ -1,4 +1,5 @@
 DROP PROCEDURE IF EXISTS resetTableEmployees;
+DELIMITER //
 CREATE PROCEDURE resetTableEmployees()
 BEGIN
 DROP TABLE IF EXISTS Employees;
@@ -12,7 +13,8 @@ CREATE TABLE Employees
     Degree VARCHAR(1),
     DateOfEmployment DATE DEFAULT '2022-05-01'
 );
-END;
+END //
+DELIMITER ;
 # INSERT INTO Pilots (FirstName,Surname,Salary,Nationality,Degree) VALUES
 #  ('Albert','Kowalski',12000,'Poland','C'),
 # ('Jan','Płatwiński',7000,'Poland','F'),

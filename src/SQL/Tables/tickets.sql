@@ -19,7 +19,7 @@ BEGIN
 #          ON DELETE CASCADE
 #          ON UPDATE CASCADE,
 
-                             CONSTRAINT uc UNIQUE (FlightID,NumberOfSeat)
-    );
+     CONSTRAINT uc UNIQUE (FlightID,NumberOfSeat)
+);
 END; //
 DELIMITER ;

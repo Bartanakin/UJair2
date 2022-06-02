@@ -2,6 +2,7 @@
 
 namespace App\Controllers\PlannerAppControllers;
 
+use App\C\Controller;
 use App\Exceptions\IncorrectLoginException;
 use App\Exceptions\IncorrectPasswordException;
 use App\Interfaces\FindAllFlights;
@@ -10,24 +11,22 @@ use App\View;
 use App\ViewPaths;
 use function PHPUnit\Framework\isEmpty;
 
-class PlannerLoginController
+class PlannerLoginController extends Controller
 {
     public function __construct(
         protected PlannerLoginInterface $loginService,
         protected FindAllFlights $findAllFlights
     ){
-
+        parent::__construct();
     }
     public function login(): View {
-        if( isset( $_SESSION['logged'])){
-            if( $_SESSION['logged'] === true ){
-                return $this -> makeAllFlightsView();
-            }
-        }
+        if( $this -> logged )
+            return $this -> makeAllFlightsView();
         if( isset($_POST["login"],$_POST["password"])){
+        echo $_POST["login"] ." ".$_POST["password"];
             try{
                 $this -> loginService -> login($_POST["login"],$_POST["password"]);
-                $_SESSION["logged"] = true;
+                $this -> logged = true;
                 return $this -> makeAllFlightsView();
             }
             catch( IncorrectLoginException|IncorrectPasswordException $e ){

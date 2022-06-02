@@ -1,3 +1,6 @@
+DROP PROCEDURE IF EXISTS resetTablePassengers;
+DELIMITER //
+
 CREATE PROCEDURE resetTablePassengers()
 BEGIN
 DROP TABLE IF EXISTS Passengers;
@@ -14,4 +17,5 @@ CREATE TABLE Passengers (
 #         ON DELETE CASCADE
 #         ON UPDATE CASCADE
 );
-END
+END //
+DELIMITER ;

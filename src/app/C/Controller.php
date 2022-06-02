@@ -7,6 +7,12 @@ abstract class Controller
 
     protected bool $destruct = false;
     protected array $sessionVariables = [];
+    protected bool $logged = false;
+
+    public function __construct()
+    {
+        $this -> trackSessionVariable('logged','logged',false);
+    }
 
     protected function trackSessionVariable(string $propName, string $sesName, mixed $default){
         $this -> sessionVariables[$propName] = [ 'sesName' => $sesName, 'defaultVar' => $default ];

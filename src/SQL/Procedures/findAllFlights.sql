@@ -1,5 +1,6 @@
 
 DROP PROCEDURE IF EXISTS findAllFlights;
+DELIMITER //
 CREATE PROCEDURE findAllFlights( )
 BEGIN
     SELECT Flights.ID AS FlightID,
@@ -17,4 +18,4 @@ BEGIN
     JOIN AirplaneTypes AType ON A.AirplaneTypeID = AType.ID
     WHERE Flights.Canceled = false;
 
-END
+END // DELIMITER ;

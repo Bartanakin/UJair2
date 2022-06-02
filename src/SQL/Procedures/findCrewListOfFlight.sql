@@ -1,4 +1,5 @@
 DROP PROCEDURE IF EXISTS findCrewListOfFlight;
+DELIMITER //
 CREATE PROCEDURE findCrewListOfFlight(IN input_flightID INT)
 BEGIN
 
@@ -11,4 +12,4 @@ BEGIN
              JOIN Employees ON CrewList.EmployeeID = Employees.ID
     WHERE FlightID = input_flightID;
 
-end;
+end // DELIMITER ;

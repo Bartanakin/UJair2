@@ -1,3 +1,5 @@
+DROP PROCEDURE IF EXISTS  resetTableRoutes;
+DELIMITER //
 CREATE PROCEDURE resetTableRoutes()
 BEGIN
 DROP TABLE IF EXISTS Routes;
@@ -17,7 +19,7 @@ CREATE TABLE Routes (
 #         ON DELETE CASCADE
 #         ON UPDATE CASCADE
 );
-END
+END //
 #
 # INSERT INTO Routes VALUES
 #    (NULL,1,2,1000),
@@ -25,3 +27,4 @@ END
 #    (NULL,1,3,1200),
 #    (NULL,2,3,1800),
 #    (NULL,3,2,1800);
+DELIMITER ;

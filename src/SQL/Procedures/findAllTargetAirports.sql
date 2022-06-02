@@ -1,4 +1,5 @@
 DROP PROCEDURE IF EXISTS FindAllTargetAirports;
+DELIMITER //
 CREATE PROCEDURE FindAllTargetAirports(IN starting_airport_name VARCHAR(30), IN max_distance FLOAT )
 BEGIN
     IF max_distance = 0 THEN
@@ -13,6 +14,6 @@ BEGIN
 
     WHERE StartingAirports.Airport_name LIKE starting_airport_name
       AND Routes.Distance <= max_distance;
-END;
+END // DELIMITER ;
 
 CALL FindAllTargetAirports('X',30000);

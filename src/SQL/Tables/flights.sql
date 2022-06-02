@@ -1,3 +1,5 @@
+DROP PROCEDURE if exists resetTableFlights;
+DELIMITER //
 CREATE PROCEDURE resetTableFlights()
 BEGIN
 DROP TABLE IF EXISTS Flights;
@@ -20,4 +22,6 @@ CREATE TABLE Flights (
 #          ON UPDATE CASCADE
 
 );
-END
+END //
+
+DELIMITER ;
