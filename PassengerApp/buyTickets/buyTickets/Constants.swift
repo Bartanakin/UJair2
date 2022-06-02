@@ -10,16 +10,16 @@ import Foundation
 struct K {
     struct URLs {
         //dodać tokeny
-        static let getPassengerIDIfExistsURL = "http://localhost:8002/getPassengerIDIfExists"
-        static let verifyLoginURL = "http://localhost:8002/canAddLogin"
-        static let loadCountriesURL = "http://localhost:8002/loadCountries"
-        static let insertPassengerURL = "http://localhost:8002/insertPassenger"
-        static let downloadStartingAirportsURL = "http://localhost:8002/getAllAirports"
-        static let downloadTargetAirportsURL = "http://localhost:8002/getTargetAirports"
-        static let downloadScheduleURL = "http://localhost:8002/getScheduleForRoute"
-        static let downloadAvailableSeatsURL = "http://localhost:8002/getAvailableSeats"
-        static let insertTicketURL = "http://localhost:8002/insertTicket"
-        static let downloadTicketsForPassengerURL = "http://localhost:8002/getTicketsForPassengerID"
+        static let getPassengerIDIfExistsURL = "https://github.frege.ii.uj.edu.pl/getPassengerIDIfExists"
+        static let verifyLoginURL = "https://github.frege.ii.uj.edu.pl/canAddLogin"
+        static let loadCountriesURL = "https://github.frege.ii.uj.edu.pl/loadCountries"
+        static let insertPassengerURL = "https://github.frege.ii.uj.edu.pl/insertPassenger"
+        static let downloadStartingAirportsURL = "https://github.frege.ii.uj.edu.pl/getAllAirports"
+        static let downloadTargetAirportsURL = "https://github.frege.ii.uj.edu.pl/getTargetAirports"
+        static let downloadScheduleURL = "https://github.frege.ii.uj.edu.pl/getScheduleForRoute"
+        static let downloadAvailableSeatsURL = "https://github.frege.ii.uj.edu.pl/getAvailableSeats"
+        static let insertTicketURL = "https://github.frege.ii.uj.edu.pl/insertTicket"
+        static let downloadTicketsForPassengerURL = "https://github.frege.ii.uj.edu.pl/getTicketsForPassengerID"
         
     }
     

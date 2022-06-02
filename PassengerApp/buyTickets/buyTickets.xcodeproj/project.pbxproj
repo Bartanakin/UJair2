@@ -117,20 +117,10 @@
 		3A4484F32824668100DE86E0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				3AE6CB2F278F7FC100D7EBAD /* Country.swift */,
-				3AA927642799850300162E31 /* Ticket.swift */,
+				3AD699C228493A650097DC5F /* Entities */,
 				3A938A04282469730011E6BE /* TextFieldProperties.swift */,
 				3A938A0628246B320011E6BE /* CustomTextField.swift */,
-				3A938A0828247D4F0011E6BE /* LoginManager.swift */,
-				3A938A172824950D0011E6BE /* Passenger.swift */,
-				3A938A192824AADF0011E6BE /* RegistrationManager.swift */,
-				3A8017722841759B00B120F2 /* Answer.swift */,
-				3AD699B42843B97A0097DC5F /* BookingManager.swift */,
-				3AD699B62843BEBB0097DC5F /* ChoosingListManager.swift */,
-				3AD699B82843D40A0097DC5F /* Airport.swift */,
-				3AD699BA2843F4110097DC5F /* Route.swift */,
-				3AD699BC284406020097DC5F /* Seats.swift */,
-				3AD699C0284416300097DC5F /* MyTicketsManager.swift */,
+				3AD699C328493A730097DC5F /* Managers */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -151,6 +141,32 @@
 				3A938A1028248BEC0011E6BE /* LoginTests.swift */,
 			);
 			path = LoginTests;
+			sourceTree = "<group>";
+		};
+		3AD699C228493A650097DC5F /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				3AE6CB2F278F7FC100D7EBAD /* Country.swift */,
+				3AA927642799850300162E31 /* Ticket.swift */,
+				3A938A172824950D0011E6BE /* Passenger.swift */,
+				3A8017722841759B00B120F2 /* Answer.swift */,
+				3AD699B82843D40A0097DC5F /* Airport.swift */,
+				3AD699BA2843F4110097DC5F /* Route.swift */,
+				3AD699BC284406020097DC5F /* Seats.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		3AD699C328493A730097DC5F /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				3A938A0828247D4F0011E6BE /* LoginManager.swift */,
+				3A938A192824AADF0011E6BE /* RegistrationManager.swift */,
+				3AD699B42843B97A0097DC5F /* BookingManager.swift */,
+				3AD699B62843BEBB0097DC5F /* ChoosingListManager.swift */,
+				3AD699C0284416300097DC5F /* MyTicketsManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		3AE6CB0B278F43C800D7EBAD = {

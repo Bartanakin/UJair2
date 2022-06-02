@@ -210,6 +210,8 @@ class BookingTicketsViewController: UIViewController {
             
 
             self.present(alertVC, animated: true, completion: nil)
+        }else {
+            showErrorMessage(message: "Choose something in previous fields.")
         }
         
     }
