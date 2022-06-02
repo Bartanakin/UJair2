@@ -1,0 +1,19 @@
+.totals{
+    margin: 4vh 10%;
+    font-size: min(1em,2.5vw);
+}
+
+.tilesContainer{
+    margin: 4vh 10%;
+}
+
+.tile{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.tileInfo{
+    width: 32%;
+    font-size: min(1em,2.5vw);
+}

@@ -2,6 +2,7 @@
 
 namespace App\Controllers\PassengerAppControllers;
 
+use App\C\Controller;
 use App\Entities\Ticket;
 use App\Exceptions\PassenagerAppException\ParameterNotSetException;
 use App\Interfaces\BookingTicketsInterfaces\AllAirportsGetter;
@@ -9,16 +10,21 @@ use App\Interfaces\BookingTicketsInterfaces\InsertionNewTicket;
 use App\Interfaces\BookingTicketsInterfaces\ScheduleOfRouteGetter;
 use App\Interfaces\BookingTicketsInterfaces\SeatsGetter;
 use App\Interfaces\BookingTicketsInterfaces\TargetAirportsGetter;
+use App\View;
+use App\ViewPaths;
 
-class BookingTicketsController {
+class BookingTicketsController extends  Controller {
 
     public function __construct(protected AllAirportsGetter $airportsGetter,
                                 protected ScheduleOfRouteGetter $scheduleOfRouteGetter,
                                 protected TargetAirportsGetter $targetAirportsGetter,
                                 protected SeatsGetter $seatsGetter,
                                 protected InsertionNewTicket $insertionNewTicket) {
+
     }
     public function getAllAirports() {
+        // Jesli token jest zły
+//        return View::make( ViewPaths::UNAUTHORIZED);
         $airports = $this -> airportsGetter -> run();
         echo json_encode($airports);
     }

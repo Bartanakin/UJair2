@@ -21,7 +21,7 @@ $app = new App($_SERVER["REQUEST_METHOD"],$_SERVER["REQUEST_URI"],CONNECT);
 $app -> getRouter() -> get('/',[HomeController::class, 'index']);
 $app -> getRouter() -> post("/",[\App\Controllers\PlannerAppControllers\PlannerLoginController::class,'login']);
 $app -> getRouter() -> get("/editFlight",[\App\Controllers\PlannerAppControllers\AllFlightsController::class,'addFlight']);
-$app -> getRouter() -> get("/settlements",[\App\Controllers\PlannerAppControllers\AllFlightsController::class,'showSettlements']);
+$app -> getRouter() -> get("/settlements",[\App\Controllers\PlannerAppControllers\SettlementController::class,'settlementsPage']);
 $app -> getRouter() -> post("/editCrew",[\App\Controllers\PlannerAppControllers\AllFlightsController::class,'editCrew']);
 $app -> getRouter() -> post("/selectDate",[\App\Controllers\PlannerAppControllers\FlightEditorController::class,'selectDate']);
 $app -> getRouter() -> post("/editFlight",[\App\Controllers\PlannerAppControllers\FlightEditorController::class,'loadFlight']);
@@ -46,6 +46,7 @@ $app -> getRouter() -> get("/jsCalendarsStyles",[\App\Controllers\StyleControlle
 $app -> getRouter() -> get("/flightEditorStyles",[\App\Controllers\StyleController::class,'flightEditor']);
 $app -> getRouter() -> get("/confirmationStyle",[\App\Controllers\StyleController::class,'confirmationPage']);
 $app -> getRouter() -> get("/crewStyle",[\App\Controllers\StyleController::class,'crewPage']);
+$app -> getRouter() -> get("/settlementsStyle",[\App\Controllers\StyleController::class,'settlementsPage']);
 // scripts:
 $app -> getRouter() -> get("/jsCalendarsScript",[\App\Controllers\ScriptController::class,'JsCalendar']);
 
