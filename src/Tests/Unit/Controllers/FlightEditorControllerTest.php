@@ -103,6 +103,7 @@ class FlightEditorControllerTest extends TestCase
 
     /** @test */
     public function check_picking_target_airport_price_and_inserting(){
+        $_SESSION['logged'] = true;
         $_SESSION['editedFlight'] = Flight::createNull();
         $_SESSION['editedFlight'] -> unsetToDate(\DateTime::createFromFormat(Model::$dateFormat,'2022-06-06 00:00:00'));
         $_SESSION['editedFlight'] -> unsetToAirplane(
@@ -124,7 +125,7 @@ class FlightEditorControllerTest extends TestCase
 
 
         $this -> assertEquals(
-            ViewPaths::ALL_FLIGHTS_PAGE,
+            ViewPaths::ALL_FLIGHT_REDIRECT,
             $this -> flightEditorController -> selectTargetAirportTicketPriceAndConfirm() -> getPath()
         );
 
@@ -201,7 +202,7 @@ class FlightEditorControllerTest extends TestCase
 
         $returnedView = $this -> flightEditorController -> acceptConfirmation();
         $this -> assertEquals(
-            ViewPaths::ALL_FLIGHTS_PAGE,
+            ViewPaths::ALL_FLIGHT_REDIRECT,
             $returnedView -> getPath()
         );
     }
@@ -223,13 +224,10 @@ class FlightEditorControllerTest extends TestCase
     public function check_cancel(){
         $this -> make();
 
-        $this -> findAllFlights
-            -> expects($this -> once())
-            -> method('findAllFlights');
         $returnedView = $this -> flightEditorController -> cancel();
 
         $this -> assertEquals(
-            ViewPaths::ALL_FLIGHTS_PAGE,
+            ViewPaths::ALL_FLIGHT_REDIRECT,
             $returnedView -> getPath()
         );
     }

@@ -9,9 +9,11 @@ class FindCrewForFlightTest extends ModelTestBaseClass
 {
     private FindCrewForFlight $findCrewForFlight;
     private $keys = [
+        'RoleID',
         'EmployeeID',
-        'EmployeeFullName',
-        'RoleID'
+        'FirstName',
+        'Surname',
+        'Degree'
     ];
     protected function setUp(): void
     {
