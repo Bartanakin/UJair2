@@ -27,6 +27,8 @@ class AllFlightsController extends Controller
     )
     {
         parent::__construct();
+
+        $this -> trackSessionVariable('logged','logged',false);
     }
 
 
@@ -37,6 +39,7 @@ class AllFlightsController extends Controller
             try{
                 $this -> loginService -> login($_POST["login"],$_POST["password"]);
                 $this -> logged = true;
+
                 return $this -> findAllFlights();
             }
             catch( IncorrectLoginException|IncorrectPasswordException $e ){
@@ -46,11 +49,18 @@ class AllFlightsController extends Controller
         return View::make(ViewPaths::BAD_REQUEST);
     }
 
+    public function allFlights(): View {
+        if( $this -> logged )
+            return $this -> findAllFlights();
+        else
+            return View::make(ViewPaths::HOME_PAGE);
+    }
+
     private function findAllFlights(): View
     {
         return View::make(
             ViewPaths::ALL_FLIGHTS_PAGE,
-            ['allFLights' => $this -> findAllFlights -> findAllFlights()]
+            ['allFLights' => $this -> findAllFlights -> findAllFlights(), 'warning' => $this->warning]
         );
     }
 }

@@ -21,7 +21,10 @@ class View
     }
 
     public function render(): string {
-
+        if( $this -> viewFileName -> value[0] == '/' ){
+            header("Location: ".$this -> viewFileName -> value);
+            exit;
+        }
         $path = VIEW_PATH . "/" . $this -> viewFileName -> value . ".php";
 
         if( ! file_exists($path) ){

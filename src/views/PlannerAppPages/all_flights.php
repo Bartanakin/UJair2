@@ -21,6 +21,11 @@
                 <input type="submit" value="Incomes and expenses" class="managerSubmit submit"/>
             </form>
         </div>
+        <?php if($this -> params['warning']): ?>
+            <div class="headerMessage headerForm textInfo">
+                <?= $this -> params['warning'] ?>
+            </div>
+        <?php endif; ?>
     </header>
     <div class="wrapper">
         <?php

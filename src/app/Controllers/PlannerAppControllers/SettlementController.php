@@ -14,6 +14,7 @@ class SettlementController extends Controller
 
     public function __construct(protected SettlementFinder $finder)
     {
+        parent::__construct();
         $this -> payments = new PaymentList();
     }
 
@@ -25,6 +26,6 @@ class SettlementController extends Controller
         }catch( \PDOException $e ){
             // TODO
         }
-        return View::make(ViewPaths::SETTLEMENTS_PAGE, ['payments' => $this -> payments, 'warning' => ""]);
+        return View::make(ViewPaths::SETTLEMENTS_PAGE, ['payments' => $this -> payments, 'warning' => $this -> warning]);
     }
 }

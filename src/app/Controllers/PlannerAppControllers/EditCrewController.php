@@ -26,21 +26,16 @@ class EditCrewController extends Controller
         protected CrewEditor $crewEditor,
     )
     {
+        parent::__construct();
         $this ->trackSessionVariable('flight','flight',Flight::createNull());
         $this ->trackSessionVariable('candidates','candidates',[]);
         $this ->trackSessionVariable('roleToLink','roleToLink',EmployeeDegree::UNDEFINED);
     }
 
-    public function __destruct()
-    {
-        if( !$this -> destruct ){
-            $this -> writeSession();
-        }
-    }
-
     public function linkMember(): View {
-        if( $this -> assertPostVariables(['EmployeeID']))
-            return View::make(ViewPaths::BAD_REQUEST);
+        if( !$this -> logged ) return $this -> createSessionExpiredView();
+        if( $this -> assertPostVariables(['EmployeeID'])) return $this -> createBadRequestView();
+
         try{
             $this -> flight -> assertFlightID();
             if(!in_array($_POST['EmployeeID'], array_map(fn($x) => $x->getID(), $this->candidates)))
@@ -59,14 +54,14 @@ class EditCrewController extends Controller
             $this ->resetProp('roleToLink');
             $this ->resetProp('candidates');
         }catch( SessionExpiredException $e ){
-            return View::make(ViewPaths::SESSION_EXPIRED,['warning' => $e -> getMessage()]);
+            return $this -> createSessionExpiredView($e -> getMessage());
         }
         return $this -> createDefaultView();
     }
 
     public function unlinkMember(): View {
-        if( $this -> assertPostVariables(['EmployeeID']))
-            return View::make(ViewPaths::BAD_REQUEST);
+        if( !$this -> logged ) return $this -> createSessionExpiredView();
+        if( $this -> assertPostVariables(['EmployeeID'])) return $this -> createBadRequestView();
         try{
             $this -> flight -> assertFlightID();
             $this -> flight -> assertCrewListWithEmployee($_POST['EmployeeID']);
@@ -77,31 +72,31 @@ class EditCrewController extends Controller
             $this ->resetProp('roleToLink');
             $this ->resetProp('candidates');
         }catch( SessionExpiredException $e ){
-            return View::make(ViewPaths::SESSION_EXPIRED,['warning' => $e -> getMessage()]);
+            return $this -> createSessionExpiredView($e -> getMessage());
         }
         return $this -> createDefaultView();
     }
 
     public function findAvailableMembers(): View {
-        if( $this -> assertPostVariables(['RoleID']))
-            return View::make(ViewPaths::BAD_REQUEST);
-
+        if( !$this -> logged ) return $this -> createSessionExpiredView();
+        if( $this -> assertPostVariables(['RoleID'])) return $this -> createBadRequestView();
         try{
             $this -> flight -> assertFlightID();
             $this -> roleToLink = EmployeeDegree::tryFrom($_POST['RoleID']);
 
             $this -> candidates = $this -> availableMemberFinder -> run($this -> roleToLink);
         }catch( SessionExpiredException $e ){
-             return View::make(ViewPaths::SESSION_EXPIRED,['warning' => $e -> getMessage()]);
+            return $this -> createSessionExpiredView($e -> getMessage());
         }
         return $this -> createDefaultView();
     }
 
     public function loadCrewList(): View {
+        if( !$this -> logged ) return $this -> createSessionExpiredView();
 
-        $this ->resetProp('flight','flight',Flight::createNull());
-        $this ->resetProp('candidates','candidates',[]);
-        $this ->resetProp('roleToLink','roleToLink',EmployeeDegree::UNDEFINED);
+        $this ->resetProp('flight');
+        $this ->resetProp('candidates');
+        $this ->resetProp('roleToLink');
 
         if( $this -> assertPostVariables(['flightID']))
             return View::make(ViewPaths::BAD_REQUEST);
@@ -116,11 +111,12 @@ class EditCrewController extends Controller
     }
 
     protected function createDefaultView(string $message = ""): View {
+        $this -> warning = $message;
         return View::make(ViewPaths::EDIT_CREW_PAGE,[
             'flight' => $this -> flight,
             'candidates' => $this -> candidates,
             'roleToLink' => $this -> roleToLink,
-            'message' => $message
+            'warning' => $message
         ]);
     }
 }
