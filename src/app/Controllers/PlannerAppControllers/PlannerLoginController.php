@@ -24,6 +24,7 @@ class PlannerLoginController extends Controller
             return $this -> makeAllFlightsView();
         if( isset($_POST["login"],$_POST["password"])){
         echo $_POST["login"] ." ".$_POST["password"];
+        echo " ".password_hash($_POST['password'],PASSWORD_DEFAULT);
             try{
                 $this -> loginService -> login($_POST["login"],$_POST["password"]);
                 $this -> logged = true;
