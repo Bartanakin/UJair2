@@ -7,6 +7,7 @@ use App\Controllers\PassengerAppControllers\PassengerRegistrationController;
 use App\Controllers\PassengerAppControllers\PassengersTicketsController;
 use App\Controllers\PlannerAppControllers\AllFlightsController;
 use App\Controllers\PlannerAppControllers\HomeController;
+use App\View;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -62,5 +63,12 @@ $app -> getRouter() -> get("/loadCountries",[PassengerRegistrationController::cl
 $app -> getRouter() -> get("/insertPassenger",[PassengerRegistrationController::class,'insertPassenger']);
 $app -> getRouter() -> get("/getTicketsForPassengerID",[PassengersTicketsController::class,'getTicketsForPassengerID']);
 
+try{
 
-$app -> run();
+    $app -> run();
+
+}catch( \App\Exceptions\Container\NotFoundException $e){
+    echo View::make(\App\ViewPaths::NOT_FOUND);
+}catch( Exception $e){
+    echo View::make(\App\ViewPaths::SERVER_ERROR);
+}

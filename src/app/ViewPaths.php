@@ -18,6 +18,8 @@ enum ViewPaths: string
     case BAD_REQUEST = "ErrorPages/BadRequest";
     case UNAUTHORIZED = "ErrorPages/Unauthorized";
     case SESSION_EXPIRED = "ErrorPages/SessionHasExpired";
+    case SERVER_ERROR = "ErrorPages/ServerError";
+    case NOT_FOUND = "ErrorPages/NotFound";
 
     // Redirects ( starting with / )
     case ALL_FLIGHT_REDIRECT = '/';
