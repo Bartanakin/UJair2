@@ -5,7 +5,7 @@
     /** @var  $roleToLink \App\Entities\PersonClasses\EmployeeDegree*/
     $roleToLink = $this -> params['roleToLink'];
     /** @var  $message string */
-    $message = $this -> params['message'];
+    $warning = $this -> params['warning'];
 ?>
 <!DOCTYPE html>
 <html lang="eng">
@@ -27,6 +27,11 @@
             <input type="submit" value="cancel" class="managerSubmit submit ">
         </form>
     </div>
+    <?php if($warning): ?>
+        <div class="headerMessage headerForm textInfo">
+            <?= $warning ?>
+        </div>
+    <?php endif; ?>
 </header>
 <div class="wrapper">
     <div class="leftColumn">

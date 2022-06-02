@@ -5,6 +5,7 @@ use App\Controllers\PassengerAppControllers\BookingTicketsController;
 use App\Controllers\PassengerAppControllers\PassengerLoginController;
 use App\Controllers\PassengerAppControllers\PassengerRegistrationController;
 use App\Controllers\PassengerAppControllers\PassengersTicketsController;
+use App\Controllers\PlannerAppControllers\AllFlightsController;
 use App\Controllers\PlannerAppControllers\HomeController;
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -18,10 +19,11 @@ session_start();
 $app = new App($_SERVER["REQUEST_METHOD"],$_SERVER["REQUEST_URI"],CONNECT);
 
 // Planner app:
-$app -> getRouter() -> get('/',[HomeController::class, 'index']);
+$app -> getRouter() -> get('/',[AllFlightsController::class, 'allFlights']);
 $app -> getRouter() -> post("/",[\App\Controllers\PlannerAppControllers\AllFlightsController::class,'login']);
-$app -> getRouter() -> get("/editFlight",[\App\Controllers\PlannerAppControllers\EditCrewController::class,'addFlight']);
+$app -> getRouter() -> get("/editFlight",[\App\Controllers\PlannerAppControllers\FlightEditorController::class,'addFlight']);
 $app -> getRouter() -> get("/settlements",[\App\Controllers\PlannerAppControllers\SettlementController::class,'settlementsPage']);
+$app -> getRouter() -> get("/findAllFlights",[\App\Controllers\PlannerAppControllers\SettlementController::class,'settlementsPage']);
 $app -> getRouter() -> post("/selectDate",[\App\Controllers\PlannerAppControllers\FlightEditorController::class,'selectDate']);
 $app -> getRouter() -> post("/editFlight",[\App\Controllers\PlannerAppControllers\FlightEditorController::class,'loadFlight']);
 $app -> getRouter() -> post("/selectAirplane",[\App\Controllers\PlannerAppControllers\FlightEditorController::class,'selectAirplane']);

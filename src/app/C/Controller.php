@@ -11,12 +11,19 @@ abstract class Controller
     protected bool $destruct = false;
     protected array $sessionVariables = [];
     protected bool $logged = false;
+    protected ?string $warning = "";
 
     public function __construct()
     {
-        $this -> trackSessionVariable('logged','logged',false);
+        $this -> trackSessionVariable('logged','logged',true);
+        $this -> trackSessionVariable('warning','warning','');
     }
-
+    public function __destruct()
+    {
+        if( !$this -> destruct ){
+            $this -> writeSession();
+        }
+    }
     protected function trackSessionVariable(string $propName, string $sesName, mixed $default){
         $this -> sessionVariables[$propName] = [ 'sesName' => $sesName, 'defaultVar' => $default ];
         $this -> restoreFromSession($propName);
@@ -49,6 +56,11 @@ abstract class Controller
         return false;
     }
 
+    public function resetAllProps(): void {
+        foreach ( $this -> sessionVariables as $propName => $variable ){
+            $this -> $propName = $variable['defaultVar'];
+        }
+    }
     public function createSessionExpiredView(string $message = "Session expired"): View {
         return View::make(ViewPaths::HOME_PAGE,['serverMessage' => $message ]);
     }
