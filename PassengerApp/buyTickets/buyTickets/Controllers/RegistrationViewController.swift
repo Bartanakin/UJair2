@@ -69,7 +69,7 @@ extension RegistrationViewController: UITextFieldDelegate {
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if let textField = textField as? CustomUIField {
-            textField.setProperties(TextFieldProperties(borderWidth: 1, borderColor: CGColor(red: 220, green: 220, blue: 220, alpha: 0.7)))
+            textField.setProperties(TextFieldProperties(borderWidth: 1, borderColor: UIColor(named: "Borders")!.cgColor))
         }
     }
 

@@ -112,28 +112,40 @@ class MyTicketsViewController: UIViewController, UISearchBarDelegate, UITableVie
     
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         tabBar.selectedItem = item
+        searchBar.text = ""
         switch item.tag {
             case K.TicketType.canceled:
                 myTicketsManager.filteredData = myTicketsManager.tickets?.filter({ t in
-                    t.canceled!
+                    doesFulfilllConditions(of: K.TicketType.canceled, ticket: t)
                 })
                 myTicketsManager.selectedTicketType = K.TicketType.canceled
             case K.TicketType.active:
                 myTicketsManager.filteredData = myTicketsManager.tickets?.filter({ t in
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = K.dateFormat
-                    return dateFormatter.date(from: t.dateOfDeparture!)! > Date() && !t.canceled!
+                    doesFulfilllConditions(of: K.TicketType.active, ticket: t)
                 })
                 myTicketsManager.selectedTicketType = K.TicketType.active
             default:
                 myTicketsManager.filteredData = myTicketsManager.tickets?.filter({ t in
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = K.dateFormat
-                    return dateFormatter.date(from: t.dateOfDeparture!)! < Date() && !t.canceled!
+                    doesFulfilllConditions(of: K.TicketType.finished, ticket: t)
                 })
-            myTicketsManager.selectedTicketType = K.TicketType.finished
+                myTicketsManager.selectedTicketType = K.TicketType.finished
         }
         tableView.reloadData()
+    }
+    
+    func doesFulfilllConditions(of type: Int, ticket: Ticket) -> Bool {
+        switch type {
+        case K.TicketType.canceled:
+            return ticket.canceled!
+        case K.TicketType.active:
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = K.dateFormat
+            return dateFormatter.date(from: ticket.dateOfDeparture!)! > Date() && !ticket.canceled!
+        default:
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = K.dateFormat
+            return dateFormatter.date(from: ticket.dateOfDeparture!)! < Date() && !ticket.canceled!
+        }
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -170,9 +182,15 @@ class MyTicketsViewController: UIViewController, UISearchBarDelegate, UITableVie
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        myTicketsManager.filteredData = searchText.isEmpty ? myTicketsManager.tickets : myTicketsManager.tickets?.filter { (item: Ticket) -> Bool in
-            return item.start!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil || item.target!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil ||
-                item.dateOfDeparture!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        if searchText.isEmpty {
+            myTicketsManager.filteredData = myTicketsManager.tickets?.filter { (item: Ticket) -> Bool in
+                return doesFulfilllConditions(of: myTicketsManager.selectedTicketType!, ticket: item)
+            }
+        }else {
+            myTicketsManager.filteredData = myTicketsManager.tickets?.filter { (item: Ticket) -> Bool in
+                return (item.start!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil || item.target!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil ||
+                        item.dateOfDeparture!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil) && doesFulfilllConditions(of: myTicketsManager.selectedTicketType!, ticket: item)
+            }
         }
         tableView.reloadData()
     }
