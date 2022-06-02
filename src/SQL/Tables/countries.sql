@@ -10,18 +10,4 @@ BEGIN
 END; //
 DELIMITER ;
 
-INSERT INTO Countries VALUES
-  (NULL, 'Morocco'),
-  (NULL, 'Afghanistan'),
-  (NULL, 'Finland'),
-  (NULL, 'Latvia'),
-  (NULL, 'Romania'),
-  (NULL, 'Uzbekistan'),
-  (NULL, 'Monaco'),
-  (NULL, 'Greece'),
-  (NULL, 'Brazil'),
-  (NULL, 'Australia'),
-  (NULL, 'Hungary'),
-  (NULL, 'Serbia'),
-  (NULL, 'Poland'),
-  (NULL, 'Italy');
+

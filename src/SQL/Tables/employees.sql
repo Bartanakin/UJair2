@@ -9,7 +9,7 @@ CREATE TABLE Employees
     FirstName VARCHAR(30) NOT NULL,
     Surname VARCHAR(40) NOT NULL,
     Salary DECIMAL(8,2) NOT NULL,
-    Nationality VARCHAR(20),
+    Nationality INT NOT NULL,
     Degree VARCHAR(1),
     DateOfEmployment DATE DEFAULT '2022-05-01'
 );
