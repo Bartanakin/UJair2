@@ -1,4 +1,4 @@
 <?php
 header("",true,401);
 ?>
-<h3 style="margin: 10vh auto 0 auto;"> Error. Unauthorized access.</h3>
+<h1 style="text-align: center; margin-top: 20vh;"> Error: Unauthorized access</h1>

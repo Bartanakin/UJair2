@@ -14,7 +14,7 @@ abstract class Controller
     protected bool $logged = false;
     protected ?string $warning = "";
 
-    public function __construct(protected LoginAndPasswordVerification $loginAndPasswordVerification)
+    public function __construct(protected ?LoginAndPasswordVerification $loginAndPasswordVerification = null)
     {
         $this -> trackSessionVariable('logged','logged',true);
         $this -> trackSessionVariable('warning','warning','');
