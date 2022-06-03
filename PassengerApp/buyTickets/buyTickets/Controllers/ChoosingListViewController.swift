@@ -79,35 +79,8 @@ extension ChoosingListViewController {
 
 }
 
-class ChoosingListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    @IBOutlet var tableView: UITableView!
-    @IBOutlet var searchBar: UISearchBar!
-    var listManager = ChoosingListManager()
-    var parentController: UIViewController? 
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        listManager.delegate = self
-        tableView.delegate = self
-        searchBar.delegate = self
-        tableView.dataSource = self
-        
-        let tableViewTap = UITapGestureRecognizer(target: self, action: #selector(tableViewTapped))
-        tableViewTap.cancelsTouchesInView = false
-        tableView.addGestureRecognizer(tableViewTap)
-        
-        listManager.downloadData()
-    }
-    
-    @objc func tableViewTapped() {
-        searchBar.endEditing(true)
-    }
-
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        searchBar.endEditing(true)
-    }
-
+//MARK: - TableView functions
+extension ChoosingListViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -170,5 +143,35 @@ class ChoosingListViewController: UIViewController, UITableViewDelegate, UITable
                 self.dismiss(animated: true)
             }
         }
+    }
+}
+
+class ChoosingListViewController: UIViewController {
+    
+    @IBOutlet var tableView: UITableView!
+    @IBOutlet var searchBar: UISearchBar!
+    var listManager = ChoosingListManager()
+    var parentController: UIViewController? 
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        listManager.delegate = self
+        tableView.delegate = self
+        searchBar.delegate = self
+        tableView.dataSource = self
+        
+        let tableViewTap = UITapGestureRecognizer(target: self, action: #selector(tableViewTapped))
+        tableViewTap.cancelsTouchesInView = false
+        tableView.addGestureRecognizer(tableViewTap)
+        
+        listManager.downloadData()
+    }
+    
+    @objc func tableViewTapped() {
+        searchBar.endEditing(true)
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        searchBar.endEditing(true)
     }
 }

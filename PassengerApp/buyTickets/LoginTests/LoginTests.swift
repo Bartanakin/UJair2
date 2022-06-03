@@ -25,9 +25,9 @@ class LoginTests: XCTestCase {
         try super.tearDownWithError()
     }
     
-    func testCheckReturnPassengerID() async {
-        //given
+    func testCheckReturnPassengerID() {
         for _ in 1...100 {
+            //given
             let randomID = Int.random(in: 1...1000)
             let passenger = Passenger(passengerID: randomID, firstName: "Test", lastName: "Test", login: "login", password: "password", countryID: 2)
             let jsonEncoder = JSONEncoder()

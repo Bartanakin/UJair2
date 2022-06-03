@@ -22,7 +22,7 @@
 		89A72A55273CE358DC4E7600F785C37B /* DPDKeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52207BAA0D9CAA7480F977233384D906 /* DPDKeyboardListener.swift */; };
 		907338727C09F65DB75AA7AB9E10C3B4 /* DropDown-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D908043600F7CBD38D695A9F320BF86 /* DropDown-dummy.m */; };
 		9B133C00C3F297B86C252E0F4DD7DC85 /* Pods-buyTickets-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 137558A4D1D288B20BD85EFE153915F9 /* Pods-buyTickets-dummy.m */; };
-		A3BB5CC45FD1F0CB11B839828E426F98 /* PMAlertController-PMAlertController in Resources */ = {isa = PBXBuildFile; fileRef = ECE1D4E8E06362E959CA9683CBD7C694 /* PMAlertController-PMAlertController */; };
+		A3BB5CC45FD1F0CB11B839828E426F98 /* PMAlertController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ECE1D4E8E06362E959CA9683CBD7C694 /* PMAlertController.bundle */; };
 		AB278FA709F998BDB282A366A2A7A007 /* PMAlertController-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 52F8CA678BB3FDBE021B76E30C1D7240 /* PMAlertController-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B73E510E851686F8184E26986A470458 /* DPDUIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8A2F27BC4525D32E302E903CA3305A /* DPDUIView+Extension.swift */; };
 		BDC10974A8641F01C5665C61EA37A153 /* DropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58EB0CB45EAD80F963CBEF80E0DF3DD /* DropDownCell.swift */; };
@@ -84,19 +84,19 @@
 		912D3EA5D885DB4BF18439CCF4811422 /* Pods-buyTickets-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-buyTickets-frameworks.sh"; sourceTree = "<group>"; };
 		930894745ADAB562BECDE2DF5D86F4C8 /* DropDown-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "DropDown-Info.plist"; sourceTree = "<group>"; };
 		99067767076D53060A65F7F3C86F1EEC /* DropDown-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DropDown-umbrella.h"; sourceTree = "<group>"; };
-		9B6725B782188F18CB76A740433F14E4 /* DropDown */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = DropDown; path = DropDown.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9B6725B782188F18CB76A740433F14E4 /* DropDown.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DropDown.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		B32ACED34E87B83137C0035405E16732 /* ResourceBundle-PMAlertController-PMAlertController-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-PMAlertController-PMAlertController-Info.plist"; sourceTree = "<group>"; };
 		BF737FCB961357FDB6664CA7B4BA670C /* PMAlertController.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PMAlertController.release.xcconfig; sourceTree = "<group>"; };
 		C40A744F2F43E9425D537D34114AB3F2 /* Pods-buyTickets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-buyTickets.release.xcconfig"; sourceTree = "<group>"; };
 		C58EB0CB45EAD80F963CBEF80E0DF3DD /* DropDownCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DropDownCell.swift; path = DropDown/src/DropDownCell.swift; sourceTree = "<group>"; };
-		C896D3D249F15B7280D3A50AA603D70F /* PMAlertController */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = PMAlertController; path = PMAlertController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C896D3D249F15B7280D3A50AA603D70F /* PMAlertController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PMAlertController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D172D83905578C5B93A6FC3ECE44094B /* PMAlertController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PMAlertController-prefix.pch"; sourceTree = "<group>"; };
 		D245E0514AAC1A2B9A6D5EA2F383E90F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		D47F192CDBCAF11E0ADD81E87F3925A2 /* Pods-buyTickets-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-buyTickets-Info.plist"; sourceTree = "<group>"; };
 		D98F68BEC59C2FA30D153536EAD459AB /* PMAlertController.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PMAlertController.debug.xcconfig; sourceTree = "<group>"; };
 		EAB6F611E86A4758835A715E4B4184F6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		ECE1D4E8E06362E959CA9683CBD7C694 /* PMAlertController-PMAlertController */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "PMAlertController-PMAlertController"; path = PMAlertController.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECE1D4E8E06362E959CA9683CBD7C694 /* PMAlertController.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PMAlertController.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,9 +155,9 @@
 		607D37B0CB4A42B1DC01DE2E3A255CA6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9B6725B782188F18CB76A740433F14E4 /* DropDown */,
-				C896D3D249F15B7280D3A50AA603D70F /* PMAlertController */,
-				ECE1D4E8E06362E959CA9683CBD7C694 /* PMAlertController-PMAlertController */,
+				9B6725B782188F18CB76A740433F14E4 /* DropDown.framework */,
+				C896D3D249F15B7280D3A50AA603D70F /* PMAlertController.framework */,
+				ECE1D4E8E06362E959CA9683CBD7C694 /* PMAlertController.bundle */,
 				025B434F7996B7A444091CE5496BF8AD /* Pods-buyTickets */,
 			);
 			name = Products;
@@ -175,7 +175,6 @@
 				BEED8712360B5A2A8019AAF61D2B95F6 /* Resources */,
 				690B7B571230BD52A8885703AC7D3952 /* Support Files */,
 			);
-			name = DropDown;
 			path = DropDown;
 			sourceTree = "<group>";
 		};
@@ -237,7 +236,6 @@
 				C91BA0EF5DB6D2172E36AB88D2D1645E /* Resources */,
 				CCE6607D5773F9FB5BFFBF5686B0644F /* Support Files */,
 			);
-			name = PMAlertController;
 			path = PMAlertController;
 			sourceTree = "<group>";
 		};
@@ -329,7 +327,7 @@
 			);
 			name = PMAlertController;
 			productName = PMAlertController;
-			productReference = C896D3D249F15B7280D3A50AA603D70F /* PMAlertController */;
+			productReference = C896D3D249F15B7280D3A50AA603D70F /* PMAlertController.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		CFC56688CA1DFE62A8399E08B1B2FA68 /* Pods-buyTickets */ = {
@@ -366,7 +364,7 @@
 			);
 			name = "PMAlertController-PMAlertController";
 			productName = PMAlertController;
-			productReference = ECE1D4E8E06362E959CA9683CBD7C694 /* PMAlertController-PMAlertController */;
+			productReference = ECE1D4E8E06362E959CA9683CBD7C694 /* PMAlertController.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		E9F9401E9C74C0C393164FD8D86D0068 /* DropDown */ = {
@@ -384,7 +382,7 @@
 			);
 			name = DropDown;
 			productName = DropDown;
-			productReference = 9B6725B782188F18CB76A740433F14E4 /* DropDown */;
+			productReference = 9B6725B782188F18CB76A740433F14E4 /* DropDown.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -394,7 +392,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1330;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -430,7 +428,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A3BB5CC45FD1F0CB11B839828E426F98 /* PMAlertController-PMAlertController in Resources */,
+				A3BB5CC45FD1F0CB11B839828E426F98 /* PMAlertController.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -626,7 +624,7 @@
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/PMAlertController";
 				IBSC_MODULE = PMAlertController;
 				INFOPLIST_FILE = "Target Support Files/PMAlertController/ResourceBundle-PMAlertController-PMAlertController-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_NAME = PMAlertController;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -642,7 +640,7 @@
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/PMAlertController";
 				IBSC_MODULE = PMAlertController;
 				INFOPLIST_FILE = "Target Support Files/PMAlertController/ResourceBundle-PMAlertController-PMAlertController-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_NAME = PMAlertController;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -666,7 +664,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/PMAlertController/PMAlertController-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/PMAlertController/PMAlertController-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -700,7 +698,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/PMAlertController/PMAlertController-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/PMAlertController/PMAlertController-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -735,7 +733,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/DropDown/DropDown-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/DropDown/DropDown-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -870,7 +868,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/DropDown/DropDown-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/DropDown/DropDown-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

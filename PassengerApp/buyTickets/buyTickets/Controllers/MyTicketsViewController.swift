@@ -17,6 +17,8 @@ protocol MyTicketsManagerDelegate {
     func endRefreshing()
 }
 
+//MARK: - MyTicketsManagerDelegate functions
+
 extension MyTicketsViewController: MyTicketsManagerDelegate {
     func showErrorMessage(message: String) {
         DispatchQueue.main.async {
@@ -62,7 +64,86 @@ extension MyTicketsViewController: MyTicketsManagerDelegate {
         }
     }
 }
-class MyTicketsViewController: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, UITabBarDelegate {
+
+//MARK: - SearchBar functions
+extension MyTicketsViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            myTicketsManager.filteredData = myTicketsManager.tickets?.filter { (item: Ticket) -> Bool in
+                return doesFulfilllConditions(of: myTicketsManager.selectedTicketType!, ticket: item)
+            }
+        }else {
+            myTicketsManager.filteredData = myTicketsManager.tickets?.filter { (item: Ticket) -> Bool in
+                return (item.start!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil || item.target!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil ||
+                        item.dateOfDeparture!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil) && doesFulfilllConditions(of: myTicketsManager.selectedTicketType!, ticket: item)
+            }
+        }
+        tableView.reloadData()
+    }
+}
+
+//MARK: - TableView functions
+extension MyTicketsViewController: UITableViewDelegate, UITableViewDataSource {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        searchBar.endEditing(true)
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let count = myTicketsManager.filteredData?.count {
+            if count == 0 {
+                setEmptyMessage("No Results.")
+            }else {
+                restore()
+            }
+            return count
+        }
+        
+        return myTicketsManager.filteredData?.count ?? 0
+    }
+
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Ticket", for: indexPath)
+        var content = cell.defaultContentConfiguration()
+        if let ticket = myTicketsManager.filteredData?[indexPath.row] {
+            content.text = ticket.start! + " -> " + ticket.target!
+            content.secondaryText = ticket.dateOfDeparture! + " Seat: " + String(ticket.numberOfSeat!)
+        }
+        cell.contentConfiguration = content
+        return cell
+    }
+}
+
+//MARK: - TabBar functions
+extension MyTicketsViewController: UITabBarDelegate {
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        tabBar.selectedItem = item
+        searchBar.text = ""
+        switch item.tag {
+            case K.TicketType.canceled:
+                myTicketsManager.filteredData = myTicketsManager.tickets?.filter({ t in
+                    doesFulfilllConditions(of: K.TicketType.canceled, ticket: t)
+                })
+                myTicketsManager.selectedTicketType = K.TicketType.canceled
+            case K.TicketType.active:
+                myTicketsManager.filteredData = myTicketsManager.tickets?.filter({ t in
+                    doesFulfilllConditions(of: K.TicketType.active, ticket: t)
+                })
+                myTicketsManager.selectedTicketType = K.TicketType.active
+            default:
+                myTicketsManager.filteredData = myTicketsManager.tickets?.filter({ t in
+                    doesFulfilllConditions(of: K.TicketType.finished, ticket: t)
+                })
+                myTicketsManager.selectedTicketType = K.TicketType.finished
+        }
+        tableView.reloadData()
+    }
+}
+class MyTicketsViewController: UIViewController {
     
     @IBOutlet var tabBar: UITabBar!
     @IBOutlet var tableView: UITableView!
@@ -73,6 +154,7 @@ class MyTicketsViewController: UIViewController, UISearchBarDelegate, UITableVie
         return (view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0.0) +
             (self.navigationController?.navigationBar.frame.height ?? 0.0)
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "My Tickets"
@@ -110,29 +192,6 @@ class MyTicketsViewController: UIViewController, UISearchBarDelegate, UITableVie
         searchBar.endEditing(true)
     }
     
-    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        tabBar.selectedItem = item
-        searchBar.text = ""
-        switch item.tag {
-            case K.TicketType.canceled:
-                myTicketsManager.filteredData = myTicketsManager.tickets?.filter({ t in
-                    doesFulfilllConditions(of: K.TicketType.canceled, ticket: t)
-                })
-                myTicketsManager.selectedTicketType = K.TicketType.canceled
-            case K.TicketType.active:
-                myTicketsManager.filteredData = myTicketsManager.tickets?.filter({ t in
-                    doesFulfilllConditions(of: K.TicketType.active, ticket: t)
-                })
-                myTicketsManager.selectedTicketType = K.TicketType.active
-            default:
-                myTicketsManager.filteredData = myTicketsManager.tickets?.filter({ t in
-                    doesFulfilllConditions(of: K.TicketType.finished, ticket: t)
-                })
-                myTicketsManager.selectedTicketType = K.TicketType.finished
-        }
-        tableView.reloadData()
-    }
-    
     func doesFulfilllConditions(of type: Int, ticket: Ticket) -> Bool {
         switch type {
         case K.TicketType.canceled:
@@ -146,53 +205,6 @@ class MyTicketsViewController: UIViewController, UISearchBarDelegate, UITableVie
             dateFormatter.dateFormat = K.dateFormat
             return dateFormatter.date(from: ticket.dateOfDeparture!)! < Date() && !ticket.canceled!
         }
-    }
-
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        searchBar.endEditing(true)
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let count = myTicketsManager.filteredData?.count {
-            if count == 0 {
-                setEmptyMessage("No Results.")
-            }else {
-                restore()
-            }
-            return count
-        }
-        
-        return myTicketsManager.filteredData?.count ?? 0
-    }
-
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Ticket", for: indexPath)
-        var content = cell.defaultContentConfiguration()
-        if let ticket = myTicketsManager.filteredData?[indexPath.row] {
-            content.text = ticket.start! + " -> " + ticket.target!
-            content.secondaryText = ticket.dateOfDeparture! + " Seat: " + String(ticket.numberOfSeat!)
-        }
-        cell.contentConfiguration = content
-        return cell
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.isEmpty {
-            myTicketsManager.filteredData = myTicketsManager.tickets?.filter { (item: Ticket) -> Bool in
-                return doesFulfilllConditions(of: myTicketsManager.selectedTicketType!, ticket: item)
-            }
-        }else {
-            myTicketsManager.filteredData = myTicketsManager.tickets?.filter { (item: Ticket) -> Bool in
-                return (item.start!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil || item.target!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil ||
-                        item.dateOfDeparture!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil) && doesFulfilllConditions(of: myTicketsManager.selectedTicketType!, ticket: item)
-            }
-        }
-        tableView.reloadData()
     }
 
 }

@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct Seats: Decodable {
+struct Seats: Codable {
     var seats: [Int]?
 }

@@ -36,10 +36,7 @@ extension ChoosingListManager {
     func parseJSONAirport(data: Data) {
         let decoder = JSONDecoder()
         do {
-            let str = String(decoding: data, as: UTF8.self)
-            print(str)
             airports = try decoder.decode([Airport].self, from: data)
-            
             filteredData = airports
             delegate?.updateTableView()
         }catch {

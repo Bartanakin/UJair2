@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct Route: Decodable {
+struct Route: Codable, Equatable {
     var ID: Int?
     var DateTimeOfDeparture: String?
+    init(ID: Int?, DateTimeOfDeparture: String?) {
+        self.ID = ID
+        self.DateTimeOfDeparture = DateTimeOfDeparture
+    }
 }

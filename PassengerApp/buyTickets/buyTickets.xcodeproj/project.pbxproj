@@ -26,6 +26,9 @@
 		3AD699BD284406020097DC5F /* Seats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD699BC284406020097DC5F /* Seats.swift */; };
 		3AD699BF284415EA0097DC5F /* MyTicketsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD699BE284415EA0097DC5F /* MyTicketsViewController.swift */; };
 		3AD699C1284416300097DC5F /* MyTicketsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD699C0284416300097DC5F /* MyTicketsManager.swift */; };
+		3AD699C52849927E0097DC5F /* BookingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD699C42849927E0097DC5F /* BookingTests.swift */; };
+		3AD699C728499A930097DC5F /* ChoosingListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD699C628499A930097DC5F /* ChoosingListTests.swift */; };
+		3AD699C928499DCF0097DC5F /* MyTicketsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD699C828499DCF0097DC5F /* MyTicketsTests.swift */; };
 		3AE6CB18278F43C900D7EBAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE6CB17278F43C900D7EBAD /* AppDelegate.swift */; };
 		3AE6CB1A278F43C900D7EBAD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE6CB19278F43C900D7EBAD /* SceneDelegate.swift */; };
 		3AE6CB1C278F43C900D7EBAD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE6CB1B278F43C900D7EBAD /* LoginViewController.swift */; };
@@ -69,6 +72,9 @@
 		3AD699BC284406020097DC5F /* Seats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seats.swift; sourceTree = "<group>"; };
 		3AD699BE284415EA0097DC5F /* MyTicketsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTicketsViewController.swift; sourceTree = "<group>"; };
 		3AD699C0284416300097DC5F /* MyTicketsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTicketsManager.swift; sourceTree = "<group>"; };
+		3AD699C42849927E0097DC5F /* BookingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingTests.swift; sourceTree = "<group>"; };
+		3AD699C628499A930097DC5F /* ChoosingListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoosingListTests.swift; sourceTree = "<group>"; };
+		3AD699C828499DCF0097DC5F /* MyTicketsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTicketsTests.swift; sourceTree = "<group>"; };
 		3AE6CB14278F43C800D7EBAD /* buyTickets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = buyTickets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AE6CB17278F43C900D7EBAD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3AE6CB19278F43C900D7EBAD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -137,6 +143,9 @@
 		3A938A0F28248BEC0011E6BE /* LoginTests */ = {
 			isa = PBXGroup;
 			children = (
+				3AD699C828499DCF0097DC5F /* MyTicketsTests.swift */,
+				3AD699C628499A930097DC5F /* ChoosingListTests.swift */,
+				3AD699C42849927E0097DC5F /* BookingTests.swift */,
 				3A938A1B2824B4E90011E6BE /* RegistrationTests.swift */,
 				3A938A1028248BEC0011E6BE /* LoginTests.swift */,
 			);
@@ -368,6 +377,9 @@
 			files = (
 				3A938A1C2824B4E90011E6BE /* RegistrationTests.swift in Sources */,
 				3A938A1128248BEC0011E6BE /* LoginTests.swift in Sources */,
+				3AD699C52849927E0097DC5F /* BookingTests.swift in Sources */,
+				3AD699C728499A930097DC5F /* ChoosingListTests.swift in Sources */,
+				3AD699C928499DCF0097DC5F /* MyTicketsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
