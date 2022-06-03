@@ -31,7 +31,6 @@ class SettlementFinderTest extends ModelTestBaseClass
      * @preserveGlobalState disabled
      */
     public function checks_find_salaries($now,$expected,$values){
-        print "XDXDXDXDXD";
         $this -> current -> method('now') -> willReturn($now);
         $this -> pdoStatementMock
             -> method('fetch')

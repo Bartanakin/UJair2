@@ -5,7 +5,8 @@ namespace App;
 
 
 use App\Exceptions\UnknownUriException;
-use PHPUnit\Exception;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class Router{
     private array $actions = [];
@@ -28,7 +29,12 @@ class Router{
         return $this -> register("POST",$uri,$action);
     }
 
-    public function resolve( string $method, string $uri ){
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws UnknownUriException
+     * @throws NotFoundExceptionInterface
+     */
+    public function resolve(string $method, string $uri ){
 
         $uri = $this -> parseUri($uri);
         $action = $this -> actions[$uri][$method] ?? null;
@@ -59,18 +65,6 @@ class Router{
 
     public function routes(): array {
         return $this -> actions;
-    }
-
-    private function loadFromSessionOrGet(string $class)
-    {
-        if( isset($_SESSION[$class]) ){
-            $class = $_SESSION[$class];
-        }
-        else{
-            $class = $this -> container -> get($class);
-            $_SESSION[$class::class] = $class;
-        }
-        return $class;
     }
 
 

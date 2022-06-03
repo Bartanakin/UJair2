@@ -32,15 +32,15 @@ BEGIN
            (4, 3, '2022-06-06 14:00:00', 2, 100, true), # 2 'Y' 'Z'
            (5, 4, '2022-06-06 20:00:00', 2, 100, true), # 3 'Z' 'X'
            (6, 4, '2022-06-06 20:00:00', 2, 100, true); # 3 'Z' 'X'
-    INSERT INTO Employees VALUES
-          (1,'Albert','Kowalski',12000,'Poland','C'),
-          (2,'Jan','Płatwiński',7000,'Poland','F'),
-          (3,'Joanna','Kowalczyk',10000,'Poland','C'),
-          (4,'Edward','Orzechowski',8000,'Poland','F'),
-          (5,'Joanna','Kołaczkowska',6000,'Poland','S'),
-          (6,'Aniela','Chmielewska',4000,'Poland','S'),
-          (7,'Żaneta','Szewczyk',3000,'Poland','S'),
-          (8,'Marzanna','Górecka',4000,'Poland','S');
+    INSERT INTO Employees (ID,FirstName,Surname,Salary,Nationality,Degree) VALUES
+          (1,'Albert','Kowalski',12000,1,'C'),
+          (2,'Jan','Płatwiński',7000,1,'F'),
+          (3,'Joanna','Kowalczyk',10000,1,'C'),
+          (4,'Edward','Orzechowski',8000,1,'F'),
+          (5,'Joanna','Kołaczkowska',6000,1,'S'),
+          (6,'Aniela','Chmielewska',4000,1,'S'),
+          (7,'Żaneta','Szewczyk',3000,1,'S'),
+          (8,'Marzanna','Górecka',4000,1,'S');
 
 
         INSERT INTO CrewList VALUES

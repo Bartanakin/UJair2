@@ -22,6 +22,7 @@ abstract class Payment
     public function getDateString(): string { return $this -> date -> format("Y-m-d"); }
 
     public static function createForAllSalaryMonths($date,$value): static {
+        $date -> setTime(0,0,0);
         return new static($value,$date);
     }
 }

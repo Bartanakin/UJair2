@@ -6,7 +6,6 @@ use App\Controllers\PassengerAppControllers\PassengerLoginController;
 use App\Controllers\PassengerAppControllers\PassengerRegistrationController;
 use App\Controllers\PassengerAppControllers\PassengersTicketsController;
 use App\Controllers\PlannerAppControllers\AllFlightsController;
-use App\Controllers\PlannerAppControllers\HomeController;
 use App\View;
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -67,7 +66,7 @@ try{
 
     $app -> run();
 
-}catch( \App\Exceptions\Container\NotFoundException $e){
+}catch( \App\Exceptions\UnknownUriException $e){
     echo View::make(\App\ViewPaths::NOT_FOUND);
 }catch( Exception $e){
     echo View::make(\App\ViewPaths::SERVER_ERROR);

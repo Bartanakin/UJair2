@@ -12,21 +12,25 @@ class FindCrewForFlightProvider
         $maxNumberOfFA = 100;
         $rows = [
             [
+                'F',
                 1,
-                'Jan Kowalski',
+                'Jan',
+                'Kowalski',
                 'F'
             ],
             [
-                1,
-                'Eliza Kochanowska',
+                'S',
+                2,
+                'Eliza',
+                'Kochanowska',
                 'S'
             ]
         ];
         $returned = CrewList::createForFindCrew(
             $maxNumberOfFA,
-            [ FlightAttendant::createForFindCrew(1,'Eliza Kochanowska')],
+            [ FlightAttendant::createForFindCrew(2,'Eliza','Kochanowska')],
             null,
-            Pilot::createForFindCrew(1,'Jan Kowalski')
+            Pilot::createForFindCrew(1,'Jan','Kowalski','F')
         );
 
         return [

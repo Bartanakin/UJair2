@@ -105,21 +105,15 @@ class App
         return $this -> router;
     }
 
+    /**
+     * @throws Exceptions\UnknownUriException
+     */
     function run(){
         echo $this -> router -> resolve($this -> method,$this -> uri);
     }
 
     public static function getDataBaseConnection(): DataBaseConnection {
         return static::$dbConnection;
-    }
-
-    public function assertLogged(){
-        if( isset($_SESSION['logged']) ){
-            if( $_SESSION['logged'] === true ){
-                return;
-            }
-        }
-        throw new UnauthorizedPageAccessException();
     }
 
 }

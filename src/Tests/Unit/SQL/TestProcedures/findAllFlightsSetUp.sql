@@ -1,3 +1,4 @@
+DROP PROCEDURE IF EXISTS  findAllFlightsSetUp;
 CREATE PROCEDURE findAllFlightsSetUp()
 BEGIN
 
@@ -28,5 +29,5 @@ BEGIN
            (4, 3, '2022-06-06 14:00:00', 2, 100, false), # 2 'Y' 'Z'
            (5, 4, '2022-06-06 20:00:00', 2, 100, false), # 3 'Z' 'X'
            (6, 4, '2022-06-06 20:00:00', 2, 100, true); # 3 'Z' 'X'
-end;
+end
 
