@@ -17,7 +17,8 @@ class PassengerLoginController extends Controller
     public function getPassengerIDIfExists() {
         $login = $_POST['login'];
         $password = $_POST['hashP'];
-        if($this->verifyAccount() == -1) {
+        $success = $this->verifyAccount();
+        if($success == -1 || $success == 1) {
             return json_encode(["passengerID" => $this->loginAndPasswordVerification->run($login, $password)]);
         }else {
             return $this->createUnauthorizedView();

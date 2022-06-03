@@ -11,7 +11,7 @@ struct K {
     struct URLs {
         //https://github.frege.ii.uj.edu.pl/
         //http://localhost:8002/
-        static let address = "http://localhost:8002/"
+        static let address = "https://github.frege.ii.uj.edu.pl/"
         static let getPassengerIDIfExistsURL = address + "getPassengerIDIfExists"
         static let verifyLoginURL = address + "canAddLogin"
         static let loadCountriesURL = address + "loadCountries"

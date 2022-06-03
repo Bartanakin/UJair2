@@ -62,8 +62,6 @@ class LoginManager {
     func parseJSON(data: Data) -> Int? {
         let decoder = JSONDecoder()
         do {
-            let str = String(decoding: data, as: UTF8.self)
-            print(str)
             let decodedData = try decoder.decode(Passenger.self, from: data)
             
             self.passengerID = decodedData.passengerID
