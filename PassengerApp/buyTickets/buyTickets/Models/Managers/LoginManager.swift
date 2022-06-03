@@ -24,8 +24,7 @@ class LoginManager {
             delegate?.showErrorMessage(message: "Enter your password.")
         }else {
             let hashedPassword = SHA256.hash(data: Data(password.utf8)).description.replacingOccurrences(of: "SHA256 digest: ", with: "")
-            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            performRequest(login: login, password: password)
+            performRequest(login: login, password: hashedPassword)
         }
     }
     
@@ -63,7 +62,10 @@ class LoginManager {
     func parseJSON(data: Data) -> Int? {
         let decoder = JSONDecoder()
         do {
+            let str = String(decoding: data, as: UTF8.self)
+            print(str)
             let decodedData = try decoder.decode(Passenger.self, from: data)
+            
             self.passengerID = decodedData.passengerID
             return decodedData.passengerID
         } catch {

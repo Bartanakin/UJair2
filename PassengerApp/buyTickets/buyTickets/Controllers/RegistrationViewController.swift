@@ -14,7 +14,8 @@ protocol RegistrationManagerDelegate: AnyObject {
 }
 
 class RegistrationViewController: UIViewController, UIPickerViewDataSource {
-
+    @IBOutlet var scrollView: UIScrollView!
+    
     @IBOutlet var firstNameField: CustomUIField!
     @IBOutlet var lastNameField: CustomUIField!
     @IBOutlet var loginField: CustomUIField!
@@ -43,8 +44,19 @@ class RegistrationViewController: UIViewController, UIPickerViewDataSource {
         countryPicker.delegate = self
         countryPicker.dataSource = self
         
+        let scrollViewTap = UITapGestureRecognizer(target: self, action: #selector(scrollViewTapped))
+        scrollView.addGestureRecognizer(scrollViewTap)
+        
         registrationManager.downloadCountries()
         
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        view.endEditing(true)
+    }
+    
+    @objc func scrollViewTapped() {
+        view.endEditing(true)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

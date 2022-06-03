@@ -26,16 +26,17 @@ abstract class Controller
         }
     }
 
-    protected function verifyAccount(): bool {
+    protected function verifyAccount(): int {
         $token = $_POST['token'];
         $login = $_POST['login'];
         $hashP = $_POST['hashP'];
         if(hash("sha256", $login . $hashP . $hashP) == $token) {
             if($this -> loginAndPasswordVerification -> run($login, $hashP) != -1) {
-                return true;
+                return 1;
             }
+            return -1;
         }
-        return false;
+        return 0;
     }
 
     protected function createUnauthorizedView(): View {
