@@ -41,7 +41,7 @@ abstract class Controller
     protected function createUnauthorizedView(): View {
         return View::make( ViewPaths::UNAUTHORIZED);
     }
-    
+
     protected function trackSessionVariable(string $propName, string $sesName, mixed $default){
         $this -> sessionVariables[$propName] = [ 'sesName' => $sesName, 'defaultVar' => $default ];
         $this -> restoreFromSession($propName);

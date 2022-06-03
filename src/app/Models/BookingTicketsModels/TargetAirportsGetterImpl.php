@@ -15,10 +15,12 @@ class TargetAirportsGetterImpl extends \App\Model implements \App\Interfaces\Boo
 
     function run(int $start): array
     {
-        $query = 'SELECT R.TargetAirportID AS ID, A.Airport_name, Countries.CountryName FROM Routes AS R
-                  JOIN Airports AS A ON A.ID = R.TargetAirportID
-                  JOIN Countries ON A.CountryID = Countries.ID
-                    WHERE R.StartingAirportID = ?;';
+        $query = 'SELECT Count(R.TargetAirportID), R.TargetAirportID AS ID, A.Airport_name, Countries.CountryName FROM Flights AS F
+JOIN Routes AS R ON F.RouteID = R.ID
+JOIN Airports AS A ON A.ID = R.TargetAirportID
+JOIN Countries ON A.CountryID = Countries.ID
+WHERE R.StartingAirportID = ?
+GROUP BY R.TargetAirportID;';
         $statement = $this -> getDBConnection() -> prepare($query);
         $statement -> execute([$start]);
         while($data = $statement -> fetch()) {

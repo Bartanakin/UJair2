@@ -11,8 +11,11 @@ class AllAirportsGetterImpl extends \App\Model implements \App\Interfaces\Bookin
         parent::__construct($dataBaseConnection);
     }
     function run(): array {
-        $query = 'SELECT Airports.ID, Airports.Airport_name, Countries.CountryName FROM Airports
-                  JOIN Countries ON Airports.CountryID = Countries.ID;';
+        $query = 'SELECT COUNT(FD.StartingAirportName) AS StartingAirportName, FD.StartingAirportID AS ID, FD.StartingAirportName AS Airport_name, C.CountryName 
+                  FROM FlightsData AS FD
+                  JOIN Airports AS A ON A.ID = FD.StartingAirportID
+                  JOIN Countries AS C ON C.ID = A.CountryID
+                  GROUP BY FD.StartingAirportID, FD.StartingAirportName, C.CountryName;';
         $statement = $this -> getDBConnection() -> prepare($query);
         $statement -> execute();
         while($data = $statement -> fetch()) {

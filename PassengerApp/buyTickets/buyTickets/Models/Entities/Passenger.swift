@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct Passenger: Decodable {
+struct Passenger: Codable {
     let passengerID: Int?
     let firstName: String?
     let lastName: String?

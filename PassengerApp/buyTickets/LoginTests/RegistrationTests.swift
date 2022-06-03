@@ -8,8 +8,6 @@
 import XCTest
 @testable import buyTickets
 
-
-
 class RegistrationTests: XCTestCase {
     var sut: RegistrationManager!
     override func setUpWithError() throws {

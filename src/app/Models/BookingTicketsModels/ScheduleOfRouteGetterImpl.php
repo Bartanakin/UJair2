@@ -18,7 +18,7 @@ class ScheduleOfRouteGetterImpl extends \App\Model implements \App\Interfaces\Bo
 
         $query = 'SELECT Flights.ID, Flights.DateTimeOfDeparture FROM Flights 
         WHERE Flights.RouteID = (SELECT Routes.ID FROM Routes 
-        WHERE Routes.TargetAirportID = ? AND Routes.StartingAirportID = ?);';
+        WHERE Routes.TargetAirportID = ? AND Routes.StartingAirportID = ? AND Flights.Canceled = FALSE);';
 
         //$this -> getDBConnection() -> beginTransaction();
 
