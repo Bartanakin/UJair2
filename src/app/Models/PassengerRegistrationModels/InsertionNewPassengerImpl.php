@@ -16,7 +16,7 @@ class InsertionNewPassengerImpl extends \App\Model implements \App\Interfaces\Pa
         $amountOfLogins = 0;
         $query = 'SELECT Count(*) AS amountOfLogins FROM Passengers WHERE ? LIKE Passengers.Login';
         $statement = $this -> getDBConnection() -> prepare($query);
-        $statement -> execute([$passenger->login]);
+        $statement -> execute([$passenger->getLogin()]);
         while($data = $statement -> fetch()) {
             $amountOfLogins = $data['amountOfLogins'];
         }
@@ -29,11 +29,11 @@ class InsertionNewPassengerImpl extends \App\Model implements \App\Interfaces\Pa
         try {
             $this->getDBConnection()->beginTransaction();
             $success = $statement->execute([
-                $passenger->firstName,
-                $passenger->lastName,
-                $passenger->countryID,
-                $passenger->login,
-                $passenger->password
+                $passenger->getFirstName(),
+                $passenger->getSurname(),
+                $passenger->getCountryID(),
+                $passenger->getLogin(),
+                $passenger->getPassword()
             ]);
             $this->getDBConnection()->commit();
         }

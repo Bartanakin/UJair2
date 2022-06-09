@@ -15,6 +15,30 @@ class Passenger extends Person
         parent::__construct($id, $firstName, $lastName);
     }
 
+    /**
+     * @return string|null
+     */
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getLogin(): ?string
+    {
+        return $this->login;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getCountryID(): ?int
+    {
+        return $this->countryID;
+    }
+
     public static function createPassengerForRegistration(string $firstName,
                                                           string $lastName,
                                                           string $password,
