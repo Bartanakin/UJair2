@@ -19,7 +19,7 @@ class TargetAirportsGetterImpl extends \App\Model implements \App\Interfaces\Boo
 JOIN Routes AS R ON F.RouteID = R.ID
 JOIN Airports AS A ON A.ID = R.TargetAirportID
 JOIN Countries ON A.CountryID = Countries.ID
-WHERE R.StartingAirportID = ?
+WHERE R.StartingAirportID = ? AND F.Canceled = false
 GROUP BY R.TargetAirportID;';
         $statement = $this -> getDBConnection() -> prepare($query);
         $statement -> execute([$start]);
