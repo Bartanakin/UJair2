@@ -46,7 +46,7 @@ class FlightEditorController extends Controller
     public function addFlight(): View{
         if( ! $this -> logged ) return $this -> createSessionExpiredView();
 
-        $this ->resetAllProps();
+        $this ->resetAllProps(['logged']);
 
         return $this -> createDefaultView();
     }
@@ -81,7 +81,7 @@ class FlightEditorController extends Controller
         if( ! $this -> logged ) return $this -> createSessionExpiredView();
         if( $this -> assertPostVariables(['flightID']) ) return $this -> createBadRequestView();
 
-        $this ->resetAllProps();
+        $this ->resetAllProps(['logged']);
 
         $this -> editedFlight -> setId($_POST['flightID']);
         return $this->createDefaultView();

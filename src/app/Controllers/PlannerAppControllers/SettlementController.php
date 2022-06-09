@@ -19,6 +19,7 @@ class SettlementController extends Controller
     }
 
     public function settlementsPage(): View {
+        if( !$this -> logged ) return View::make(ViewPaths::ALL_FLIGHT_REDIRECT);
         try{
             $this ->payments -> addPayments( $this -> finder -> findSalaries());
             $this ->payments -> addPayments( $this -> finder -> findAirplanesLeasing());

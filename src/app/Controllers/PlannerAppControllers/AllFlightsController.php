@@ -27,8 +27,6 @@ class AllFlightsController extends Controller
     )
     {
         parent::__construct();
-
-        $this -> trackSessionVariable('logged','logged',false);
     }
 
 
@@ -47,6 +45,12 @@ class AllFlightsController extends Controller
             }
         }
         return View::make(ViewPaths::BAD_REQUEST);
+    }
+
+    public function logout(): View{
+
+        $this -> logged = false;
+        return View::make(ViewPaths::ALL_FLIGHT_REDIRECT);
     }
 
     public function allFlights(): View {

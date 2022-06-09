@@ -20,6 +20,9 @@
             <form method="get" action="settlements" class="headerForm">
                 <input type="submit" value="Incomes and expenses" class="managerSubmit submit"/>
             </form>
+            <form method="get" action="logout" class="headerForm">
+                <input type="submit" value="Log out" class="managerSubmit submit"/>
+            </form>
         </div>
         <?php if($this -> params['warning']): ?>
             <div class="headerMessage headerForm textInfo">

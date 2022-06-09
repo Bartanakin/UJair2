@@ -20,6 +20,7 @@ $app = new App($_SERVER["REQUEST_METHOD"],$_SERVER["REQUEST_URI"],CONNECT);
 
 // Planner app:
 $app -> getRouter() -> get('/',[AllFlightsController::class, 'allFlights']);
+$app -> getRouter() -> get('/logout',[AllFlightsController::class, 'logout']);
 $app -> getRouter() -> post("/",[\App\Controllers\PlannerAppControllers\AllFlightsController::class,'login']);
 $app -> getRouter() -> get("/editFlight",[\App\Controllers\PlannerAppControllers\FlightEditorController::class,'addFlight']);
 $app -> getRouter() -> get("/settlements",[\App\Controllers\PlannerAppControllers\SettlementController::class,'settlementsPage']);
