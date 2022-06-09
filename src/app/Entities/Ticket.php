@@ -37,7 +37,7 @@ class Ticket implements JsonSerializable {
             numberOfSeat: $numberOfSeat,
             start: $start,
             target: $target,
-            dateOfDeparture: DateTime::createFromFormat('Y-m-d H:i', $dateOfDeparture),
+            dateOfDeparture: DateTime::createFromFormat(Model::$dateFormat, $dateOfDeparture),
             canceled: $canceled
         );
     }
@@ -46,7 +46,7 @@ class Ticket implements JsonSerializable {
             'numberOfSeat' => $this->numberOfSeat,
             'start' => $this->start,
             'target' => $this->target,
-            'dateOfDeparture' => date_format($this->dateOfDeparture, Model::$dateFormat),
+            'dateOfDeparture' => date_format($this->dateOfDeparture, 'Y-m-d H:i'),
             'canceled' => $this->canceled
         ];
     }
