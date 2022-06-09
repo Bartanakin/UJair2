@@ -26,11 +26,13 @@ class Flight implements JsonSerializable {
 
     public static function createForBookingTickets(
         int $id,
-        string $date
+        string $date,
+        float $price
     ) {
         return new static(
             id: $id,
-            dateOfDeparture: DateTime::createFromFormat(Model::$dateFormat, $date)
+            dateOfDeparture: DateTime::createFromFormat(Model::$dateFormat, $date),
+            price: $price
         );
     }
 
@@ -70,7 +72,8 @@ class Flight implements JsonSerializable {
     public function jsonSerialize(): mixed {
         return [
             'ID' => $this->id,
-            'DateTimeOfDeparture' => $this->dateOfDeparture->format('Y-m-d H:i')
+            'DateTimeOfDeparture' => $this->dateOfDeparture->format('Y-m-d H:i'),
+            'Price' => $this->price
         ];
     }
 

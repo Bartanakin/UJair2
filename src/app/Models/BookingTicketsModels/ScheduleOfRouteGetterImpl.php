@@ -16,7 +16,7 @@ class ScheduleOfRouteGetterImpl extends \App\Model implements \App\Interfaces\Bo
     function run(int $start, int $target): array
     {
 
-        $query = 'SELECT Flights.ID, Flights.DateTimeOfDeparture FROM Flights 
+        $query = 'SELECT Flights.ID, Flights.DateTimeOfDeparture, Flights.Price FROM Flights 
         WHERE Flights.RouteID = (SELECT Routes.ID FROM Routes 
         WHERE Routes.TargetAirportID = ? AND Routes.StartingAirportID = ? AND Flights.Canceled = FALSE AND Flights.DateTimeOfDeparture > NOW());';
 
@@ -29,7 +29,7 @@ class ScheduleOfRouteGetterImpl extends \App\Model implements \App\Interfaces\Bo
         //$this -> getDBConnection() -> rollBack();
 
         while($data = $statement -> fetch()) {
-            $this->flights[] = Flight::createForBookingTickets($data['ID'], $data['DateTimeOfDeparture']);
+            $this->flights[] = Flight::createForBookingTickets($data['ID'], $data['DateTimeOfDeparture'], $data['Price']);
 //            echo $data['ID'] . " " . $data['Airport_name'] . '<br/ >';
         }
         return $this -> flights;

@@ -5,14 +5,14 @@ namespace App\Entities\PersonClasses;
 class Passenger extends Person
 {
     protected function __construct(
-        protected ?int $id = null,
-        protected ?string $firstName = null,
-        protected ?string $lastName = null,
+        ?int $id = null,
+        ?string $firstName = null,
+        ?string $lastName = null,
         protected ?string $password = null,
         protected ?string $login = null,
         protected ?int $countryID = null
     ) {
-
+        parent::__construct($id, $firstName, $lastName);
     }
 
     public static function createPassengerForRegistration(string $firstName,

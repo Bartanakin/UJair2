@@ -203,6 +203,7 @@ class BookingTicketsViewController: UIViewController {
                                                                                 From: \(bookingManager.selectedDeparturePlace!.Airport_name!)
                                                                                 To: \(bookingManager.selectedDistanationPlace!.Airport_name!)
                                                                                 Seat: \(selectedSeat)
+                                                                                Price: \(bookingManager.selectedRoute!.Price!)
                                                                                 """,
                                             image: UIImage(named: "ticket.png"), style: .alert)
 
