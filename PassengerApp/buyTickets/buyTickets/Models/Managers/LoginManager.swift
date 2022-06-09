@@ -63,7 +63,6 @@ class LoginManager {
         let decoder = JSONDecoder()
         do {
             let decodedData = try decoder.decode(Passenger.self, from: data)
-            
             self.passengerID = decodedData.passengerID
             return decodedData.passengerID
         } catch {

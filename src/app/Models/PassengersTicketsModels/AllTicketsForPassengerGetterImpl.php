@@ -16,7 +16,7 @@ class AllTicketsForPassengerGetterImpl extends \App\Model implements \App\Interf
         $tickets = [];
         $query = 'SELECT T.NumberOfSeat, FD.DateTimeOfDeparture, FD.StartingAirportName, FD.TargetAirportName, FD.Canceled
                     FROM Tickets AS T
-                    JOIN FlightsData AS FD ON T.FlightID = FD.FlightID
+                    JOIN FLightsDataForPassengers AS FD ON T.FlightID = FD.FlightID
                     WHERE T.PassengerID = ?;';
         $statement = $this -> getDBConnection() -> prepare($query);
         $statement -> execute([$passID]);

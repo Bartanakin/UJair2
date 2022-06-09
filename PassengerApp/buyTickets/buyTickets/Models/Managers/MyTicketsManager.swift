@@ -69,7 +69,6 @@ class MyTicketsManager {
     
     func parseJSON(data: Data) {
         let decoder = JSONDecoder()
-        
         do {
             tickets = try decoder.decode([Ticket].self, from: data)
             switch selectedTicketType! {

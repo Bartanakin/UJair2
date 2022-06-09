@@ -139,6 +139,7 @@ extension RegistrationManager: CountryLoader {
                     countries[name] = id
                 }
             }
+            selectedCountry = decodedData[0].ID
             delegate?.updateCountryPickerView()
         }catch {
             delegate?.showErrorMessage(message: "Failed to parse data.")
