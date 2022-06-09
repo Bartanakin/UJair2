@@ -49,6 +49,12 @@ extension RegistrationManager: PassengerInserter {
             message = "Choose a country of origin."
         }else if repeatPassword != password {
             message = "Password and confirm password does not match."
+        }else if password.rangeOfCharacter(from: CharacterSet.decimalDigits) == nil {
+            message = "Password must contain at least one digit."
+        }else if password.count < 8 {
+            message = "Password is too short."
+        }else if password.count > 20 {
+            message = "Password is too long."
         }
         if message != "" {
             delegate?.showErrorMessage(message: message)
@@ -82,6 +88,7 @@ extension RegistrationManager: PassengerInserter {
     func parseJSONPassenger(data: Data) {
         let decoder = JSONDecoder()
         do {
+            print(String(data: data, encoding: .utf8))
             let decodedData = try decoder.decode(Answer.self, from: data)
             if let answer = decodedData.answer {
                 if answer == 1  {

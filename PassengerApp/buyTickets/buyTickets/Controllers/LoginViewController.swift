@@ -31,6 +31,12 @@ class LoginViewController: UIViewController {
         loginManager.delegate = self
         
         title = "Register or Sign In"
+        
+        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        backgroundImage.image = UIImage(named: "rainbowDash")
+        backgroundImage.contentMode = UIView.ContentMode.scaleAspectFit
+        self.view.insertSubview(backgroundImage, at: 0)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

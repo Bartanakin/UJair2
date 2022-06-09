@@ -29,20 +29,15 @@ class Passenger extends Person
         );
     }
 
-    public function __get(string $name)
-    {
-        return $this -> $name;
-    }
-
     /**
      * @inheritDoc
      */
     public function jsonSerialize(): mixed
     {
         return [
-            'ID' => $this -> id,
+            'ID' => $this -> ID,
             'firstName' => $this -> firstName,
-            'lastName' => $this -> lastName,
+            'lastName' => $this -> surname,
             'password' => $this -> password,
             'login' => $this -> login,
             'country' => $this -> countryID
