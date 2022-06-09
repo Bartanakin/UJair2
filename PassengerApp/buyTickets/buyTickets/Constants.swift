@@ -45,6 +45,6 @@ struct K {
         static let finished = 3
     }
     
-    static let dateFormat = "yyyy-MM-dd HH:mm:ss"
+    static let dateFormat = "yyyy-MM-dd HH:mm"
     static let token = "UJAIR2"
 }

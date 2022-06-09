@@ -70,7 +70,7 @@ class Flight implements JsonSerializable {
     public function jsonSerialize(): mixed {
         return [
             'ID' => $this->id,
-            'DateTimeOfDeparture' => $this->dateOfDeparture->format(Model::$dateFormat)
+            'DateTimeOfDeparture' => $this->dateOfDeparture->format('Y-m-d H:i')
         ];
     }
 
