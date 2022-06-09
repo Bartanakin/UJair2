@@ -16,7 +16,7 @@ abstract class Controller
 
     public function __construct(protected ?LoginAndPasswordVerification $loginAndPasswordVerification = null)
     {
-        $this -> trackSessionVariable('logged','logged',true);
+        $this -> trackSessionVariable('logged','logged',false);
         $this -> trackSessionVariable('warning','warning','');
     }
     public function __destruct()
@@ -75,9 +75,10 @@ abstract class Controller
         return false;
     }
 
-    public function resetAllProps(): void {
+    public function resetAllProps(array $without = []): void {
         foreach ( $this -> sessionVariables as $propName => $variable ){
-            $this -> $propName = $variable['defaultVar'];
+            if( !in_array($propName,$without) )
+                $this -> $propName = $variable['defaultVar'];
         }
     }
     public function createSessionExpiredView(string $message = "Session expired"): View {
