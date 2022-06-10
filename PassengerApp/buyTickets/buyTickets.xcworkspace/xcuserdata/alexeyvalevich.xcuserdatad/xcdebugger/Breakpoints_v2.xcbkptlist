@@ -14,10 +14,10 @@
             filePath = "buyTickets/Controllers/MyTicketsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
-            landmarkName = "MyTicketsViewController"
-            landmarkType = "3">
+            startingLineNumber = "165"
+            endingLineNumber = "165"
+            landmarkName = "myTicketsManager"
+            landmarkType = "24">
             <Locations>
                <Location
                   uuid = "45165C21-CBD3-44B2-98B2-1B6D85D00DD2 - ad2378a8897ce5c6"

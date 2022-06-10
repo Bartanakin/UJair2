@@ -119,6 +119,7 @@ extension MyTicketsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        ticketView = TicketView()
         guard let seat = myTicketsManager.filteredData?[indexPath.row].numberOfSeat,
         let start = myTicketsManager.filteredData?[indexPath.row].start,
         let target = myTicketsManager.filteredData?[indexPath.row].target,
@@ -161,7 +162,7 @@ class MyTicketsViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var filterButton: UIBarButtonItem!
     @IBOutlet var searchBar: UISearchBar!
-    let ticketView = TicketView()
+    var ticketView = TicketView()
     var myTicketsManager = MyTicketsManager()
     var topbarHeight: CGFloat {
         return (view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0.0) +
