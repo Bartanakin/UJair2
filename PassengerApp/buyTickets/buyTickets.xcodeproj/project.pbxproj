@@ -37,6 +37,7 @@
 		3AE6CB24278F43CB00D7EBAD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AE6CB22278F43CB00D7EBAD /* LaunchScreen.storyboard */; };
 		3AE6CB2E278F71A900D7EBAD /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE6CB2D278F71A900D7EBAD /* RegistrationViewController.swift */; };
 		3AE6CB30278F7FC100D7EBAD /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE6CB2F278F7FC100D7EBAD /* Country.swift */; };
+		3AFA20DE2852A69B0074DE3F /* TicketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA20DD2852A69B0074DE3F /* TicketView.swift */; };
 		456B57FB224E8A449734955E /* Pods_buyTickets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB1D4C4D3F3222F3D45EC856 /* Pods_buyTickets.framework */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +86,7 @@
 		3AE6CB25278F43CB00D7EBAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3AE6CB2D278F71A900D7EBAD /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		3AE6CB2F278F7FC100D7EBAD /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		3AFA20DD2852A69B0074DE3F /* TicketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketView.swift; sourceTree = "<group>"; };
 		41EF26594393D7352CD6B9A5 /* Pods-buyTickets.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-buyTickets.debug.xcconfig"; path = "Target Support Files/Pods-buyTickets/Pods-buyTickets.debug.xcconfig"; sourceTree = "<group>"; };
 		DB1D4C4D3F3222F3D45EC856 /* Pods_buyTickets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_buyTickets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -116,6 +118,7 @@
 				3A80177028416FA100B120F2 /* BookingTicketsViewController.swift */,
 				3AD699B22843B5CA0097DC5F /* ChoosingListViewController.swift */,
 				3AD699BE284415EA0097DC5F /* MyTicketsViewController.swift */,
+				3AFA20DD2852A69B0074DE3F /* TicketView.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -402,6 +405,7 @@
 				3A938A1A2824AADF0011E6BE /* RegistrationManager.swift in Sources */,
 				3AE6CB2E278F71A900D7EBAD /* RegistrationViewController.swift in Sources */,
 				3AE6CB30278F7FC100D7EBAD /* Country.swift in Sources */,
+				3AFA20DE2852A69B0074DE3F /* TicketView.swift in Sources */,
 				3A80177128416FA100B120F2 /* BookingTicketsViewController.swift in Sources */,
 				3AE6CB1A278F43C900D7EBAD /* SceneDelegate.swift in Sources */,
 				3AD699C1284416300097DC5F /* MyTicketsManager.swift in Sources */,

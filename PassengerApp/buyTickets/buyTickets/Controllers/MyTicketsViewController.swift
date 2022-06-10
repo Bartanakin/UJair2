@@ -106,6 +106,7 @@ extension MyTicketsViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Ticket", for: indexPath)
         var content = cell.defaultContentConfiguration()
@@ -115,6 +116,17 @@ extension MyTicketsViewController: UITableViewDelegate, UITableViewDataSource {
         }
         cell.contentConfiguration = content
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let seat = myTicketsManager.filteredData?[indexPath.row].numberOfSeat,
+        let start = myTicketsManager.filteredData?[indexPath.row].start,
+        let target = myTicketsManager.filteredData?[indexPath.row].target,
+        let date = myTicketsManager.filteredData?[indexPath.row].dateOfDeparture
+        else {
+            return
+        }
+        ticketView.showTicketView(title: "BOARDING PASS", seat: seat, start: start, target: target, date: date, on: self)
     }
 }
 
@@ -149,6 +161,7 @@ class MyTicketsViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var filterButton: UIBarButtonItem!
     @IBOutlet var searchBar: UISearchBar!
+    let ticketView = TicketView()
     var myTicketsManager = MyTicketsManager()
     var topbarHeight: CGFloat {
         return (view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0.0) +
@@ -172,11 +185,16 @@ class MyTicketsViewController: UIViewController {
         myTicketsManager.setUpFilterList(height: topbarHeight)
         
         let tableViewTap = UITapGestureRecognizer(target: self, action: #selector(tableViewTapped))
+        tableViewTap.cancelsTouchesInView = false
         tableView.addGestureRecognizer(tableViewTap)
         
         let refreshControl = UIRefreshControl()
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
+    }
+    
+    @objc func dismissTicket() {
+        ticketView.dismissTicket()
     }
     
     @objc private func refreshData(_ sender: Any) {

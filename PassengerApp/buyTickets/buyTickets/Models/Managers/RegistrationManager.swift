@@ -88,11 +88,10 @@ extension RegistrationManager: PassengerInserter {
     func parseJSONPassenger(data: Data) {
         let decoder = JSONDecoder()
         do {
-            print(String(data: data, encoding: .utf8))
             let decodedData = try decoder.decode(Answer.self, from: data)
             if let answer = decodedData.answer {
                 if answer == 1  {
-                    delegate?.showSuccessMessage(message: "The account was successively created.")
+                    delegate?.showSuccessMessage(message: "The account was successfully created.")
                 }else if answer == 0 {
                     delegate?.showErrorMessage(message: "Failed to create an account. Try again later.")
                 }else {
